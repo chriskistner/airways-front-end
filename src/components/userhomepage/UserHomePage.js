@@ -17,7 +17,6 @@ class UserHomePage extends Component {
         this.props.getUser(this.props.match.params.userId);
     }
     render() {
-        console.log(this.props.userName)
         return (
             <Container>
                 <UserNavBar user={this.props.userName}/>

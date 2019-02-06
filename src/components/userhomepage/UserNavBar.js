@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router'
 import {connect} from 'react-redux';
 import {setAuthentication} from '../../actions/authentication';
 import {
@@ -67,4 +68,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(UserNavBar)
+export default withRouter(connect(null, mapDispatchToProps)(UserNavBar));
