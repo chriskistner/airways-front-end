@@ -3,7 +3,7 @@ import axios from "axios";
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
-export const SET_USER_NAME = 'SET_USER_NAME'
+export const SET_USER_DATA = 'SET_USER_DATA'
 
 export const setAuthentication = claim => ({
   type: SET_AUTHENTICATION,
@@ -78,7 +78,7 @@ export const getUser = (userId) => {
         }
       });
       dispatch({
-        type: SET_USER_NAME,
+        type: SET_USER_DATA,
         payload: response.data.result
       })
     }catch(err) {

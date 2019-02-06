@@ -1,9 +1,10 @@
-import {SET_AUTHENTICATION, SET_USER_NAME} from '../actions/authentication'
+import {SET_AUTHENTICATION, SET_USER_DATA} from '../actions/authentication'
 
 const initialState = {
     userId: null,
     pending: true,
-    userName: ''
+    userName: '',
+    userZip: null
 };
 
 export default function auth (state = initialState, action) {
@@ -12,9 +13,10 @@ export default function auth (state = initialState, action) {
         const id = action.payload !== null ? action.payload.id : null
           return {...state, userId: id, pending: false}
         
-        case SET_USER_NAME:
-            const userName = action.payload.user_name
-            return {...state, userName: userName}
+      case SET_USER_DATA:
+        const userName = action.payload.user_name
+        const userZip = action.payload.zip_code
+        return {...state, userName: userName, userZip: userZip }
       default:
           return state
   }

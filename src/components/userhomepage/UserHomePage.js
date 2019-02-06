@@ -31,7 +31,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        userName: state.auth.userName
+        userName: state.auth.userName,
+        userZip: state.auth.userZip
     }
 }
 
