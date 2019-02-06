@@ -9,6 +9,11 @@ import HomePage from './components/homepage/LoginPage';
 import UserHomePage from './components/userhomepage/UserHomePage'
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.verifyUser()
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -16,6 +21,7 @@ class App extends Component {
           <div className="row" >
             <div className="col border bg-light">
               <Switch>
+                <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
                 <Route path='/user' component={UserHomePage}/>
                 <Route path='/' component={HomePage}/>
               </Switch>
@@ -32,4 +38,4 @@ bindActionCreators({
   verifyUser,
 }, dispatch)
 
-export default connect(mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

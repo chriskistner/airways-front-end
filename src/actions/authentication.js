@@ -69,7 +69,7 @@ export const getUser = (userId) => {
   return async (dispatch) => {
     try{
       const token = localStorage.getItem('token');
-      const response = await axios(`${url}/users/${userId}`, {
+      const response = await axios(`${url}/user/${userId}`, {
         method: "get",
         headers: {
           'Content-Type': 'application/json',
@@ -85,4 +85,4 @@ export const getUser = (userId) => {
       console.log(err)
     }
   }
-}
+};

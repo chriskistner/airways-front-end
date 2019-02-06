@@ -16,7 +16,7 @@ class LoginForm extends Component{
     handleLogin = (event) => {
         event.preventDefault();
         this.props.login(event.target.userEmail.value, event.target.userPassword.value,
-            () => this.props.history.push(`/user/${this.props.userId}/decks`))
+            () => this.props.history.push(`/user/${this.props.userId}`))
 
     };
 

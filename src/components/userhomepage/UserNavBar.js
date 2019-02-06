@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setAuthentication, getUser} from '../../actions/authentication';
+import {setAuthentication} from '../../actions/authentication';
 import {
     Collapse,
     Navbar,
@@ -9,11 +9,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    NavLink,} from 'reactstrap';
 
 class UserNavBar extends Component {
     constructor(props) {
@@ -29,11 +25,17 @@ class UserNavBar extends Component {
         })
     }
 
+    logOut = () => {
+        localStorage.removeItem('token');
+        this.props.setAuthentication(null);
+        this.props.history.push(`/`)
+    }
+
     render() {
         return (
             <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Welcome User, Got To..</NavbarBrand>
+              <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Got To..</NavbarBrand>
               <NavbarToggler onClick={this.toggleNav} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
@@ -50,41 +52,19 @@ class UserNavBar extends Component {
                         <NavLink href="/profile">Profile</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">Logout</NavLink>
+                        <NavLink onClick={this.logOut} href="#">Logout</NavLink>
                     </NavItem>
                 </Nav>
               </Collapse>
             </Navbar>
           </div>
-                // <Navbar>
-                //     <NavbarBrand href="/">Welcome User, Got To...</NavbarBrand>
-                //     <NavbarToggler onClick={this.toggle} />
-                //     <Collapse isOpen={this.state.isOpen} navbar></Collapse>
-                //     <Nav className="ml-auto" navbar>
-                //         <NavItem>
-                //             <NavLink href="/routes/">Routes</NavLink>
-                //         </NavItem>
-                //         <NavItem>
-                //             <NavLink href="/locations">Locations</NavLink>
-                //         </NavItem>
-                //         <NavItem>
-                //             <NavLink href="/alerts">Alerts</NavLink>
-                //         </NavItem>
-                //         <NavItem>
-                //             <NavLink href="/profile">Profile</NavLink>
-                //         </NavItem>
-                //         <NavItem>
-                //             <NavLink href="#">Logout</NavLink>
-                //         </NavItem>
-                //     </Nav>
-                // </Navbar>
         )
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({},dispatch)
+    return bindActionCreators({setAuthentication},dispatch)
 }
 
 
-export default connect(mapDispatchToProps)(UserNavBar)
+export default connect(null, mapDispatchToProps)(UserNavBar)

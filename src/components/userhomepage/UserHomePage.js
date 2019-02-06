@@ -12,17 +12,28 @@ class UserHomePage extends Component {
 
         }
     }
+
+    componentDidMount() {
+        this.props.getUser(this.props.match.params.userId);
+    }
     render() {
+        console.log(this.props.userName)
         return (
             <Container>
-                <UserNavBar/>
+                <UserNavBar user={this.props.userName}/>
             </Container>
         )
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({},dispatch)
+    return bindActionCreators({setAuthentication, getUser},dispatch)
 }
 
-export default connect(mapDispatchToProps)(UserHomePage)
+const mapStateToProps = (state) => {
+    return {
+        userName: state.auth.userName
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserHomePage)
