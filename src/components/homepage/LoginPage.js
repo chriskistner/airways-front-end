@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Container} from 'reactstrap';
 import LoginForm from './LoginForm';
 import CreateUserForm from './CreateUserForm';
 
@@ -11,24 +11,22 @@ class HomePage extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            newUser: false,
+            modal: false,
         }
     }
 
-    toggleNewUserField = () => {
+    toggleModal = () => {
+        console.log(this.state.modal)
         this.setState({
-            newUser: !this.state.newUser
+            modal: !this.state.modal
         })
     };
-
 
     render() {
         return (
             <Container>
-                <LoginForm newUser={this.toggleNewUserField}/>
-                {
-                    this.state.newUser ? <CreateUserForm/>: null
-                }       
+                <LoginForm newUser={this.toggleModal}/>
+                <CreateUserForm newUser={this.toggleModal} modalStatus={this.state.modal}/>
             </Container>
         )
     }

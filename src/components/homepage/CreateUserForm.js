@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormFeedback, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class CreateUserForm extends Component{
     constructor(props) {
@@ -16,11 +16,12 @@ class CreateUserForm extends Component{
 
     render() {
         return (
-            <Container>
-                <Row id="createForm">
-                    <Col>
+            <Modal isOpen={this.props.modalStatus} toggle={this.props.newUser}>
+                <ModalHeader>
+                <h1>Create Account</h1>
+                </ModalHeader>
+                    <ModalBody>
                         <Form>
-                            <h1>Create Account</h1>
                             <FormGroup>
                                 <Label for="newUserName">User Name</Label>
                                 <Input type="text" name="newUserName" id="newUserName" placeholder="create a user name for your account"></Input>
@@ -42,11 +43,11 @@ class CreateUserForm extends Component{
                                 <Input type="text" name="newUserZip" id="newUserZip" placeholder="enter your home zip code"></Input>
                                 <FormFeedback>Sorry, that email is already being used</FormFeedback>
                             </FormGroup>
+                            <Button>Create Account</Button>
                         </Form>
-                        <Button>Create Account</Button>
-                    </Col>
-                </Row>
-            </Container>
+                    </ModalBody>
+            </Modal>
+
         )
     }
 };
