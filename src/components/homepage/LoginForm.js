@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 
 class LoginForm extends Component{
     constructor(props) {
@@ -13,12 +13,19 @@ class LoginForm extends Component{
         }
     }
 
+    handleLogin = (event) => {
+        event.preventDefault();
+        this.props.login(event.target.userEmail.value, event.target.userPassword.value,
+            () => this.props.history.push(`/user/${this.props.userId}/decks`))
+
+    };
+
     render() {
         return (
             <Container>
                 <Row id = "loginForm">
                     <Col>
-                        <Form>
+                        <Form onSubmit={this.handleLogin}>
                             <h1>Login</h1>
                             <FormGroup>
                                 <Label for="userEmail">Email</Label>

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {verifyUser} from './actions/authentication';
 import HomePage from './components/homepage/LoginPage';
+import UserHomePage from './components/userhomepage/UserHomePage'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <div className="row" >
             <div className="col border bg-light">
               <Switch>
+                <Route path='/user' component={UserHomePage}/>
                 <Route path='/' component={HomePage}/>
               </Switch>
               </div>

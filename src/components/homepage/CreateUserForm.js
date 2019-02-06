@@ -43,7 +43,10 @@ class CreateUserForm extends Component{
                                 <Input type="text" name="newUserZip" id="newUserZip" placeholder="enter your home zip code"></Input>
                                 <FormFeedback>Sorry, that email is already being used</FormFeedback>
                             </FormGroup>
+                            <ModalFooter>
                             <Button>Create Account</Button>
+                            </ModalFooter>
+                            
                         </Form>
                     </ModalBody>
             </Modal>

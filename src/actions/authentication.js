@@ -14,8 +14,7 @@ export const verifyUser = (fn) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
-      const user = await axios(`${url}/auth/verify`,{
-        method: "get",
+      const user = await axios.get(`${url}/auth/verify`,{
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -53,10 +52,10 @@ export const createUser = (user_name, password, fn) => {
   }
 };
 
-export const login = (user_name, password, fn) => {
+export const login = (email, password, fn) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${url}/auth/login`, {userName: user_name, password: password});
+      const response = await axios.post(`${url}/auth/login`, {email: email, password: password});
       localStorage.setItem('token', response.data.token);
       dispatch(verifyUser(fn));
     }catch(err) {
