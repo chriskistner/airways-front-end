@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux';
-import {setAuthentication} from '../../actions/authentication';
+import {setAuthentication, toggleError} from '../../actions/authentication';
 import {
     Collapse,
     Navbar,
@@ -29,6 +29,7 @@ class UserNavBar extends Component {
     logOut = () => {
         localStorage.removeItem('token');
         this.props.setAuthentication(null);
+        this.props.toggleError(false);
         this.props.history.push(`/`)
     }
 
@@ -64,7 +65,7 @@ class UserNavBar extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setAuthentication},dispatch)
+    return bindActionCreators({setAuthentication, toggleError},dispatch)
 }
 
 

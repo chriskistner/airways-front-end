@@ -3,12 +3,18 @@ import axios from "axios";
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
-export const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR"
 
-export const setAuthentication = claim => ({
+export const setAuthentication = (claim) => ({
   type: SET_AUTHENTICATION,
   payload: claim
 });
+
+export const toggleError = (claim) => ({
+  type: SET_LOGIN_ERROR,
+  payload: claim
+})
 
 export const verifyUser = (fn) => {
   return async (dispatch) => {
@@ -61,6 +67,7 @@ export const login = (email, password, fn) => {
     }catch(err) {
       console.error(err)
       dispatch(setAuthentication(null))
+      dispatch(toggleError(true))
     }
   }
 };
