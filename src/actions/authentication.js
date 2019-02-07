@@ -36,11 +36,10 @@ export const verifyUser = (fn) => {
   }
 };
 
-export const createUser = (user_name, password, fn) => {
+export const createUser = (userName, email, password, zipCode, fn) => {
   return async (dispatch) => {
     try {
-      await axios(`${url}/users`, {
-        method: "post",
+      await axios.post(`${url}/users`, {
         header: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -50,7 +49,7 @@ export const createUser = (user_name, password, fn) => {
           password: password
         }
       });
-      dispatch(login(user_name, password, fn))
+      dispatch(login(userName, password, fn))
     }catch(err) {
       console.error(err);
       dispatch(setAuthentication(null))
