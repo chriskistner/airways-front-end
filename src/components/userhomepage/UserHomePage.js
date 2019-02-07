@@ -3,8 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import { Container, Row, Col } from 'reactstrap';
-import UserNavBar from './UserNavBar'
-
+import UserNavBar from './UserNavBar';
+import GoogleMap from '../googlemaps/GoogleMap';
 class UserHomePage extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +20,7 @@ class UserHomePage extends Component {
         return (
             <Container>
                 <UserNavBar user={this.props.userName}/>
+                <GoogleMap google={this.props.google}/>
             </Container>
         )
     }
