@@ -16,8 +16,9 @@ class GoogleMap extends Component {
 
     render() {
         return (
-            <Container style={{height: 500}}>
-                <Map 
+            // <Container style={{height: 500}}>
+                <Map
+                style={{width: '100%', height: '100%', position: 'relative'}} 
                 google={this.props.google} 
                 zoom={15}
                 initialCenter={{
@@ -29,8 +30,10 @@ class GoogleMap extends Component {
                     lng: this.props.homeLong
                 }}
                 >
-                    <Marker onClick={this.onMarkerClick}
-                            name={'Current location'} />
+                      <Marker
+                        title={'Your Default Zip Code Based on Your Profile'}
+                        name={'Home'}
+                        position={{lat: this.props.homeLat, lng: this.props.homeLong}}/>
             
                     <InfoWindow onClose={this.onInfoWindowClose}>
                         <div>
@@ -38,7 +41,7 @@ class GoogleMap extends Component {
                         </div>
                     </InfoWindow>
                 </Map>
-            </Container>
+            // </Container>
 
         )
     }

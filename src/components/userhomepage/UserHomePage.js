@@ -28,7 +28,7 @@ class UserHomePage extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col xs="8" style={{height: 400}}>
                         <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>
                     </Col>  
                 </Row>

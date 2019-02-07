@@ -17,17 +17,17 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <div className='container'>
+      {/* <div className='container'>
           <div className="row" >
-            <div className="col border bg-light">
+            <div className="col border bg-light"> */}
               <Switch>
                 <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
                 <Route path='/user' component={UserHomePage}/>
                 <Route path='/' component={HomePage}/>
               </Switch>
-              </div>
+              {/* </div>
           </div>
-      </div>
+      </div> */}
     </BrowserRouter>
     );
   }
