@@ -37,7 +37,7 @@ class UserNavBar extends Component {
         return (
             <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Got To..</NavbarBrand>
+              <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
               <NavbarToggler onClick={this.toggleNav} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>

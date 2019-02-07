@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {ReactDOM} from 'react-dom';
 import {GoogleApiWrapper, Map, InfoWindow, Marker} from 'google-maps-react';
+import { Container} from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
 // import {withRouter} from 'react-router'
@@ -14,25 +14,35 @@ class GoogleMap extends Component {
         }
     }
 
-
-
-
     render() {
-        const style = {
-            width: '100%',
-            height: '100%'
-          }
         return (
-            <Map style= {style} google={this.props.google} zoom={14}>
-                <Marker onClick={this.onMarkerClick}
-                        name={'Current location'} />
-        
-                <InfoWindow onClose={this.onInfoWindowClose}>
-                    <div>
-                    <h1>Test Map</h1>
-                    </div>
-                </InfoWindow>
-          </Map>
+            // <Container style={{height: 500}}>
+                <Map
+                style={{width: '100%', height: '100%', position: 'relative'}} 
+                google={this.props.google} 
+                zoom={15}
+                initialCenter={{
+                    lat: this.props.homeLat,
+                    lng: this.props.homeLong
+                  }}
+                center={{
+                    lat: this.props.homeLat,
+                    lng: this.props.homeLong
+                }}
+                >
+                      <Marker
+                        title={'Your Default Zip Code Based on Your Profile'}
+                        name={'Home'}
+                        position={{lat: this.props.homeLat, lng: this.props.homeLong}}/>
+            
+                    <InfoWindow onClose={this.onInfoWindowClose}>
+                        <div>
+                        <h1>Test Map</h1>
+                        </div>
+                    </InfoWindow>
+                </Map>
+            // </Container>
+
         )
     }
 }
