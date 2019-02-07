@@ -1,10 +1,13 @@
 import {SET_AUTHENTICATION, SET_LOGIN_ERROR, SET_USER_DATA} from '../actions/authentication'
+import{GET_GEOCODE} from '../actions/google';
 
 const initialState = {
     userId: null,
     pending: true,
     userName: '',
     userZip: null,
+    zipLat: null,
+    zipLong: null,
     errors: false
 };
 
@@ -22,6 +25,11 @@ export default function auth (state = initialState, action) {
         const userName = action.payload.user_name
         const userZip = action.payload.zip_code
         return {...state, userName: userName, userZip: userZip }
+
+      case GET_GEOCODE:
+        const lat = action.payload.location.lat;
+        const long = action.payload.location.lng;
+        return {...state, zipLat: lat, zipLong: long}
       default:
           return state
   }
