@@ -18,8 +18,8 @@ class UserHomePage extends Component {
         this.props.getUser(this.props.match.params.userId);
         this.props.getGeoCode(this.props.userZip)
     }
+
     render() {
-        console.log(this.props.homeLate, this.props.homeLong)
         return (
             <Container>
                 <Row>
@@ -29,7 +29,7 @@ class UserHomePage extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <GoogleMap google={this.props.google}/>
+                        <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>
                     </Col>  
                 </Row>
             </Container>

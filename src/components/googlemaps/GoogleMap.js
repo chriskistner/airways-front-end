@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {GoogleApiWrapper, Map, InfoWindow, Marker} from 'google-maps-react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container} from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
 // import {withRouter} from 'react-router'
@@ -15,10 +15,20 @@ class GoogleMap extends Component {
     }
 
     render() {
-
         return (
             <Container style={{height: 500}}>
-                <Map google={this.props.google} zoom={14}>
+                <Map 
+                google={this.props.google} 
+                zoom={15}
+                initialCenter={{
+                    lat: this.props.homeLat,
+                    lng: this.props.homeLong
+                  }}
+                center={{
+                    lat: this.props.homeLat,
+                    lng: this.props.homeLong
+                }}
+                >
                     <Marker onClick={this.onMarkerClick}
                             name={'Current location'} />
             

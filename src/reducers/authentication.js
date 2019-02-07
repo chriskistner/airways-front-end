@@ -27,8 +27,8 @@ export default function auth (state = initialState, action) {
         return {...state, userName: userName, userZip: userZip }
 
       case GET_GEOCODE:
-        const lat = action.payload.location.lat;
-        const long = action.payload.location.lng;
+        const lat = action.payload.geometry.location.lat;
+        const long = action.payload.geometry.location.lng;
         return {...state, zipLat: lat, zipLong: long}
       default:
           return state
