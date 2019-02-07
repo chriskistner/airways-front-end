@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setAuthentication, login, createUser } from '../../actions/authentication';
+import {createUser} from '../../actions/authentication';
 import { Button, Form, FormGroup, Label, Input, FormFeedback, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class CreateUserForm extends Component{
@@ -13,6 +13,16 @@ class CreateUserForm extends Component{
         }
     }
 
+    handleCreateUser = (event) => {
+        event.preventDefault();
+        this.props.createUser(event.target.newUserName.value, 
+            event.target.newUserEmail.value,
+            event.target.newUserPassword.value,
+            event.target.newUserZip.value,
+            () => this.props.history.push(`/user/${this.props.userId}/`)
+            );
+    }
+
 
     render() {
         return (
@@ -21,7 +31,7 @@ class CreateUserForm extends Component{
                 <h1>Create Account</h1>
                 </ModalHeader>
                     <ModalBody>
-                        <Form>
+                        <Form onSubmit={this.handleCreateUser}>
                             <FormGroup>
                                 <Label for="newUserName">User Name</Label>
                                 <Input type="text" name="newUserName" id="newUserName" placeholder="create a user name for your account"></Input>
@@ -56,15 +66,12 @@ class CreateUserForm extends Component{
 };
 
 const mapStateToProps = state => ({
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    errors: state.auth.errors
   })
 
   const mapDispatchToProps = dispatch =>
-    bindActionCreators({
-      setAuthentication,
-      login,
-      createUser
-    }, dispatch)
+    bindActionCreators({createUser}, dispatch)
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateUserForm))
