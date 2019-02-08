@@ -20,6 +20,7 @@ class UserHomePage extends Component {
     }
 
     render() {
+        console.log(this.props.homePollen)
         return (
             <Container>
                 <Row>
@@ -50,7 +51,8 @@ const mapStateToProps = (state) => {
         userZip: state.auth.userZip,
         homeLat: state.auth.zipLat,
         homeLong: state.auth.zipLong,
-        homeConditions: state.auth.homeConditions
+        homeConditions: state.auth.homeConditions,
+        homePollen: state.auth.homePollen
     }
 }
 

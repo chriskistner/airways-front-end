@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getCurrentConditions} from './breezeometer'
+import {getCurrentConditions, getPollenCount} from './breezeometer'
 const googleUrl = process.env.REACT_APP_GOOGLE_GEOCODE_URL
 const key = process.env.REACT_APP_GOOGLE_API_KEY
 
@@ -14,6 +14,7 @@ export const getGeoCode = (zip) => {
                 payload: response.data.results[0]
             })
             dispatch(getCurrentConditions(response.data.results[0].geometry.location.lat, response.data.results[0].geometry.location.lng))
+            dispatch(getPollenCount(response.data.results[0].geometry.location.lat, response.data.results[0].geometry.location.lng))
         }catch(err) {
             console.log(err)
         }
