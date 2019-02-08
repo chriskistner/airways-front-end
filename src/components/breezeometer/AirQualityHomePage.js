@@ -16,7 +16,6 @@ export default class AirQualityHomePage extends Component {
     }
     
     render() {
-        console.log(this.props.conditions.pollutants && this.props.conditions.pollutants)
         return (
                 this.props.conditions.indexes ?
                     <Container>
@@ -50,7 +49,7 @@ export default class AirQualityHomePage extends Component {
                             <Row>
                                 <Col>
                                     <p style={{color: this.props.conditions.indexes.usa_epa.color}}>
-                                        <b>{this.props.conditions.indexes.usa_epa.category} today</b>
+                                        <b>{this.props.conditions.indexes.usa_epa.category} right now.</b>
                                     </p>
                                 </Col>
                             </Row>
