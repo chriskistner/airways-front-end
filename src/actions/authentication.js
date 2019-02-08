@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import {getGeoCode} from './google'
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
@@ -39,16 +40,13 @@ export const verifyUser = (fn) => {
 export const createUser = (userName, email, password, zipCode, fn) => {
   return async (dispatch) => {
     try {
-      await axios.post(`${url}/users`, {
-        header: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        data: {
-          userName: user_name,
-          password: password
+      await axios.post(`${url}/user`, {
+          userName: userName,
+          password: password,
+          email: email,
+          zipCode: zipCode
         }
-      });
+      );
       dispatch(login(userName, password, fn))
     }catch(err) {
       console.error(err);
@@ -87,6 +85,8 @@ export const getUser = (userId) => {
         type: SET_USER_DATA,
         payload: response.data.result
       })
+      console.log('response', response.data.result)
+      dispatch(getGeoCode(response.data.result.zip_code))
     }catch(err) {
       console.log(err)
     }
