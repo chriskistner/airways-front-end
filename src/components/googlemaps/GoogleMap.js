@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {GoogleApiWrapper, Map, InfoWindow, Marker} from 'google-maps-react';
+import {Container,Row, Col } from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
 // import {withRouter} from 'react-router'
@@ -15,32 +16,38 @@ class GoogleMap extends Component {
 
     render() {
         return (
-             this.props.homeLat ?  
-                <Map
-                style={{width: '100%', height: '100%', position: 'relative'}} 
-                google={this.props.google} 
-                zoom={15}
-                scrollwheel={true}
-                initialCenter={{
-                    lat: this.props.homeLat,
-                    lng: this.props.homeLong
-                  }}
-                center={{
-                    lat: this.props.homeLat,
-                    lng: this.props.homeLong
-                }}
-                >
-                      <Marker
-                        title={'Your Default Zip Code Based on Your Profile'}
-                        name={'Home'}
-                        position={{lat: this.props.homeLat, lng: this.props.homeLong}}/>
-            
-                    <InfoWindow onClose={this.onInfoWindowClose}>
-                        <div>
-                        <h1>Test Map</h1>
-                        </div>
-                    </InfoWindow>
-                </Map> : <p>loading...</p>
+             this.props.homeLat ? 
+                <Container>
+                    <Row>
+                        <Map
+                        style={{width: '100%', height: '100%', position: 'relative'}} 
+                        google={this.props.google} 
+                        zoom={15}
+                        scrollwheel={true}
+                        initialCenter={{
+                            lat: this.props.homeLat,
+                            lng: this.props.homeLong
+                        }}
+                        center={{
+                            lat: this.props.homeLat,
+                            lng: this.props.homeLong
+                        }}
+                        >
+                            <Marker
+                                title={'Your Default Zip Code Based on Your Profile'}
+                                name={'Home'}
+                                position={{lat: this.props.homeLat, lng: this.props.homeLong}}/>
+                        
+                            <InfoWindow onClose={this.onInfoWindowClose}>
+                                <div>
+                                <h1>Test Map</h1>
+                                </div>
+                            </InfoWindow>
+                        </Map>
+                    </Row>
+
+                </Container>
+ : <p>loading...</p>
 
         )
     }

@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import {getGeoCode} from './google'
+import {getGeoCode} from './google';
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
@@ -85,7 +85,6 @@ export const getUser = (userId) => {
         type: SET_USER_DATA,
         payload: response.data.result
       })
-      console.log('response', response.data.result)
       dispatch(getGeoCode(response.data.result.zip_code))
     }catch(err) {
       console.log(err)
