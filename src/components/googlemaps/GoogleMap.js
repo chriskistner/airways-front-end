@@ -20,6 +20,7 @@ class GoogleMap extends Component {
                 style={{width: '100%', height: '100%', position: 'relative'}} 
                 google={this.props.google} 
                 zoom={15}
+                scrollwheel={true}
                 initialCenter={{
                     lat: this.props.homeLat,
                     lng: this.props.homeLong
