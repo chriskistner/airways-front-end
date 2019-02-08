@@ -15,6 +15,8 @@ class App extends Component {
   }
 
   render() {
+    const geo = navigator.geolocation;
+    console.log(geo)
     return (
       <BrowserRouter>
       {/* <div className='container'>
