@@ -20,7 +20,6 @@ class UserHomePage extends Component {
     }
 
     render() {
-        console.log(this.props.homeConditions)
         return (
             <Container>
                 <Row>
@@ -30,7 +29,7 @@ class UserHomePage extends Component {
                 </Row>
                 <Row>
                     <Col xs="4" style={{padding: 0}}>
-                        <AirQualityHomePage/>
+                        <AirQualityHomePage conditions={this.props.homeConditions}/>
                     </Col>
                     <Col xs="8" style={{padding: 0}}>
                         <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>

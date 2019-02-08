@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container,Row, Col } from 'reactstrap';
 
-
 export default class AirQualityHomePage extends Component {
     constructor(props) {
         super(props)
@@ -12,47 +11,66 @@ export default class AirQualityHomePage extends Component {
         }
     }
 
+    generatePollutantList = (obj) => {
+        
+    }
+    
     render() {
+        console.log(this.props.conditions.pollutants && this.props.conditions.pollutants)
         return (
-            <Container>
-                <Row>
-                    <Col>
-                        <h2>Current Home Air Quality</h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <hr />
-                        <h3>Pollen Count</h3>
-                        <hr />
-                        <Row>
-                            <p><b>Current Count: 45</b></p>
-                        </Row>
-                        <Row>
-                            <p><b>Primary Allergen: Alder</b></p>
-                        </Row>
-                        <Row>
-                            <p><b>Secondary Allergen: Alder</b></p>
-                        </Row>
-                        <hr />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h3>Pollutant Data</h3>
-                        <hr />
-                        <Row>
-                            <p><b>Primary Pollutant: SO2</b></p>
-                        </Row>
-                        <Row>
-                            <p><b>PPM-25: 125</b></p>
-                        </Row>
-                        <Row>
-                            <p><b>PPM-50: 45</b></p>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
+                this.props.conditions.indexes ?
+                    <Container>
+                    <Row>
+                        <Col>
+                            <h2>Current Home Air Quality</h2>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <hr />
+                            <h4>Pollen Count</h4>
+                            <hr />
+                            <Row>
+                                <Col>
+                                <p><b>Current Count: 45</b></p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p><b>Primary Allergen: Alder</b></p>
+                                </Col>
+                            </Row>
+                            <hr />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h4>Pollutant Data</h4>
+                            <hr />
+                            <Row>
+                                <Col>
+                                    <p style={{color: this.props.conditions.indexes.usa_epa.color}}>
+                                        <b>{this.props.conditions.indexes.usa_epa.category} today</b>
+                                    </p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p><b>Air Quality Index: {this.props.conditions.indexes.usa_epa.aqi_display}</b></p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p><b>Dominant Pollutant: {this.props.conditions.indexes.usa_epa.dominant_pollutant}</b></p>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container> : 
+            
+            <p>loading...</p>
+       
+
         )
     }
 }
