@@ -1,5 +1,6 @@
 import {SET_AUTHENTICATION, SET_LOGIN_ERROR, SET_USER_DATA} from '../actions/authentication'
-import{GET_GEOCODE} from '../actions/google';
+import {GET_GEOCODE} from '../actions/google';
+import {GET_CURRENT_CONDITIONS} from '../actions/breezeometer'
 
 const initialState = {
     userId: null,
@@ -8,7 +9,8 @@ const initialState = {
     userZip: null,
     zipLat: null,
     zipLong: null,
-    errors: false
+    errors: false,
+    homeConditions: {}
 };
 
 export default function auth (state = initialState, action) {
@@ -30,6 +32,10 @@ export default function auth (state = initialState, action) {
         const lat = action.payload.geometry.location.lat;
         const long = action.payload.geometry.location.lng;
         return {...state, zipLat: lat, zipLong: long}
+
+      case GET_CURRENT_CONDITIONS:
+        const result = action.payload !== null ? action.payload : {};
+        return {...state, homeConditions: result}
       default:
           return state
   }

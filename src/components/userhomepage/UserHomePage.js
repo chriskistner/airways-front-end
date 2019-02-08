@@ -20,8 +20,7 @@ class UserHomePage extends Component {
     }
 
     render() {
-        console.log(this.props.userZip)
-        console.log('coordinates:', this.props.homeLat, this.props.homeLong)
+        console.log(this.props.homeConditions)
         return (
             <Container>
                 <Row>
@@ -51,7 +50,8 @@ const mapStateToProps = (state) => {
         userName: state.auth.userName,
         userZip: state.auth.userZip,
         homeLat: state.auth.zipLat,
-        homeLong: state.auth.zipLong
+        homeLong: state.auth.zipLong,
+        homeConditions: state.auth.homeConditions
     }
 }
 
