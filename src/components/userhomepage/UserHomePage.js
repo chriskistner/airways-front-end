@@ -6,6 +6,7 @@ import {getGeoCode} from '../../actions/google'
 import { Container, Row, Col } from 'reactstrap';
 import UserNavBar from './UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
+import AirQualityHomePage from '../breezeometer/AirQualityHomePage'
 class UserHomePage extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +17,6 @@ class UserHomePage extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
-        // this.props.getGeoCode(this.props.userZip)
     }
 
     render() {
@@ -30,7 +30,10 @@ class UserHomePage extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="8" style={{height: 400}}>
+                    <Col xs="4" style={{padding: 0}}>
+                        <AirQualityHomePage/>
+                    </Col>
+                    <Col xs="8" style={{padding: 0}}>
                         <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>
                     </Col>  
                 </Row>
