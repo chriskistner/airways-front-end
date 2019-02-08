@@ -15,7 +15,7 @@ export default function auth (state = initialState, action) {
   switch(action.type) {
       case SET_AUTHENTICATION:
         const id = action.payload !== null ? action.payload.id : null;
-        return {...state, userId: id, pending: false}
+        return {...state, userId: id, pending: false, userZip: null, zipLat: null, zipLong: null}
 
       case SET_LOGIN_ERROR:
         const errorState = action.payload;

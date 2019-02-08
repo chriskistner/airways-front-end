@@ -16,10 +16,12 @@ class UserHomePage extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
-        this.props.getGeoCode(this.props.userZip)
+        // this.props.getGeoCode(this.props.userZip)
     }
 
     render() {
+        console.log(this.props.userZip)
+        console.log('coordinates:', this.props.homeLat, this.props.homeLong)
         return (
             <Container>
                 <Row>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {GoogleApiWrapper, Map, InfoWindow, Marker} from 'google-maps-react';
-import { Container} from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
 // import {withRouter} from 'react-router'
@@ -16,7 +15,7 @@ class GoogleMap extends Component {
 
     render() {
         return (
-            // <Container style={{height: 500}}>
+             this.props.homeLat ?  
                 <Map
                 style={{width: '100%', height: '100%', position: 'relative'}} 
                 google={this.props.google} 
@@ -40,8 +39,7 @@ class GoogleMap extends Component {
                         <h1>Test Map</h1>
                         </div>
                     </InfoWindow>
-                </Map>
-            // </Container>
+                </Map> : <p>loading...</p>
 
         )
     }
