@@ -47,7 +47,7 @@ export const createUser = (userName, email, password, zipCode, fn) => {
           zipCode: zipCode
         }
       );
-      dispatch(login(userName, password, fn))
+      dispatch(login(email, password, fn))
     }catch(err) {
       console.error(err);
       dispatch(setAuthentication(null))
