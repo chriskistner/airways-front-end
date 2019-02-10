@@ -20,7 +20,6 @@ class UserHomePage extends Component {
     }
 
     render() {
-        console.log(this.props.homePollen)
         return (
             <Container>
                 <Row>
@@ -29,10 +28,10 @@ class UserHomePage extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="4" style={{padding: 0}}>
+                    <Col xs="5" style={{padding: 0}}>
                         <AirQualityHomePage conditions={this.props.homeConditions}/>
                     </Col>
-                    <Col xs="8" style={{padding: 0}}>
+                    <Col xs="7" style={{padding: 0}}>
                         <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>
                     </Col>  
                 </Row>
