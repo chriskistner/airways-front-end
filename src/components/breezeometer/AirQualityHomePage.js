@@ -11,24 +11,36 @@ export default class AirQualityHomePage extends Component {
         }
     }
 
-    generatePollutantList = (obj) => {
-        
+    generatePollutantList = () => {
+        const pollutants = this.props.conditions.pollutants;
+        const pollArr = [];
+        Object.keys(pollutants).forEach(key => {
+            pollArr.push(pollutants[key])
+        })
+        console.log(pollArr)
+        return (
+            <ul>
+                {pollArr.map(particle => <li><b>{particle.full_name}</b>, {particle.concentration.value}{particle.concentration.units}</li>)}
+            </ul>
+        )
     }
     
     render() {
         return (
                 this.props.conditions.indexes ?
-                    <Container>
+                    <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>
                     <Row>
                         <Col>
-                            <h2>Current Home Air Quality</h2>
+                            <h2>Current Air Quality</h2>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <hr />
-                            <h4>Pollen Count</h4>
-                            <hr />
+                            <Row style={{backgroundColor: "#A9B6BB"}}>
+                                <Col>
+                                <h4>Pollen Count</h4>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col>
                                 <p><b>Current Count: 45</b></p>
@@ -39,13 +51,15 @@ export default class AirQualityHomePage extends Component {
                                     <p><b>Primary Allergen: Alder</b></p>
                                 </Col>
                             </Row>
-                            <hr />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Pollutant Data</h4>
-                            <hr />
+                            <Row style={{backgroundColor: "#A9B6BB"}}>
+                                <Col>
+                                <h4>Pollutant Data</h4>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col>
                                     <p style={{color: this.props.conditions.indexes.usa_epa.color}}>
@@ -55,12 +69,13 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>Air Quality Index: {this.props.conditions.indexes.usa_epa.aqi_display}</b></p>
+                                    <p><b>Air Quality Index:</b> {this.props.conditions.indexes.usa_epa.aqi_display} | <b>Dominant Pollutant:</b> {this.props.conditions.indexes.usa_epa.dominant_pollutant}</p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>Dominant Pollutant: {this.props.conditions.indexes.usa_epa.dominant_pollutant}</b></p>
+                                    <p><b>All Pollutants Present:</b></p>
+                                    {this.generatePollutantList()}
                                 </Col>
                             </Row>
                         </Col>
