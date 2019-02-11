@@ -6,7 +6,6 @@ const initialState = {
     userId: null,
     pending: true,
     userName: '',
-    userZip: null,
     zipLat: null,
     zipLong: null,
     errors: false,
@@ -18,16 +17,18 @@ export default function auth (state = initialState, action) {
   switch(action.type) {
       case SET_AUTHENTICATION:
         const id = action.payload !== null ? action.payload.id : null;
-        return {...state, userId: id, pending: false, userZip: null, zipLat: null, zipLong: null}
+        return {...state, userId: id, pending: false, zipLat: null, zipLong: null}
 
       case SET_LOGIN_ERROR:
         const errorState = action.payload;
         return {...state, errors: errorState}
         
       case SET_USER_DATA:
-        const userName = action.payload.user_name
-        const userZip = action.payload.zip_code
-        return {...state, userName: userName, userZip: userZip }
+        const userName = action.payload.user_name;
+        const userZip = action.payload.zip_code;
+        const userLat = action.payload.home_latitude;
+        const userLong = action.payload.home_longitude;
+        return {...state, userName: userName, userZip: userZip, zipLat: userLat, zipLong: userLong }
 
       case GET_GEOCODE:
         const lat = action.payload.geometry.location.lat;

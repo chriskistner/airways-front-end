@@ -1,7 +1,8 @@
 
 import axios from "axios";
-import {getGeoCode} from './google';
+import {getCurrentConditions} from './breezeometer'
 const url = process.env.REACT_APP_API_URL;
+
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const SET_USER_DATA = 'SET_USER_DATA';
@@ -37,14 +38,16 @@ export const verifyUser = (fn) => {
   }
 };
 
-export const createUser = (userName, email, password, zipCode, fn) => {
+export const createUser = (userName, email, password, address, city, state, fn) => {
   return async (dispatch) => {
     try {
       await axios.post(`${url}/user`, {
           userName: userName,
           password: password,
           email: email,
-          zipCode: zipCode
+          address: address,
+          city: city,
+          state: state
         }
       );
       dispatch(login(email, password, fn))
@@ -85,7 +88,7 @@ export const getUser = (userId) => {
         type: SET_USER_DATA,
         payload: response.data.result
       })
-      dispatch(getGeoCode(response.data.result.zip_code))
+      dispatch(getCurrentConditions(response.data.result.home_latitude, response.data.result.home_longitude))
     }catch(err) {
       console.log(err)
     }

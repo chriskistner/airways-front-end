@@ -17,7 +17,6 @@ export default class AirQualityHomePage extends Component {
         Object.keys(pollutants).forEach(key => {
             pollArr.push(pollutants[key])
         })
-        console.log(pollArr)
         return (
             <ul>
                 {pollArr.map(particle => <li><b>{particle.full_name}</b>, {particle.concentration.value}{particle.concentration.units}</li>)}

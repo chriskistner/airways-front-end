@@ -18,7 +18,9 @@ class CreateUserForm extends Component{
         this.props.createUser(event.target.newUserName.value, 
             event.target.newUserEmail.value,
             event.target.newUserPassword.value,
-            event.target.newUserZip.value,
+            event.target.newUserAddress.value,
+            event.target.newUserCity.value,
+            event.target.newUserState.value,
             () => this.props.history.push(`/user/${this.props.userId}/`)
             );
     }
@@ -49,8 +51,11 @@ class CreateUserForm extends Component{
                                 <FormFeedback>Sorry, those passwords don't match</FormFeedback>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="newUserEmail">User Zip Code</Label>
-                                <Input type="text" name="newUserZip" id="newUserZip" placeholder="enter your home zip code"></Input>
+                                <Label for="newUserEmail">User Home Address</Label>
+                                <Input type="text" name="newUserAddress" id="newUserAddress" placeholder="Enter Street Address"></Input>
+                                <Input type="text" name="newUserCity" id="newUserCity" placeholder="Enter City"></Input>
+                                <Input type="text" name="newUserState" id="newUserState" placeholder="Enter State"></Input>
+
                                 <FormFeedback>Sorry, that email is already being used</FormFeedback>
                             </FormGroup>
                             <ModalFooter>

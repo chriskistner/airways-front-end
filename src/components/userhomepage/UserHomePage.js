@@ -47,7 +47,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         userName: state.auth.userName,
-        userZip: state.auth.userZip,
         homeLat: state.auth.zipLat,
         homeLong: state.auth.zipLong,
         homeConditions: state.auth.homeConditions,
