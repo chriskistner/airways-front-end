@@ -26,7 +26,7 @@ export const getPollenCount = (lat, long) => {
         try {
             const response = await axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
             dispatch({
-                type: GET_CURRENT_CONDITIONS,
+                type: GET_POLLEN_COUNT,
                 payload: response.data.data
             })
         }catch(err) {
