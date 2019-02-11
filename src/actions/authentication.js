@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import {getCurrentConditions} from './breezeometer'
+import {getCurrentConditions, getPollenCount} from './breezeometer'
 const url = process.env.REACT_APP_API_URL;
 
 
@@ -88,7 +88,8 @@ export const getUser = (userId) => {
         type: SET_USER_DATA,
         payload: response.data.result
       })
-      dispatch(getCurrentConditions(response.data.result.home_latitude, response.data.result.home_longitude))
+      dispatch(getCurrentConditions(response.data.result.home_latitude, response.data.result.home_longitude));
+      dispatch(getPollenCount(response.data.result.home_latitude, response.data.result.home_longitude));
     }catch(err) {
       console.log(err)
     }

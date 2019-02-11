@@ -25,8 +25,9 @@ export default class AirQualityHomePage extends Component {
     }
     
     render() {
+        console.log(this.props.pollen[0] && this.props.pollen[0].types)
         return (
-                this.props.conditions.indexes ?
+                this.props.conditions.indexes && this.props.pollen[0] ?
                     <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>
                     <Row>
                         <Col>
@@ -42,12 +43,23 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                <p><b>Current Count: 45</b></p>
+                                <p><b>Tree Pollen: </b>
+                                {
+                                    !this.props.pollen[0].types.tree.in_season ? "Pollen Out of Season" :
+                                    <span>Pollen is <u>{this.props.pollen[0].types.tree.index.category}</u> today, Index of {this.props.pollen[0].types.tree.index.value} bpi</span>
+                                }
+                                </p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>Primary Allergen: Alder</b></p>
+                                    <p><b>Primary Allergen: </b>
+                                    {
+                                    !this.props.pollen[0].types.grass.in_season ? "Pollen Out of Season" :
+                                    <span>Pollen is <u>{this.props.pollen[0].types.grass.index.category}</u> today, Index of {this.props.pollen[0].types.grass.index.value} bpi</span>
+                                }
+                                    
+                                    </p>
                                 </Col>
                             </Row>
                         </Col>
@@ -81,7 +93,7 @@ export default class AirQualityHomePage extends Component {
                     </Row>
                 </Container> : 
             
-            <p>loading...</p>
+            <p>loading Air Quality Data...</p>
        
 
         )

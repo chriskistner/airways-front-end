@@ -29,7 +29,7 @@ class UserHomePage extends Component {
                 </Row>
                 <Row>
                     <Col xs="5" style={{padding: 0}}>
-                        <AirQualityHomePage conditions={this.props.homeConditions}/>
+                        <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
                     </Col>
                     <Col xs="7" style={{padding: 0}}>
                         <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>

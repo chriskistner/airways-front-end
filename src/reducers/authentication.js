@@ -41,7 +41,7 @@ export default function auth (state = initialState, action) {
 
       case GET_POLLEN_COUNT:
         const pollen = action.payload !== null ? action.payload : {};
-        return {...state, homeConditions: pollen}
+        return {...state, homePollen: pollen}
       default:
           return state
   }
