@@ -11,7 +11,11 @@ class UserLocationsPage extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {}
+        this.state = {
+            currentLocName: '',
+            currentLocLat: '',
+            currentLocLong: '',
+        }
     }
 
     componentDidMount() {
@@ -26,6 +30,14 @@ class UserLocationsPage extends Component {
                 </Col>
             </Row>
         )
+    };
+
+    handlelocationSelecton = (name, lat, long) => {
+        this.setState({
+            currentLocName: name,
+            currentLocLat: lat,
+            currentLocLong: long
+        })
     }
 
     render () {
@@ -40,7 +52,7 @@ class UserLocationsPage extends Component {
                 <Row>
                     <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} />})
+                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrrent={this.handlelocationSelecton}/>})
                     }
                     </Col>
                     <Col xs='8' style={{paddingRight: 0}}>
