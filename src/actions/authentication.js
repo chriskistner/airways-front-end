@@ -76,8 +76,7 @@ export const getUser = (userId) => {
   return async (dispatch) => {
     try{
       const token = localStorage.getItem('token');
-      const response = await axios(`${url}/user/${userId}`, {
-        method: "get",
+      const response = await axios.get(`${url}/user/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router'
+import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {setAuthentication, toggleError} from '../../actions/authentication';
 import {
@@ -42,7 +42,7 @@ class UserNavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink href="/routes/">Routes</NavLink>
+                    <Link to={`/locations`} ><NavLink href="/routes/">Routes</NavLink></Link>
                     </NavItem>
                     <NavItem>
                         <NavLink href="/locations">Locations</NavLink>
