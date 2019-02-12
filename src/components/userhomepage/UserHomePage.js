@@ -6,7 +6,8 @@ import {getGeoCode} from '../../actions/google'
 import { Container, Row, Col } from 'reactstrap';
 import UserNavBar from './UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
-import AirQualityHomePage from '../breezeometer/AirQualityHomePage'
+import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
+
 class UserHomePage extends Component {
     constructor(props) {
         super(props)

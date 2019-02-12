@@ -15,6 +15,7 @@ class GoogleMap extends Component {
     }
 
     render() {
+        console.log(this.props.currentLat)
         return (
              this.props.homeLat ? 
                 <Container>
@@ -25,12 +26,12 @@ class GoogleMap extends Component {
                         zoom={15}
                         scrollwheel={true}
                         initialCenter={{
-                            lat: this.props.homeLat,
-                            lng: this.props.homeLong
+                            lat: this.props.currentLat ? this.props.currentLat : this.props.homeLat,
+                            lng: this.props.currentLong ? this.props.currentLong : this.props.homeLong
                         }}
                         center={{
-                            lat: this.props.homeLat,
-                            lng: this.props.homeLong
+                            lat: this.props.currentLat ? this.props.currentLat : this.props.homeLat,
+                            lng: this.props.currentLong ? this.props.currentLong : this.props.homeLong
                         }}
                         >
                             <Marker
