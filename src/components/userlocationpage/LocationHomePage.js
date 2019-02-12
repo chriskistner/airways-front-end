@@ -13,8 +13,8 @@ class UserLocationsPage extends Component {
 
         this.state = {
             currentLocName: '',
-            currentLocLat: '',
-            currentLocLong: '',
+            currentLocLat: null,
+            currentLocLong: null,
         }
     }
 
@@ -32,7 +32,7 @@ class UserLocationsPage extends Component {
         )
     };
 
-    handlelocationSelecton = (name, lat, long) => {
+    handleLocationSelecton = (name, lat, long) => {
         this.setState({
             currentLocName: name,
             currentLocLat: lat,
@@ -52,11 +52,16 @@ class UserLocationsPage extends Component {
                 <Row>
                     <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrrent={this.handlelocationSelecton}/>})
+                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrent={this.handleLocationSelecton}/>})
                     }
                     </Col>
                     <Col xs='8' style={{paddingRight: 0}}>
-                        <GoogleMap homeLat={this.props.homeLat} homeLong={this.props.homeLong} google={this.props.google}/>
+                        <GoogleMap currentName={this.state.currentLocName}
+                                    currentLat={this.state.currentLocLat}
+                                    currentLong={this.state.currentLocLong} 
+                                    homeLat={this.props.homeLat} 
+                                    homeLong={this.props.homeLong} 
+                                    google={this.props.google}/>
                     </Col>
 
                 </Row>

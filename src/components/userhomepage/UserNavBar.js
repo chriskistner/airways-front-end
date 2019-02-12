@@ -34,6 +34,7 @@ class UserNavBar extends Component {
     }
 
     render() {
+        console.log(this.props.match)
         return (
             <div>
             <Navbar color="light" light expand="md">
@@ -42,10 +43,10 @@ class UserNavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                    <Link to={`/locations`} ><NavLink href="/routes/">Routes</NavLink></Link>
+                        <NavLink>Routes</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/locations">Locations</NavLink>
+                        <NavLink ><Link to={`${this.props.match.url}/locations`}>Locations</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href="/alerts">Alerts</NavLink>

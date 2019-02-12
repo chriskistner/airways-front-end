@@ -5,14 +5,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 function locationListing ({id, name, longitude, latitude, userId,  match, setCurrent}) {
-    console.log(typeof setCurrent)
     return (
         <Row>
             <Col xs="5">
                 <b>{name}</b> 
             </Col>
             <Col xs="5">
-                <Button outline color="success" size="sm" block onClick={() => {setCurrent(name, latitude, longitude)}}>Get Air Info</Button>
+                <Button outline color="success" size="sm" block onClick={() => setCurrent(name, latitude, longitude)}>Get Air Info</Button>
             </Col>
             <Col xs="1">
                 DEL
