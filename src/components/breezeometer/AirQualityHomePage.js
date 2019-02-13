@@ -22,17 +22,8 @@ export default class AirQualityHomePage extends Component {
     }
     
     render() {
-        let pollenData = null;
-        let airData = null;
-        if(this.props.currentPollen) {
-            pollenData = this.props.currentPollen;
-            airData = this.props.currentCond;
-        } else { 
-            pollenData = this.props.pollen;
-            airData = this.props.conditions
-        }
         return (
-                airData.indexes && pollenData[0] ?
+                this.props.conditions.indexes && this.props.pollen[0] ?
                     <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>
                     <Row>
                         <Col>
@@ -50,8 +41,8 @@ export default class AirQualityHomePage extends Component {
                                 <Col>
                                 <p><b>Tree: </b>
                                 {
-                                    !pollenData[0].types.tree.in_season ? "This allergen is out of season" :
-                                    <span>Pollen is <u>{pollenData[0].types.tree.index.category}</u> today, Index of {pollenData[0].types.tree.index.value} bpi</span>
+                                    !this.props.pollen[0].types.tree.in_season ? "This allergen is out of season" :
+                                    <span>Pollen is <u>{this.props.pollen[0].types.tree.index.category}</u> today, Index of {this.props.pollen[0].types.tree.index.value} bpi</span>
                                 }
                                 </p>
                                 </Col>
@@ -60,8 +51,8 @@ export default class AirQualityHomePage extends Component {
                                 <Col>
                                     <p><b>Grass: </b>
                                     {
-                                    !pollenData[0].types.grass.in_season ? "This allergen is out of season" :
-                                    <span>Pollen is <u>{pollenData[0].types.grass.index.category}</u> today, Index of {pollenData[0].types.grass.index.value} bpi</span>
+                                    !this.props.pollen[0].types.grass.in_season ? "This allergen is out of season" :
+                                    <span>Pollen is <u>{this.props.pollen[0].types.grass.index.category}</u> today, Index of {this.props.pollen[0].types.grass.index.value} bpi</span>
                                 }
                                     
                                     </p>
@@ -78,20 +69,20 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <p style={{color: airData.indexes.usa_epa.color}}>
-                                        <b>{airData.indexes.usa_epa.category} right now.</b>
+                                    <p style={{color: this.props.conditions.indexes.usa_epa.color}}>
+                                        <b>{this.props.conditions.indexes.usa_epa.category} right now.</b>
                                     </p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>Air Quality Index:</b> {airData.indexes.usa_epa.aqi_display} | <b>Dominant Pollutant:</b> {airData.indexes.usa_epa.dominant_pollutant}</p>
+                                    <p><b>Air Quality Index:</b> {this.props.conditions.indexes.usa_epa.aqi_display} | <b>Dominant Pollutant:</b> {this.props.conditions.indexes.usa_epa.dominant_pollutant}</p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <p><b>All Pollutants Present:</b></p>
-                                    {this.generatePollutantList(airData.pollutants)}
+                                    {this.generatePollutantList(this.props.conditions.pollutants)}
                                 </Col>
                             </Row>
                         </Col>

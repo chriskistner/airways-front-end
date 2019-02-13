@@ -61,8 +61,8 @@ class UserLocationsPage extends Component {
                 currentLocName: name,
                 currentLocLat: lat,
                 currentLocLong: long,
-                currentCond: conditions,
-                currentPollen: pollen
+                currentCond: conditions.data.data,
+                currentPollen: pollen.data.data
             })
         }catch(err) {
             console.log(err)
@@ -77,6 +77,15 @@ class UserLocationsPage extends Component {
 
     render () {
         const locations = this.props.locations;
+        let pollenData = null;
+        let airData = null;
+        if(this.state.currentPollen) {
+            pollenData = this.state.currentPollen;
+            airData = this.state.currentCond;
+        } else { 
+            pollenData = this.props.homePollen;
+            airData = this.props.homeConditions
+        }
         return (
             <Container>
                 <Row>
@@ -94,10 +103,8 @@ class UserLocationsPage extends Component {
                     }
                     </Col>
                     <Col xs='4'>
-                        <AirQualityHomePage pollen={this.props.homePollen} 
-                                            conditions={this.props.homeConditions}
-                                            currentCond = {this.state.currentCond}
-                                            currentPollen={this.state.currentPollen}/>
+                        {pollenData ? <AirQualityHomePage pollen={pollenData} 
+                                            conditions={airData}/> : null}
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         <GoogleMap currentName={this.state.currentLocName}
