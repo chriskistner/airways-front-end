@@ -1,5 +1,5 @@
 import axios from "axios";
-import getGeoCode from './google';
+import {getCurrentConditions, getPollenCount} from './breezeometer'
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_USER_LOCATIONS = "SET_USER_LOCATIONS";
@@ -19,7 +19,7 @@ export const getUserLocations = (userId) => {
             dispatch({
                 type: SET_USER_LOCATIONS,
                 payload: response.data.result[0]
-              })
+              });
         }catch(err) {
             console.log(err)
         }

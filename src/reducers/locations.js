@@ -1,4 +1,5 @@
-import {SET_USER_LOCATIONS, CREATE_USER_LOCATION} from '../actions/locations';
+import {SET_USER_LOCATIONS} from '../actions/locations';
+import {GET_CURRENT_CONDITIONS, GET_POLLEN_COUNT} from '../actions/breezeometer';
 
 const initialState = {
     userId: null,
@@ -6,6 +7,8 @@ const initialState = {
     userName: '',
     zipLat: null,
     zipLong: null,
+    homeConditions: {},
+    homePollen: {},
     locations: []
 };
 
@@ -19,6 +22,14 @@ export default function locations (state = initialState, action) {
             const userLocations = action.payload.locations;
             return {...state, userName: userName, userZip: userZip, zipLat: userLat, zipLong: userLong, locations: userLocations }
 
+        case GET_CURRENT_CONDITIONS:
+            const result = action.payload !== null ? action.payload : {};
+            return {...state, homeConditions: result}
+    
+        case GET_POLLEN_COUNT:
+            const pollen = action.payload !== null ? action.payload : {};
+            return {...state, homePollen: pollen}
+            
         default:
             return state;
 
