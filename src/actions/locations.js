@@ -20,6 +20,8 @@ export const getUserLocations = (userId) => {
                 type: SET_USER_LOCATIONS,
                 payload: response.data.result[0]
               });
+              dispatch(getCurrentConditions(response.data.result[0].home_latitude, response.data.result[0].home_longitude));
+              dispatch(getPollenCount(response.data.result[0].home_latitude, response.data.result[0].home_longitude));
         }catch(err) {
             console.log(err)
         }

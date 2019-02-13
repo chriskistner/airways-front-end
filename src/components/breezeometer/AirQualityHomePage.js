@@ -23,7 +23,6 @@ export default class AirQualityHomePage extends Component {
     }
     
     render() {
-        console.log(this.props.pollen[0] && this.props.pollen[0].types)
         return (
                 this.props.conditions.indexes && this.props.pollen[0] ?
                     <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>

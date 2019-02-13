@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
@@ -11,6 +12,10 @@ import CreateLocation from './CreateLocation';
 import LocationHomeBar from './LocationHomeBar';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
 
+const breezeApi = process.env.REACT_APP_BREEZE_O_METER_API_KEY;
+const conditionsUrl = process.env.REACT_APP_BREEZE_O_METER_CURRENT_CONDITIONS_URL;
+const pollenUrl = process.env.REACT_APP_BREEZE_O_METER_POLLEN_URL;
+
 class UserLocationsPage extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +25,8 @@ class UserLocationsPage extends Component {
             currentLocName: '',
             currentLocLat: null,
             currentLocLong: null,
+            currentCond: null,
+            currentPollen: null
         }
     };
 
@@ -37,7 +44,15 @@ class UserLocationsPage extends Component {
         )
     };
 
-    handleLocationSelecton = (name, lat, long) => {
+    setLocalConditions = (long, lat) => {
+        axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
+        .then(function(result){
+            return result.data.data
+        })
+    }
+
+    handleLocationSelecton = (name, long, lat) => {
+        const conditions = this.setLocalConditions(long, lat);
         this.setState({
             currentLocName: name,
             currentLocLat: lat,
