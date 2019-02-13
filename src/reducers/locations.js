@@ -1,4 +1,4 @@
-import {SET_USER_LOCATIONS} from '../actions/locations';
+import {SET_USER_LOCATIONS, CREATE_USER_LOCATION} from '../actions/locations';
 
 const initialState = {
     userId: null,

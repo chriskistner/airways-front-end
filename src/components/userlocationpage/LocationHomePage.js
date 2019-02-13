@@ -29,7 +29,7 @@ class UserLocationsPage extends Component {
         return (
             <Row>
                 <Col>
-                    <h3>You Have No Saved Locations</h3>
+                    <h4>You Have No Saved Locations</h4>
                 </Col>
             </Row>
         )
@@ -51,7 +51,6 @@ class UserLocationsPage extends Component {
 
     render () {
         const locations = this.props.locations
-        console.log(this.state.createLoc)
         return (
             <Container>
                 <Row>
@@ -60,7 +59,7 @@ class UserLocationsPage extends Component {
                     </Col>
                 </Row>
                 <LocationHomeBar toggleForm={this.toggleCreateForm}/>
-                {this.state.createLoc ? <CreateLocation/> : null}
+                {this.state.createLoc ? <CreateLocation toggleForm ={this.toggleCreateForm}/> : null}
 
                 <Row style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
                     <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
