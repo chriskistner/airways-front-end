@@ -3,7 +3,7 @@ import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import {getUserLocations} from '../../actions/locations';
+import {getUserLocations, deleteUserLocation} from '../../actions/locations';
 import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
@@ -81,7 +81,7 @@ class UserLocationsPage extends Component {
                 <Row style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
                     <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrent={this.handleLocationSelecton}/>})
+                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
                     }
                     </Col>
                     <Col xs='4'>
@@ -102,7 +102,7 @@ class UserLocationsPage extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getUserLocations, getCurrentConditions, getPollenCount},dispatch)
+    return bindActionCreators({getUserLocations, deleteUserLocation, getCurrentConditions, getPollenCount},dispatch)
 }
 
 const mapStateToProps = (state) => {

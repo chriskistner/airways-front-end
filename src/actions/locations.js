@@ -52,3 +52,22 @@ export const createUserLocation = (userId, name, address, city, state) => {
         }
     }
 };
+
+export const deleteUserLocation = (userId, locId) => {
+    return async (dispatch) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios(`${url}/user/${userId}/locations/${locId}`,{
+                method: "delete",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch(getUserLocations(userId))
+        }catch(err) {
+            console.log(err)
+        }
+    }
+}
