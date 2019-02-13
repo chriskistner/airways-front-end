@@ -9,8 +9,7 @@ export default class AirQualityHomePage extends Component {
         }
     }
 
-    generatePollutantList = () => {
-        const pollutants = this.props.conditions.pollutants;
+    generatePollutantList = (pollutants) => {
         const pollArr = [];
         Object.keys(pollutants).forEach(key => {
             pollArr.push(pollutants[key])
@@ -23,7 +22,6 @@ export default class AirQualityHomePage extends Component {
     }
     
     render() {
-        console.log(this.props.pollen[0] && this.props.pollen[0].types)
         return (
                 this.props.conditions.indexes && this.props.pollen[0] ?
                     <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>
@@ -41,9 +39,9 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                <p><b>Tree Pollen: </b>
+                                <p><b>Tree: </b>
                                 {
-                                    !this.props.pollen[0].types.tree.in_season ? "Pollen Out of Season" :
+                                    !this.props.pollen[0].types.tree.in_season ? "This allergen is out of season" :
                                     <span>Pollen is <u>{this.props.pollen[0].types.tree.index.category}</u> today, Index of {this.props.pollen[0].types.tree.index.value} bpi</span>
                                 }
                                 </p>
@@ -51,9 +49,9 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>Primary Allergen: </b>
+                                    <p><b>Grass: </b>
                                     {
-                                    !this.props.pollen[0].types.grass.in_season ? "Pollen Out of Season" :
+                                    !this.props.pollen[0].types.grass.in_season ? "This allergen is out of season" :
                                     <span>Pollen is <u>{this.props.pollen[0].types.grass.index.category}</u> today, Index of {this.props.pollen[0].types.grass.index.value} bpi</span>
                                 }
                                     
@@ -84,7 +82,7 @@ export default class AirQualityHomePage extends Component {
                             <Row>
                                 <Col>
                                     <p><b>All Pollutants Present:</b></p>
-                                    {this.generatePollutantList()}
+                                    {this.generatePollutantList(this.props.conditions.pollutants)}
                                 </Col>
                             </Row>
                         </Col>
@@ -97,4 +95,3 @@ export default class AirQualityHomePage extends Component {
         )
     }
 }
-

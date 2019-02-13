@@ -15,7 +15,6 @@ class GoogleMap extends Component {
     }
 
     render() {
-        console.log(this.props.currentLong)
         return (
              this.props.homeLat ? 
                 <Container>

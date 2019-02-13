@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import {getUserLocations} from '../../actions/locations';
+import {getUserLocations, deleteUserLocation} from '../../actions/locations';
 import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
@@ -10,6 +11,10 @@ import LocationListing from './LocationListing';
 import CreateLocation from './CreateLocation';
 import LocationHomeBar from './LocationHomeBar';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
+
+const breezeApi = process.env.REACT_APP_BREEZE_O_METER_API_KEY;
+const conditionsUrl = process.env.REACT_APP_BREEZE_O_METER_CURRENT_CONDITIONS_URL;
+const pollenUrl = process.env.REACT_APP_BREEZE_O_METER_POLLEN_URL;
 
 class UserLocationsPage extends Component {
     constructor(props) {
@@ -20,6 +25,8 @@ class UserLocationsPage extends Component {
             currentLocName: '',
             currentLocLat: null,
             currentLocLong: null,
+            currentCond: null,
+            currentPollen: null
         }
     };
 
@@ -37,12 +44,29 @@ class UserLocationsPage extends Component {
         )
     };
 
-    handleLocationSelecton = (name, lat, long) => {
-        this.setState({
-            currentLocName: name,
-            currentLocLat: lat,
-            currentLocLong: long
-        })
+    setLocalConditions = (long, lat) => {
+        return axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
+ 
+    };
+
+    setLocalPollen = (long, lat) => {
+        return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
+    };
+
+    handleLocationSelecton = async (name, long, lat) => {
+        try{
+            const conditions = await this.setLocalConditions(long, lat)
+            const pollen = await this.setLocalPollen(long, lat)
+            this.setState({
+                currentLocName: name,
+                currentLocLat: lat,
+                currentLocLong: long,
+                currentCond: conditions.data.data,
+                currentPollen: pollen.data.data
+            })
+        }catch(err) {
+            console.log(err)
+        }
     };
 
     toggleCreateForm = () => {
@@ -52,7 +76,16 @@ class UserLocationsPage extends Component {
     };
 
     render () {
-        const locations = this.props.locations
+        const locations = this.props.locations;
+        let pollenData = null;
+        let airData = null;
+        if(this.state.currentPollen) {
+            pollenData = this.state.currentPollen;
+            airData = this.state.currentCond;
+        } else { 
+            pollenData = this.props.homePollen;
+            airData = this.props.homeConditions
+        }
         return (
             <Container>
                 <Row>
@@ -66,11 +99,12 @@ class UserLocationsPage extends Component {
                 <Row style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
                     <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrent={this.handleLocationSelecton}/>})
+                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} userId ={this.props.match.params.userId} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
                     }
                     </Col>
                     <Col xs='4'>
-                        <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
+                        {pollenData ? <AirQualityHomePage pollen={pollenData} 
+                                            conditions={airData}/> : null}
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         <GoogleMap currentName={this.state.currentLocName}
@@ -87,7 +121,7 @@ class UserLocationsPage extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getUserLocations, getCurrentConditions, getPollenCount},dispatch)
+    return bindActionCreators({getUserLocations, deleteUserLocation, getCurrentConditions, getPollenCount},dispatch)
 }
 
 const mapStateToProps = (state) => {
