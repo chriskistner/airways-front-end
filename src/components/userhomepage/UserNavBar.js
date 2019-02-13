@@ -34,7 +34,6 @@ class UserNavBar extends Component {
     }
 
     render() {
-        console.log(this.props.match)
         return (
             <div>
             <Navbar color="light" light expand="md">
@@ -46,7 +45,7 @@ class UserNavBar extends Component {
                         <NavLink>Routes</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink ><Link to={`${this.props.match.url}/locations`}>Locations</Link></NavLink>
+                        <NavLink ><Link to={`${this.props.match.url}/locations`} disabled>Locations</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href="/alerts">Alerts</NavLink>

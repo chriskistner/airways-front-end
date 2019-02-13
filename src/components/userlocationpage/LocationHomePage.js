@@ -6,12 +6,15 @@ import {getUserLocations} from '../../actions/locations'
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import LocationListing from './LocationListing';
+import CreateLocation from './CreateLocation';
+import LocationHomeBar from './LocationHomeBar';
 
 class UserLocationsPage extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
+            createLoc: false,
             currentLocName: '',
             currentLocLat: null,
             currentLocLong: null,
@@ -20,7 +23,7 @@ class UserLocationsPage extends Component {
 
     componentDidMount() {
         this.props.getUserLocations(this.props.match.params.userId);
-    }
+    };
 
     noLocales = () => {
         return (
@@ -38,10 +41,17 @@ class UserLocationsPage extends Component {
             currentLocLat: lat,
             currentLocLong: long
         })
+    };
+
+    toggleCreateForm = () => {
+        this.setState({
+            createLoc: !this.state.createLoc
+        })
     }
 
     render () {
         const locations = this.props.locations
+        console.log(this.state.createLoc)
         return (
             <Container>
                 <Row>
@@ -49,7 +59,10 @@ class UserLocationsPage extends Component {
                         <UserNavBar user={this.props.userName}/>
                     </Col>
                 </Row>
-                <Row>
+                <LocationHomeBar toggleForm={this.toggleCreateForm}/>
+                {this.state.createLoc ? <CreateLocation/> : null}
+
+                <Row style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
                     <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
                     {
                         locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} setCurrent={this.handleLocationSelecton}/>})
