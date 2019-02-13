@@ -45,19 +45,28 @@ class UserLocationsPage extends Component {
     };
 
     setLocalConditions = (long, lat) => {
-        axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
-        .then(function(result){
-            return result.data.data
-        })
-    }
+        return axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
+ 
+    };
 
-    handleLocationSelecton = (name, long, lat) => {
-        const conditions = this.setLocalConditions(long, lat);
-        this.setState({
-            currentLocName: name,
-            currentLocLat: lat,
-            currentLocLong: long
-        })
+    setLocalPollen = (long, lat) => {
+        return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
+    };
+
+    handleLocationSelecton = async (name, long, lat) => {
+        try{
+            const conditions = await this.setLocalConditions(long, lat)
+            const pollen = await this.setLocalPollen(long, lat)
+            this.setState({
+                currentLocName: name,
+                currentLocLat: lat,
+                currentLocLong: long,
+                currentCond: conditions,
+                currentPollen: pollen
+            })
+        }catch(err) {
+            console.log(err)
+        }
     };
 
     toggleCreateForm = () => {
@@ -67,7 +76,7 @@ class UserLocationsPage extends Component {
     };
 
     render () {
-        const locations = this.props.locations
+        const locations = this.props.locations;
         return (
             <Container>
                 <Row>
@@ -81,11 +90,14 @@ class UserLocationsPage extends Component {
                 <Row style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
                     <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
+                        locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} userId ={this.props.match.params.userId} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
                     }
                     </Col>
                     <Col xs='4'>
-                        <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
+                        <AirQualityHomePage pollen={this.props.homePollen} 
+                                            conditions={this.props.homeConditions}
+                                            currentCond = {this.state.currentCond}
+                                            currentPollen={this.state.currentPollen}/>
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         <GoogleMap currentName={this.state.currentLocName}
