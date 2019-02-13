@@ -15,7 +15,7 @@ class GoogleMap extends Component {
     }
 
     render() {
-        console.log(this.props.currentLat)
+        console.log(this.props.currentLong)
         return (
              this.props.homeLat ? 
                 <Container>
@@ -37,7 +37,8 @@ class GoogleMap extends Component {
                             <Marker
                                 title={'Your Default Zip Code Based on Your Profile'}
                                 name={'Home'}
-                                position={{lat: this.props.homeLat, lng: this.props.homeLong}}/>
+                                position={{lat: this.props.currentLat ? this.props.currentLat : this.props.homeLat,
+                                 lng: this.props.currentLong ? this.props.currentLong : this.props.homeLong}}/>
                         
                             <InfoWindow onClose={this.onInfoWindowClose}>
                                 <div>

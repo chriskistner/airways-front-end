@@ -8,7 +8,7 @@ function locationListing ({id, name, longitude, latitude, userId,  match, setCur
     return (
         <Row>
             <Col xs="5">
-                <b>{name}</b> 
+                {name}
             </Col>
             <Col xs="5">
                 <Button outline color="success" size="sm" block onClick={() => setCurrent(name, latitude, longitude)}>Get Air Info</Button>

@@ -5,10 +5,13 @@ const key = process.env.REACT_APP_GOOGLE_API_KEY
 
 export const GET_GEOCODE = "GET_GEOCODE";
 
-export const getGeoCode = (zip) => {
+export const getGeoCode = (address, city, state) => {
+    const formatAddress = address.replace(' ', '+');
+    const formatState = state.toUpperCase();
+    const formatCity = city.replace(' ', '+');
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${googleUrl}${zip}&key=${key}`,{})
+            const response = await axios.get(`${googleUrl}${formatAddress},+${formatCity},+${formatState}&key=${key}`,{})
             dispatch({
                 type: GET_GEOCODE,
                 payload: response.data.results[0]

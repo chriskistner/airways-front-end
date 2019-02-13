@@ -6,8 +6,6 @@ export default class AirQualityHomePage extends Component {
         super(props)
 
         this.state = {
-            pollen: {},
-            pollutants: {}
         }
     }
 
