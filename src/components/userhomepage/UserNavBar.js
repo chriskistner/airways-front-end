@@ -42,10 +42,10 @@ class UserNavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink>Routes</NavLink>
+                        <NavLink><Link to={`${this.props.match.url}/routes`}>Routes</Link></NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink ><Link to={`${this.props.match.url}/locations`} disabled>Locations</Link></NavLink>
+                        <NavLink ><Link to={`${this.props.match.url}/locations`}>Locations</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href="/alerts">Alerts</NavLink>
