@@ -7,7 +7,8 @@ import {bindActionCreators} from 'redux';
 import {verifyUser} from './actions/authentication';
 import HomePage from './components/homepage/LoginPage';
 import UserHomePage from './components/userhomepage/UserHomePage';
-import LocationHomePage from './components/userlocationpage/LocationHomePage';
+import UserLocationsPage from './components/userlocationpage/LocationHomePage';
+import UserRoutesPage from './components/userroutepage/RouteHomePage';
 
 class App extends Component {
 
@@ -16,22 +17,15 @@ class App extends Component {
   }
 
   render() {
-    const geo = navigator.geolocation;
-    console.log(geo)
     return (
       <BrowserRouter>
-      {/* <div className='container'>
-          <div className="row" >
-            <div className="col border bg-light"> */}
-              <Switch>
-                <AuthenticatedRoute path='/user/:userId/locations' component={LocationHomePage} />
-                <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
-                <Route path='/user' component={UserHomePage}/>
-                <Route path='/' component={HomePage}/>
-              </Switch>
-              {/* </div>
-          </div>
-      </div> */}
+        <Switch>
+          <AuthenticatedRoute path='/user/:userId/routes' component={UserRoutesPage} />
+          <AuthenticatedRoute path='/user/:userId/locations' component={UserLocationsPage} />
+          <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
+          <Route path='/user' component={UserHomePage}/>
+          <Route path='/' component={HomePage}/>
+        </Switch>
     </BrowserRouter>
     );
   }

@@ -31,7 +31,19 @@ class UserNavBar extends Component {
         this.props.setAuthentication(null);
         this.props.toggleError(false);
         this.props.history.push(`/`)
-    }
+    };
+
+    goToHome = () => {
+        this.props.history.push(`/user/${this.props.match.params.userId}`)
+    };
+
+    goToLocations = () => {
+        this.props.history.push(`/user/${this.props.match.params.userId}/locations`)
+    };
+
+    goToRoutes = () => {
+        this.props.history.push(`/user/${this.props.match.params.userId}/routes`)
+    };
 
     render() {
         return (
@@ -42,10 +54,13 @@ class UserNavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink>Routes</NavLink>
+                        <NavLink onClick={this.goToHome}>Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink ><Link to={`${this.props.match.url}/locations`} disabled>Locations</Link></NavLink>
+                        <NavLink onClick={this.goToRoutes}>Routes</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink onClick={this.goToLocations}>Locations</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href="/alerts">Alerts</NavLink>

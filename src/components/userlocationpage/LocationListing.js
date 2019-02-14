@@ -1,10 +1,7 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
 import {Row, Col, Button, ButtonGroup } from 'reactstrap';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 
-function locationListing ({id, name, longitude, latitude, userId,  match, setCurrent, deleteLoc}) {
+export default function locationListing ({id, name, longitude, latitude, userId,  match, setCurrent, deleteLoc}) {
     return (
         <Row>
             <Col xs="4">
@@ -19,9 +16,3 @@ function locationListing ({id, name, longitude, latitude, userId,  match, setCur
         </Row>
     )
 };
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({},dispatch)
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(locationListing))
