@@ -46,3 +46,22 @@ export const createUserRoute = (userId, name, polyline) => {
         }
     }
 };
+
+export const deleteUserRoute = (userId, routeId) => {
+    return async (dispatch) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios(`${url}/user/${userId}/routes/${routeId}`, {
+                method: "delete",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch(getUserRoutes(userId))
+        }catch(err) {
+            console.log(err)
+        }
+    }
+};

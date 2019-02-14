@@ -3,7 +3,7 @@ import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import {getUserRoutes} from '../../actions/routes';
+import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
 import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
 import UserNavBar from '../userhomepage/UserNavBar';
 // import GoogleMap from '../googlemaps/GoogleMap';
@@ -59,7 +59,11 @@ class UserRoutesPage extends Component {
                 <Row>
                     <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
                     {
-                        routes.length === 0 ? this.noRoutes() : routes.map(route => {return <RouteListing key={route.id} {...route} userId ={this.props.match.params.userId}/>})
+                        routes.length === 0 ? this.noRoutes() 
+                        : 
+                        routes.map(route => {return <RouteListing key={route.id} {...route} 
+                            userId ={this.props.match.params.userId}
+                            dropRoute={this.props.deleteUserRoute}/>})
                     }
                     </Col>
                 </Row>
@@ -69,7 +73,7 @@ class UserRoutesPage extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getUserRoutes},dispatch)
+    return bindActionCreators({getUserRoutes, deleteUserRoute},dispatch)
 }
 
 const mapStateToProps = (state) => {
