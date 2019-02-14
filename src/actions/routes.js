@@ -23,3 +23,26 @@ export const getUserRoutes = (userId) => {
         }
     }
 };
+
+export const createUserRoute = (userId, name, polyline) => {
+    return async (dispatch) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios(`${url}/user/${userId}/routes`,{
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  },
+                data: {
+                    name: name,
+                    polyline: polyline,
+                }
+            });
+            dispatch(getUserRoutes(userId))
+        }catch(err) {
+            console.log(err)
+        }
+    }
+};

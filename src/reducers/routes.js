@@ -6,7 +6,7 @@ const initialState = {
     userName: '',
     zipLat: null,
     zipLong: null,
-    routes: {}
+    routes: []
 };
 
 export default function routes (state = initialState, action) {
