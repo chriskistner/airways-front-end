@@ -116,9 +116,13 @@ class UserLocationsPage extends Component {
                                             conditions={airData}/> : null}
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
-                        <GoogleMap currentName={this.state.currentLocName}
-                                    coordinates={coordinates}
-                                    google={this.props.google}/>
+                        {
+                            coordinates.lat ? 
+                                <GoogleMap currentName={this.state.currentLocName}
+                                coordinates={coordinates}
+                                google={this.props.google}/> :
+                                <p>loading...</p>
+                            }
                     </Col>
                 </Row>
             </Container>
