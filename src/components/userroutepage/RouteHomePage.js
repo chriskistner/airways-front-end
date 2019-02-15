@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'reactstrap';
 import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
 import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
 import UserNavBar from '../userhomepage/UserNavBar';
-// import GoogleMap from '../googlemaps/GoogleMap';
+import GoogleMap from '../googlemaps/GoogleMap';
 import RouteListing from './RouteListing';
 import CreateRoute from './CreateRoute';
 import RouterHomeBar from './RouterHomeBar';
@@ -21,7 +21,9 @@ class UserRoutesPage extends Component {
         super(props)
 
         this.state = {
-            form: false
+            form: false,
+            currentRouteName: '',
+            currentRoute: null,
         }
     }
 
@@ -45,8 +47,23 @@ class UserRoutesPage extends Component {
         })
     };
 
+    handleRouteSelecton = (name, polyline) => {
+        this.setState({
+            currentRouteName: name,
+            currentRoute: polyline
+        })
+    };
+
     render() {
         const routes = this.props.routes
+        let coordinates = [];
+
+        if(this.state.currentRoute) {
+            for (let points of this.state.currentRoute) {
+                coordinates.push({lat: points[0], lng: points[1] })
+            } 
+        } else coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}
+        console.log(coordinates)
         return (
             <Container>
                 <Row>
@@ -63,8 +80,18 @@ class UserRoutesPage extends Component {
                         : 
                         routes.map(route => {return <RouteListing key={route.id} {...route} 
                             userId ={this.props.match.params.userId}
+                            selectRoute={this.handleRouteSelecton}
                             dropRoute={this.props.deleteUserRoute}/>})
                     }
+                    </Col>
+                    <Col xs='5' style={{paddingRight: 0}}>
+                        {
+                            coordinates !== [] ? 
+                                <GoogleMap currentName={this.state.currentLocName}
+                                coordinates={coordinates}
+                                google={this.props.google}/> :
+                                <p>loading...</p>
+                            }
                     </Col>
                 </Row>
             </Container>

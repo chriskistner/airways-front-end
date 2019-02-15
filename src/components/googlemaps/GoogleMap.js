@@ -32,17 +32,47 @@ class GoogleMap extends Component {
     generateMarker = (obj,name) => {
         return (
             <Marker
-            title={'Your Default Zip Code Based on Your Profile'}
-            name={this.props.currentName || 'Home'}
-            position={{lat: this.props.currentLat ? this.props.currentLat : this.props.homeLat,
-             lng: this.props.currentLong ? this.props.currentLong : this.props.homeLong}}/>
+            title={`Location #${name+1} of your route`}
+            name={`Location #${name}`}
+            position={obj}/>
         )
     };
 
     render() {
-        
+
+        let bounds = null
+        if(Array.isArray(this.props.coordinates)) {
+            bounds = new this.props.google.maps.LatLngBounds();
+            for (var i = 0; i < this.props.coordinates.length; i++) {
+                bounds.extend(this.props.coordinates[i]);
+            }
+        }
         return (
-             this.props.coordinates ? 
+
+             Array.isArray(this.props.coordinates) ? 
+                <Container>
+                    <Row>
+                        <Map
+                        style={{width: '100%', height: '100%', position: 'relative'}} 
+                        google={this.props.google} 
+                        zoom={10}
+                        scrollwheel={true}
+                        initialCenter={this.props.coordinates[0]}
+                        bounds={bounds}
+                        >
+                            <Polyline 
+                                path={this.props.coordinates}
+                                strokeColor="#0000FF"
+                                strokeOpacity={0.8}
+                                strokeWeight={2}
+                            />
+                            {
+                                this.props.coordinates.map(point => this.generateMarker(point, this.props.coordinates.indexOf(point)))
+                            }
+                        </Map>
+                    </Row>
+                </Container>
+                :    
                 <Container>
                     <Row>
                         <Map
@@ -52,15 +82,14 @@ class GoogleMap extends Component {
                         scrollwheel={true}
                         initialCenter={this.props.coordinates}
                         center={this.props.coordinates}
-                        >
-                            <Marker
-                                title={'Your Default Zip Code Based on Your Profile'}
-                                name={this.props.currentName || 'Home'}
-                                position={this.props.coordinates}/>
-                        </Map>
-                    </Row>
-                </Container>
- : <p>loading...</p>
+                    >
+                        <Marker
+                            title={'Your Default Zip Code Based on Your Profile'}
+                            name={this.props.currentName || 'Home'}
+                            position={this.props.coordinates}/>
+                    </Map>
+                </Row>
+            </Container>
 
         )
     }
