@@ -79,13 +79,22 @@ class UserLocationsPage extends Component {
         const locations = this.props.locations;
         let pollenData = null;
         let airData = null;
+
+        let coordinates = null;
+
+        if(this.state.currentLocLat) {
+            coordinates = {lat: this.state.currentLocLat, lng: this.state.currentLocLong}
+        } else {
+            coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}
+        };
+
         if(this.state.currentPollen) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
         } else { 
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
-        }
+        };
         return (
             <Container>
                 <Row>
@@ -108,10 +117,7 @@ class UserLocationsPage extends Component {
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         <GoogleMap currentName={this.state.currentLocName}
-                                    currentLat={this.state.currentLocLat}
-                                    currentLong={this.state.currentLocLong} 
-                                    homeLat={this.props.homeLat} 
-                                    homeLong={this.props.homeLong} 
+                                    coordinates={coordinates}
                                     google={this.props.google}/>
                     </Col>
                 </Row>
@@ -122,7 +128,7 @@ class UserLocationsPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({getUserLocations, deleteUserLocation, getCurrentConditions, getPollenCount},dispatch)
-}
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -133,6 +139,6 @@ const mapStateToProps = (state) => {
         homePollen: state.locations.homePollen,
         locations: state.locations.locations
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserLocationsPage)
