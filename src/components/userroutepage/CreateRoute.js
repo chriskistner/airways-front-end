@@ -70,16 +70,18 @@ class CreateRoute extends Component {
     generatePointDetails = (arr) => {
         return (
             <ul>
+                <span><li>Route Begins At...</li></span>
                 {arr.map(point => <li>{point.address} {point.city}, {point.state}</li>)}
+                {arr.length > 1 ? <span><li>Route Ends At...</li></span> : null}
             </ul>
         )
-    }
+    };
 
     noPoints = () => {
         return(
             <b>Add a Starting Location for Your Route</b>
         )
-    }
+    };
 
     render() {
         const points = this.state.pointDetails;
