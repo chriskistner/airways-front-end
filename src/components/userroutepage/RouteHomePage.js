@@ -24,6 +24,7 @@ class UserRoutesPage extends Component {
             form: false,
             currentRouteName: '',
             currentRoute: null,
+            currentPoint: null,
         }
     }
 
@@ -54,6 +55,12 @@ class UserRoutesPage extends Component {
         })
     };
 
+    handlePointSelection = (obj) => {
+        this.setState({
+            currentPoint: obj
+        })
+    }
+
     render() {
         const routes = this.props.routes
         let coordinates = [];
@@ -62,8 +69,7 @@ class UserRoutesPage extends Component {
             for (let points of this.state.currentRoute) {
                 coordinates.push({lat: points[0], lng: points[1] })
             } 
-        } else coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}
-        console.log(coordinates)
+        } else coordinates = {lat: this.props.homeLat, lng: this.props.homeLong};
         return (
             <Container>
                 <Row>
@@ -89,6 +95,7 @@ class UserRoutesPage extends Component {
                             coordinates !== [] ? 
                                 <GoogleMap currentName={this.state.currentLocName}
                                 coordinates={coordinates}
+                                setCurrentPoint={this.handlePointSelection}
                                 google={this.props.google}/> :
                                 <p>loading...</p>
                             }
