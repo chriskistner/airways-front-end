@@ -22,7 +22,6 @@ class UserHomePage extends Component {
 
     render() {
         let coordinates={lat: this.props.homeLat, lng: this.props.homeLong};
-        console.log(coordinates)
         return (
             <Container>
                 <Row>
@@ -35,7 +34,13 @@ class UserHomePage extends Component {
                         <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
                     </Col>
                     <Col xs="7" style={{padding: 0}}>
-                        <GoogleMap coordinates={coordinates} google={this.props.google}/>
+                    {
+                        coordinates.lat ? 
+                            <GoogleMap currentName={this.state.currentLocName}
+                            coordinates={coordinates}
+                            google={this.props.google}/> :
+                            <p>loading...</p>
+                    }
                     </Col>  
                 </Row>
             </Container>
