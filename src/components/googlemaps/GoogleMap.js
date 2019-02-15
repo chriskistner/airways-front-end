@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper, Map, InfoWindow, Marker} from 'google-maps-react';
-import {Container,Row, Col } from 'reactstrap';
+import {GoogleApiWrapper, Map, InfoWindow, Marker, Polyline} from 'google-maps-react';
+import {Container,Row} from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
 // import {withRouter} from 'react-router'
@@ -12,6 +12,21 @@ class GoogleMap extends Component {
         this.state = {
 
         }
+    }
+
+    generateLocation = (lat, long) => {
+
+    }
+
+    generatePolyline =(arr) => {
+        return (
+            <Polyline 
+                path={arr}
+                strokeColor="#0000FF"
+                strokeOpacity={0.8}
+                strokeWeight={2}
+                />
+        )
     }
 
     render() {
@@ -35,7 +50,7 @@ class GoogleMap extends Component {
                         >
                             <Marker
                                 title={'Your Default Zip Code Based on Your Profile'}
-                                name={'Home'}
+                                name={this.props.currentName || 'Home'}
                                 position={{lat: this.props.currentLat ? this.props.currentLat : this.props.homeLat,
                                  lng: this.props.currentLong ? this.props.currentLong : this.props.homeLong}}/>
                         
