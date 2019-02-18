@@ -68,8 +68,14 @@ class UserRoutesPage extends Component {
         if(this.state.currentRoute) {
             for (let points of this.state.currentRoute) {
                 coordinates.push({lat: points[0], lng: points[1] })
-            } 
-        } else coordinates = {lat: this.props.homeLat, lng: this.props.homeLong};
+            }
+        } 
+        else if(routes.length !== 0){
+            for (let points of routes[0].polyline) {
+                coordinates.push({lat: points[0], lng: points[1] })
+            }
+        }
+        else {coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}};
         return (
             <Container>
                 <Row>
