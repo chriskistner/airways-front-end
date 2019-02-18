@@ -4,13 +4,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
-import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import RouteListing from './RouteListing';
 import CreateRoute from './CreateRoute';
 import RouterHomeBar from './RouterHomeBar';
-// import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
+import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
 
 const breezeApi = process.env.REACT_APP_BREEZE_O_METER_API_KEY;
 const conditionsUrl = process.env.REACT_APP_BREEZE_O_METER_CURRENT_CONDITIONS_URL;
@@ -25,6 +24,8 @@ class UserRoutesPage extends Component {
             currentRouteName: '',
             currentRoute: null,
             currentPoint: null,
+            currentCond: null,
+            currentPollen: null,
         }
     }
 
@@ -48,22 +49,67 @@ class UserRoutesPage extends Component {
         })
     };
 
-    handleRouteSelecton = (name, polyline) => {
-        this.setState({
-            currentRouteName: name,
-            currentRoute: polyline
-        })
+    setDisplayedConditions = (long, lat) => {
+        return axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
+ 
+    };
+
+    setDisplayedPollen = (long, lat) => {
+        return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
+    };
+
+    handleRouteSelecton = async (name, polyline) => {
+        try {
+            const lat = polyline[0][0]
+            const long = polyline[0][1]
+            const conditions = await this.setDisplayedConditions(long, lat)
+            const pollen = await this.setDisplayedPollen(long, lat)
+            this.setState({
+                currentRouteName: name,
+                currentRoute: polyline,
+                currentCond: conditions.data.data,
+                currentPollen: pollen.data.data
+            })
+        }catch(err) {
+            console.log(err)
+        }
     };
 
     handlePointSelection = (obj) => {
         this.setState({
             currentPoint: obj
         })
-    }
+    };
+
+    handlePointData = async () => {
+        try{
+            let conditions = null;
+            let pollen = null;
+            if(this.state.currentPoint) {
+                conditions = await this.setLocalConditions(this.state.currentPoint.lng, this.state.currentPoint.lat)
+                pollen = await this.setLocalPollen(this.state.currentPoint.lng, this.state.currentPoint.lat)
+            } else if (this.props.routes.length !== 0) {
+                conditions = await this.setLocalConditions(this.props[0].polyline[0][0], this.props[0].polyline[0][1])
+                pollen = await this.setLocalPollen(this.props[0].polyline[0][0], this.props[0].polyline[0][1])
+            } else {
+                conditions = await this.setLocalConditions(this.props.homeLong, this.props.homeLat)
+                pollen = await this.setLocalPollen(this.props.homeLong, this.props.homeLat)
+            }
+
+            this.setState({
+
+            })
+
+        }catch(err) {
+            console.log(err)
+        }
+    };
 
     render() {
-        const routes = this.props.routes
+        const routes = this.props.routes;
         let coordinates = [];
+        let pollenData = null;
+        let airData = null;
 
         if(this.state.currentRoute) {
             for (let points of this.state.currentRoute) {
@@ -76,6 +122,12 @@ class UserRoutesPage extends Component {
             }
         }
         else {coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}};
+
+        if(this.state.currentCond) {
+            pollenData = this.state.currentPollen;
+            airData = this.state.currentCond;
+        };
+        console.log(airData)
         return (
             <Container>
                 <Row>
@@ -95,6 +147,10 @@ class UserRoutesPage extends Component {
                             selectRoute={this.handleRouteSelecton}
                             dropRoute={this.props.deleteUserRoute}/>})
                     }
+                    </Col>
+                    <Col xs='4'>
+                        {pollenData ? <AirQualityHomePage pollen={pollenData} 
+                                            conditions={airData}/> : null}
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         {
