@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
+import {getUserLocations} from '../../actions/locations';
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import RouteListing from './RouteListing';
@@ -31,6 +32,7 @@ class UserRoutesPage extends Component {
 
     componentDidMount() {
         this.props.getUserRoutes(this.props.match.params.userId);
+        this.props.getUserLocations(this.props.match.params.userId);
     };
 
     noRoutes = () => {
@@ -58,17 +60,26 @@ class UserRoutesPage extends Component {
         return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
     };
 
+    fetchAirQualityData = async (long, lat) => {
+        try {
+            const conditions = await this.setDisplayedConditions(long, lat)
+            const pollen = await this.setDisplayedPollen(long, lat)
+            return {pollen: pollen.data.data, air: conditions.data.data}
+        }catch(err) {
+            console.log(err)
+        }
+    }
+
     handleRouteSelecton = async (name, polyline) => {
         try {
             const lat = polyline[0][0]
             const long = polyline[0][1]
-            const conditions = await this.setDisplayedConditions(long, lat)
-            const pollen = await this.setDisplayedPollen(long, lat)
+            const conditions = await this.fetchAirQualityData(long,lat);
             this.setState({
                 currentRouteName: name,
                 currentRoute: polyline,
-                currentCond: conditions.data.data,
-                currentPollen: pollen.data.data
+                currentCond: conditions.air,
+                currentPollen: conditions.pollen
             })
         }catch(err) {
             console.log(err)
@@ -79,12 +90,11 @@ class UserRoutesPage extends Component {
         try {
             const lat = obj.lat;
             const long = obj.lng;
-            const conditions = await this.setDisplayedConditions(long, lat)
-            const pollen = await this.setDisplayedPollen(long, lat)
+            const conditions = await this.fetchAirQualityData(long, lat);
             this.setState({
                 currentPoint: obj,
-                currentCond: conditions.data.data,
-                currentPollen:pollen.data.data
+                currentCond: conditions.air,
+                currentPollen: conditions.pollen
             })
         }catch(err) {
             console.log(err)
@@ -112,11 +122,18 @@ class UserRoutesPage extends Component {
         if(this.state.currentCond) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
-        } else {
+        } else if (routes.length !== 0) {
+            const lat = routes[0].polyline[0][0];
+            const long = routes[0].polyline[0][1];
+            // const conditions = async () => { try{ await this.fetchAirQualityData(long, lat)}catch(err){console.log(err)} };
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
         }
-
+        else {
+            pollenData = this.props.homePollen;
+            airData = this.props.homeConditions
+        };
+        console.log(this.props.locations)
         return (
             <Container>
                 <Row>
@@ -158,7 +175,7 @@ class UserRoutesPage extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getUserRoutes, deleteUserRoute},dispatch)
+    return bindActionCreators({getUserRoutes, deleteUserRoute, getUserLocations},dispatch)
 }
 
 const mapStateToProps = (state) => {
@@ -168,7 +185,8 @@ const mapStateToProps = (state) => {
         homeLong: state.routes.zipLong,
         routes: state.routes.routes,
         homeConditions: state.routes.homeConditions,
-        homePollen: state.routes.homePollen 
+        homePollen: state.routes.homePollen,
+        locations: state.locations.locations 
     }
 }
 

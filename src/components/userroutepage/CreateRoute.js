@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col, Button, Form, Label, Input} from 'reactstrap';
 import {createUserRoute} from '../../actions/routes';
+import GoogleMap from '../googlemaps/GoogleMap';
 
 const googleUrl = process.env.REACT_APP_GOOGLE_GEOCODE_URL
 const key = process.env.REACT_APP_GOOGLE_API_KEY
@@ -70,9 +71,9 @@ class CreateRoute extends Component {
     generatePointDetails = (arr) => {
         return (
             <ul>
-                <span><li>Route Begins At...</li></span>
+                <span><i>Route Begins At...</i></span>
                 {arr.map(point => <li>{point.address} {point.city}, {point.state}</li>)}
-                {arr.length > 1 ? <span><li>Route Ends At...</li></span> : null}
+                {arr.length > 1 ? <span><i>Route Ends At...</i></span> : null}
             </ul>
         )
     };
@@ -117,18 +118,22 @@ class CreateRoute extends Component {
                         </Row>
                     </Form>
                     <Row>
-                        <Col xs="10">
+                        <Col xs="9">
                         {
                             points.length === 0 ? this.noPoints() : this.generatePointDetails(points)
                         }
                         </Col>
-                        <Col xs='2'>
+                        <Col xs='3'>
                             <Button onClick={() => this.handleCreateRoute()}>Save Route</Button>
                         </Col>
                     </Row>
                 </Col>
+                {
+                    this.state.mapPoints.length !==0 ? <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
+                            <GoogleMap coordinates={this.state.mapPoints} google={this.props.google} /> 
+                        </Col>: null
+                }
             </Row>
-
         )
     }
 };
