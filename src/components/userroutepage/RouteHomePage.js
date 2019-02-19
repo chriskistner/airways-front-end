@@ -27,7 +27,7 @@ class UserRoutesPage extends Component {
             currentCond: null,
             currentPollen: null,
         }
-    }
+    };
 
     componentDidMount() {
         this.props.getUserRoutes(this.props.match.params.userId);
@@ -77,7 +77,6 @@ class UserRoutesPage extends Component {
 
     handlePointSelection = async (obj) => {
         try {
-            console.log(obj)
             const lat = obj.lat;
             const long = obj.lng;
             const conditions = await this.setDisplayedConditions(long, lat)
@@ -91,6 +90,7 @@ class UserRoutesPage extends Component {
             console.log(err)
         }
     };
+
     render() {
         const routes = this.props.routes;
         let coordinates = [];
@@ -112,7 +112,11 @@ class UserRoutesPage extends Component {
         if(this.state.currentCond) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
+        } else {
+            pollenData = this.props.homePollen;
+            airData = this.props.homeConditions
         }
+
         return (
             <Container>
                 <Row>
@@ -135,7 +139,7 @@ class UserRoutesPage extends Component {
                     </Col>
                     <Col xs='4'>
                         {pollenData ? <AirQualityHomePage pollen={pollenData} 
-                                            conditions={airData}/> : null}
+                                            conditions={airData}/> : <p>loading...</p>}
                     </Col>
                     <Col xs='5' style={{paddingRight: 0}}>
                         {
@@ -162,7 +166,9 @@ const mapStateToProps = (state) => {
         userName: state.routes.userName,
         homeLat: state.routes.zipLat,
         homeLong: state.routes.zipLong,
-        routes: state.routes.routes
+        routes: state.routes.routes,
+        homeConditions: state.routes.homeConditions,
+        homePollen: state.routes.homePollen 
     }
 }
 
