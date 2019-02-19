@@ -68,7 +68,7 @@ class UserRoutesPage extends Component {
         }catch(err) {
             console.log(err)
         }
-    }
+    };
 
     handleRouteSelecton = async (name, polyline) => {
         try {
@@ -133,7 +133,6 @@ class UserRoutesPage extends Component {
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
         };
-        console.log(this.props.locations)
         return (
             <Container>
                 <Row>
@@ -142,7 +141,7 @@ class UserRoutesPage extends Component {
                     </Col>
                 </Row>
                 <RouterHomeBar toggleForm={this.toggleCreateForm}/>
-                {this.state.form ? <CreateRoute toggleForm ={this.toggleCreateForm}/> : null}
+                {this.state.form ? <CreateRoute userLocations={this.props.locations} toggleForm ={this.toggleCreateForm}/> : null}
                 <Row>
                     <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
                     {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Row, Col, Button, Form, Label, Input} from 'reactstrap';
+import { Row, Col, Button, Form, Label, Input, FormGroup, ButtonGroup} from 'reactstrap';
 import {createUserRoute} from '../../actions/routes';
 import GoogleMap from '../googlemaps/GoogleMap';
 
@@ -54,6 +54,10 @@ class CreateRoute extends Component {
         }
     };
 
+    addLocationToRoute = (event) => {
+        console.log(event)
+    }
+
     handleCreateRoute = () => {
         this.props.createUserRoute(this.props.match.params.userId, 
             this.state.newRouteName,
@@ -68,6 +72,14 @@ class CreateRoute extends Component {
         this.props.toggleForm()
     };
 
+    clearRoutePoints = () => {
+        this.setState({
+            points: [],
+            mapPoints: [],
+            pointDetails: []
+        })
+    }
+
     generatePointDetails = (arr) => {
         return (
             <ul>
@@ -75,6 +87,19 @@ class CreateRoute extends Component {
                 {arr.map(point => <li>{point.address} {point.city}, {point.state}</li>)}
                 {arr.length > 1 ? <span><i>Route Ends At...</i></span> : null}
             </ul>
+        )
+    };
+
+    generateStoredLocations = (obj) => {
+        const coordinates= [obj.latitude, obj.longitude];
+        const mapPoints = {lat: obj.latitude, lng: obj.longitude}
+        const dataPack = {
+            mapPoints: mapPoints,
+            points: coordinates,
+            pointDetails: obj.name
+        }
+        return (
+        <option id={obj.id} value={dataPack}>{obj.name}</option>
         )
     };
 
@@ -86,8 +111,6 @@ class CreateRoute extends Component {
 
     render() {
         const points = this.state.pointDetails;
-        console.log(this.state.newRouteName)
-        console.log(this.state.points)
         return (
             <Row>
                 <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
@@ -111,20 +134,38 @@ class CreateRoute extends Component {
                                 <Input type="text" name="newPointState" id="newPointState" placeholder="Enter State"></Input>
                             </Col>
                         </Row>
+                        {
+                            this.props.userLocations.length !== 0 ?                         
+                                <Row>
+                                    <Col>
+                                        <FormGroup>
+                                            <Label for="exampleSelect">Or Select From Your Saved Locations</Label>
+                                            <Input type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute()}>
+                                            {
+                                            this.props.userLocations.map(points => this.generateStoredLocations(points))
+                                            }
+                                            </Input>
+                                        </FormGroup>
+                                    </Col>
+                                </Row> : null
+                        }
                         <Row>
                             <Col>
-                            <Button>Add To Route</Button>
+                            <Button>{points.length !== 0 ? 'Add To Route' : 'Start New Route'}</Button>
                             </Col>
                         </Row>
                     </Form>
                     <Row>
-                        <Col xs="9">
+                        <Col xs="8">
                         {
                             points.length === 0 ? this.noPoints() : this.generatePointDetails(points)
                         }
                         </Col>
-                        <Col xs='3'>
-                            <Button onClick={() => this.handleCreateRoute()}>Save Route</Button>
+                        <Col xs='4'>
+                            <ButtonGroup>
+                                <Button outline color="success" size="sm" onClick={() => this.handleCreateRoute()}>Save Route</Button>
+                                <Button outline color="danger" size="sm" onClick={() => this.clearRoutePoints()} >Reset Points</Button>
+                            </ButtonGroup>
                         </Col>
                     </Row>
                 </Col>
