@@ -75,36 +75,22 @@ class UserRoutesPage extends Component {
         }
     };
 
-    handlePointSelection = (obj) => {
-        this.setState({
-            currentPoint: obj
-        })
-    };
-
-    handlePointData = async () => {
-        try{
-            let conditions = null;
-            let pollen = null;
-            if(this.state.currentPoint) {
-                conditions = await this.setLocalConditions(this.state.currentPoint.lng, this.state.currentPoint.lat)
-                pollen = await this.setLocalPollen(this.state.currentPoint.lng, this.state.currentPoint.lat)
-            } else if (this.props.routes.length !== 0) {
-                conditions = await this.setLocalConditions(this.props[0].polyline[0][0], this.props[0].polyline[0][1])
-                pollen = await this.setLocalPollen(this.props[0].polyline[0][0], this.props[0].polyline[0][1])
-            } else {
-                conditions = await this.setLocalConditions(this.props.homeLong, this.props.homeLat)
-                pollen = await this.setLocalPollen(this.props.homeLong, this.props.homeLat)
-            }
-
+    handlePointSelection = async (obj) => {
+        try {
+            console.log(obj)
+            const lat = obj.lat;
+            const long = obj.lng;
+            const conditions = await this.setDisplayedConditions(long, lat)
+            const pollen = await this.setDisplayedPollen(long, lat)
             this.setState({
-
+                currentPoint: obj,
+                currentCond: conditions.data.data,
+                currentPollen:pollen.data.data
             })
-
         }catch(err) {
             console.log(err)
         }
     };
-
     render() {
         const routes = this.props.routes;
         let coordinates = [];
@@ -126,8 +112,7 @@ class UserRoutesPage extends Component {
         if(this.state.currentCond) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
-        };
-        console.log(airData)
+        }
         return (
             <Container>
                 <Row>
