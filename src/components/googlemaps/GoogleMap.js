@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper, Map, InfoWindow, Marker, Polyline} from 'google-maps-react';
+import {GoogleApiWrapper, Map, Marker, Polyline} from 'google-maps-react';
 import {Container,Row} from 'reactstrap';
 // import google, from 'google-maps-react';
 // import {bindActionCreators} from 'redux';
@@ -12,10 +12,6 @@ class GoogleMap extends Component {
         this.state = {
 
         }
-    };
-
-    generateLocation = (lat, long) => {
-
     };
 
     generatePolyline =(arr) => {
@@ -32,8 +28,9 @@ class GoogleMap extends Component {
     generateMarker = (obj,name) => {
         return (
             <Marker
-            title={`Location #${name+1} of your route`}
-            name={`Location #${name}`}
+            onClick={() => this.props.setCurrentPoint(obj)}
+            title={`Location #${name+1}, click to access Air Qaulity`}
+            name={name}
             position={obj}/>
         )
     };
