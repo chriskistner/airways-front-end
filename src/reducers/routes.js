@@ -1,5 +1,5 @@
 import {SET_USER_ROUTES} from '../actions/routes';
-import {GET_CURRENT_CONDITIONS, GET_POLLEN_COUNT} from '../actions/breezeometer';
+import {GET_CURRENT_CONDITIONS, GET_POLLEN_COUNT, GET_LOADING_CONDITIONS, GET_LOADING_POLLEN} from '../actions/breezeometer';
 
 const initialState = {
     userId: null,
@@ -8,9 +8,10 @@ const initialState = {
     zipLat: null,
     zipLong: null,
     routes: [],
+    loadConditions: {},
+    loadPollen: {},
     homeConditions: {},
     homePollen: {},
-    
 };
 
 export default function routes (state = initialState, action) {
@@ -24,12 +25,20 @@ export default function routes (state = initialState, action) {
             return {...state, userName: userName, userZip: userZip, zipLat: userLat, zipLong: userLong, routes: userRoutes }
 
         case GET_CURRENT_CONDITIONS:
-            const result = action.payload !== null ? action.payload : {};
-            return {...state, homeConditions: result}
+            const air = action.payload !== null ? action.payload : {};
+            return {...state, homeConditions: air}
     
         case GET_POLLEN_COUNT:
             const pollen = action.payload !== null ? action.payload : {};
             return {...state, homePollen: pollen}
+
+        case GET_LOADING_CONDITIONS:
+            const loadAir= action.payload !== null ? action.payload : {};
+            return {...state, loadConditions: loadAir}
+
+        case GET_LOADING_POLLEN:
+            const loadPollen = action.payload !== null ? action.payload : {};
+            return {...state, loadPollen: loadPollen}
 
         default:
             return state;

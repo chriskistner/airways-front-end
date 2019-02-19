@@ -119,20 +119,18 @@ class UserRoutesPage extends Component {
         }
         else {coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}};
 
-        if(this.state.currentCond) {
+        if(this.state.currentRoute) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
+
         } else if (routes.length !== 0) {
-            const lat = routes[0].polyline[0][0];
-            const long = routes[0].polyline[0][1];
-            // const conditions = async () => { try{ await this.fetchAirQualityData(long, lat)}catch(err){console.log(err)} };
+            pollenData = this.props.loadPollen;
+            airData = this.props.loadConditions;
+        } else { 
             pollenData = this.props.homePollen;
-            airData = this.props.homeConditions
-        }
-        else {
-            pollenData = this.props.homePollen;
-            airData = this.props.homeConditions
+            airData = this.props.homeConditions;
         };
+
         return (
             <Container>
                 <Row>
@@ -185,6 +183,8 @@ const mapStateToProps = (state) => {
         routes: state.routes.routes,
         homeConditions: state.routes.homeConditions,
         homePollen: state.routes.homePollen,
+        loadConditions: state.routes.loadConditions,
+        loadPollen: state.routes.loadPollen,
         locations: state.locations.locations 
     }
 }
