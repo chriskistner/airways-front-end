@@ -6,6 +6,7 @@ const initialState = {
     userId: null,
     pending: true,
     userName: '',
+    email: '',
     address: '',
     city: '',
     state: '',
@@ -28,12 +29,13 @@ export default function auth (state = initialState, action) {
         
       case SET_USER_DATA:
         const userName = action.payload.user_name;
+        const userEmail = action.payload.email;
         const userAddress = action.payload.address;
         const userCity = action.payload.city;
-        const userState = action.payload.state
+        const userState = action.payload.state;
         const userLat = action.payload.home_latitude;
         const userLong = action.payload.home_longitude;
-        return {...state, userName: userName, address: userAddress, city: userCity, state: userState, zipLat: userLat, zipLong: userLong }
+        return {...state, userName: userName, email: userEmail, address: userAddress, city: userCity, state: userState, zipLat: userLat, zipLong: userLong }
 
       case GET_GEOCODE:
         const lat = action.payload.geometry.location.lat;

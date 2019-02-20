@@ -18,13 +18,13 @@ class UserNavBar extends Component {
         this.state = {
             isOpen: false,
         }
-    }
+    };
 
     toggleNav = () => {
         this.setState({
             isOpen: !this.state.isOpen
         })
-    }
+    };
 
     logOut = () => {
         localStorage.removeItem('token');
@@ -49,6 +49,10 @@ class UserNavBar extends Component {
         this.props.history.push(`/user/${this.props.match.params.userId}/profile`)
     };
 
+    goToAlerts = () => {
+        this.props.history.push(`/user/${this.props.match.params.userId}/alerts`)
+    }
+
     render() {
         return (
             <div>
@@ -67,7 +71,7 @@ class UserNavBar extends Component {
                         <NavLink onClick={this.goToLocations}>Locations</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/alerts">Alerts</NavLink>
+                        <NavLink onClick={this.goToAlerts}>Alerts</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink onClick={this.goToProfile}>Profile</NavLink>
