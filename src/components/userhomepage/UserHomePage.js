@@ -18,7 +18,7 @@ class UserHomePage extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
-    }
+    };
 
     render() {
         let coordinates={lat: this.props.homeLat, lng: this.props.homeLong};
