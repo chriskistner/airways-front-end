@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
+import {getUserLocations} from '../../actions/locations';
+import {getUserRoutes} from '../../actions/routes';
 import {getUserAlerts, createUserAlert} from '../../actions/alerts';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
+import CreateAlert from './CreateAlert';
 import {sendTestEmail} from '../../actions/alerts';
 
 class UserAlertsPage extends Component {
@@ -15,7 +18,9 @@ class UserAlertsPage extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
-        this.props.getUserAlerts(this.props.match.params.userId)
+        this.props.getUserAlerts(this.props.match.params.userId);
+        this.props.getUserLocations(this.props.match.params.userId);
+        this.props.getUserRoutes(this.props.match.params.userId);
 
     };
 
@@ -29,7 +34,7 @@ class UserAlertsPage extends Component {
     };
 
     render() {
-        console.log(this.props.userEmail);
+
         return(
             <Container>
                 <Row>
@@ -37,6 +42,9 @@ class UserAlertsPage extends Component {
                         <UserNavBar user={this.props.userName}/>
                     </Col>
                 </Row>
+                {
+                this.props.routes ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                }
                 <Row>
                     <Col xs='6'>
                         <Form onSubmit={this.handleSendEmail}>
@@ -54,7 +62,13 @@ class UserAlertsPage extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setAuthentication, getUser, getUserAlerts, createUserAlert, sendTestEmail},dispatch)
+    return bindActionCreators({setAuthentication, 
+        getUser, 
+        getUserAlerts,
+        getUserLocations,
+        getUserRoutes, 
+        createUserAlert, 
+        sendTestEmail},dispatch)
 };
 
 const mapStateToProps = (state) => {
@@ -66,7 +80,9 @@ const mapStateToProps = (state) => {
         userState: state.auth.state,
         homeLat: state.auth.zipLat,
         homeLong: state.auth.zipLong,
-        userAlerts: state.alerts.alerts
+        locations: state.locations.locations,
+        routes: state.routes.routes,
+        alerts: state.alerts.alerts
     }
 };
 
