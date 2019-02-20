@@ -45,6 +45,10 @@ class UserNavBar extends Component {
         this.props.history.push(`/user/${this.props.match.params.userId}/routes`)
     };
 
+    goToProfile = () => {
+        this.props.history.push(`/user/${this.props.match.params.userId}/profile`)
+    };
+
     render() {
         return (
             <div>
@@ -66,7 +70,7 @@ class UserNavBar extends Component {
                         <NavLink href="/alerts">Alerts</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/profile">Profile</NavLink>
+                        <NavLink onClick={this.goToProfile}>Profile</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink onClick={this.logOut} href="#">Logout</NavLink>

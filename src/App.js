@@ -9,6 +9,7 @@ import HomePage from './components/homepage/LoginPage';
 import UserHomePage from './components/userhomepage/UserHomePage';
 import UserLocationsPage from './components/userlocationpage/LocationHomePage';
 import UserRoutesPage from './components/userroutepage/RouteHomePage';
+import UserProfilePage from './components/userprofile/UserProfilePage';
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <AuthenticatedRoute path='/user/:userId/profile' component={UserProfilePage} />
           <AuthenticatedRoute path='/user/:userId/routes' component={UserRoutesPage} />
           <AuthenticatedRoute path='/user/:userId/locations' component={UserLocationsPage} />
           <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
