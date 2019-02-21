@@ -29,7 +29,7 @@ export const createUserAlert = (userId, name, type, frequency, polyline, latitud
     return async (dispatch) => {
         try {
             const token = localStorage.getItem('token');
-            await axios(`${url}/user/${userId}/routes`,{
+            await axios(`${url}/user/${userId}/alerts`,{
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json',
