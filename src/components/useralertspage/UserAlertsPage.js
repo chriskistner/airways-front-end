@@ -18,10 +18,9 @@ class UserAlertsPage extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
+        this.props.getUserRoutes(this.props.match.params.userId);
         this.props.getUserAlerts(this.props.match.params.userId);
         this.props.getUserLocations(this.props.match.params.userId);
-        this.props.getUserRoutes(this.props.match.params.userId);
-
     };
 
     handleSendEmail = (event) => {
@@ -34,7 +33,7 @@ class UserAlertsPage extends Component {
     };
 
     render() {
-
+        console.log(this.props.alerts)
         return(
             <Container>
                 <Row>

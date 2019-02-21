@@ -56,7 +56,7 @@ class CreateAlert extends Component {
     renderAlertTypes = () => {
         if (this.state.alertType === 'location') {
             return this.generateList('Location', this.props.locations)
-        } else if (this.state.alertType === 'routes') {
+        } else if (this.state.alertType === 'route') {
             return this.generateList('Route', this.props.routes)
         } else { return null}
     };
@@ -69,18 +69,24 @@ class CreateAlert extends Component {
                 alertValue[0].name,
                 this.state.alertType,
                 this.state.alertSched,
-                'fake',
+                'fake str',
                 parseFloat(alertValue[0].latitude),
                 parseFloat(alertValue[0].longitude)
                 )
         } else { 
             const alertValue = this.props.routes.filter(point => point.id === parseInt(this.state.alertFor));
-            console.log(alertValue);
+            this.props.createUserAlert(this.props.match.params.userId,
+                alertValue[0].name,
+                this.state.alertType,
+                this.state.alertSched,
+                alertValue[0].polyline,
+                1,
+                1
+                )
         }
     }
 
     render() {
-        console.log(this.state.alertFor)
         return (
             <Row>
                 <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
@@ -91,7 +97,7 @@ class CreateAlert extends Component {
                                 <Input type="select" name="alertType" id="alertType" onChange={this.handleChange}>
                                     <option value='base' selected disabled>Alert is for a...</option>
                                     <option value='location'>Location</option>
-                                    <option value='routes'>Route</option>
+                                    <option value='route'>Route</option>
                                 </Input>
                             </Col>
                         </Row>
