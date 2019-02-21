@@ -51,7 +51,7 @@ class UserRoutesPage extends Component {
         })
     };
 
-    setDisplayedConditions = (long, lat) => {
+    setDisplayedConditions = (lat, long) => {
         return axios.get(`${conditionsUrl}lat=${lat}&lon=${long}&key=${breezeApi}&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information`,{})
  
     };

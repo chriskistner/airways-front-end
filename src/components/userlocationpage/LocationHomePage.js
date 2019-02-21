@@ -53,7 +53,7 @@ class UserLocationsPage extends Component {
         return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
     };
 
-    handleLocationSelecton = async (name, long, lat) => {
+    handleLocationSelecton = async (name, lat, long) => {
         try{
             const conditions = await this.setLocalConditions(long, lat)
             const pollen = await this.setLocalPollen(long, lat)

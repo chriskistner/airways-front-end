@@ -21,9 +21,15 @@ class CreateRoute extends Component {
         }
     };
 
+    handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+    };
+
     addPointToRoute = async (event) => {
         event.preventDefault()
-        const {newRouteName,newPointAddress, newPointCity, newPointState} = event.target
+        const {newPointAddress, newPointCity, newPointState} = event.target
         try {
             const formatAddress = newPointAddress.value.replace(/ /g, '+') || '';
             const formatState = newPointState.value.toUpperCase();
@@ -41,7 +47,6 @@ class CreateRoute extends Component {
                 state: newPointState.value
             }
             this.setState({
-                newRouteName: newRouteName.value,
                 points: [...this.state.points, pointCoords],
                 mapPoints: [...this.state.mapPoints, mapCoords],
                 pointDetails: [...this.state.pointDetails, pointInfo]
@@ -55,8 +60,26 @@ class CreateRoute extends Component {
     };
 
     addLocationToRoute = (event) => {
-        console.log(event.target.value)
-    }
+        const location = this.props.userLocations.filter(point => parseInt(event.target.value) === point.id);
+        const pointName = location[0].name;
+        console.log(location[0])
+        const latitude = parseFloat(location[0].latitude);
+        const longitude = parseFloat(location[0].longitude);
+        console.log(latitude);
+        const pointCoords = [latitude, longitude];
+
+        const mapCoords = {lat: latitude, lng: longitude};
+
+        const pointInfo = {address: pointName, 
+            city: '', 
+            state: ''
+        };
+        this.setState({
+            points: [...this.state.points, pointCoords],
+            mapPoints: [...this.state.mapPoints, mapCoords],
+            pointDetails: [...this.state.pointDetails, pointInfo]
+        })
+    };
 
     handleCreateRoute = () => {
         this.props.createUserRoute(this.props.match.params.userId, 
@@ -104,6 +127,7 @@ class CreateRoute extends Component {
 
     render() {
         const points = this.state.pointDetails;
+        console.log(this.state.mapPoints)
         return (
             <Row>
                 <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
@@ -115,7 +139,7 @@ class CreateRoute extends Component {
                         </Row>
                         <Row>
                             <Col xs='3'>
-                                <Input type="text" name="newRouteName" id="newRouteName" placeholder="Enter a Name for this Route"></Input>
+                                <Input type="text" name="newRouteName" id="newRouteName" placeholder="Enter a Name for this Route" onChange={this.handleChange}></Input>
                             </Col>
                             <Col xs='4'>
                                 <Input type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter Address"></Input>
@@ -134,6 +158,7 @@ class CreateRoute extends Component {
                                         <FormGroup>
                                             <Label for="exampleSelect">Or Select From Your Saved Locations</Label>
                                             <Input type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute}>
+                                            <option id={0} value={'base'} selected disabled>Your Saved Routes...</option>
                                             {
                                             this.props.userLocations.map(points => this.generateStoredLocations(points))
                                             }
