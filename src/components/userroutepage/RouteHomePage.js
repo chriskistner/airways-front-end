@@ -56,14 +56,14 @@ class UserRoutesPage extends Component {
  
     };
 
-    setDisplayedPollen = (long, lat) => {
+    setDisplayedPollen = (lat, long) => {
         return axios.get(`${pollenUrl}lat=${lat}&lon=${long}&days=1&key=${breezeApi}`,{})
     };
 
-    fetchAirQualityData = async (long, lat) => {
+    fetchAirQualityData = async (lat, long) => {
         try {
-            const conditions = await this.setDisplayedConditions(long, lat)
-            const pollen = await this.setDisplayedPollen(long, lat)
+            const conditions = await this.setDisplayedConditions(lat, long);
+            const pollen = await this.setDisplayedPollen(lat, long);
             return {pollen: pollen.data.data, air: conditions.data.data}
         }catch(err) {
             console.log(err)
@@ -72,9 +72,9 @@ class UserRoutesPage extends Component {
 
     handleRouteSelecton = async (name, polyline) => {
         try {
-            const lat = polyline[0][0]
-            const long = polyline[0][1]
-            const conditions = await this.fetchAirQualityData(long,lat);
+            const lat = polyline[0][0];
+            const long = polyline[0][1];
+            const conditions = await this.fetchAirQualityData(lat, long);
             this.setState({
                 currentRouteName: name,
                 currentRoute: polyline,
@@ -90,7 +90,7 @@ class UserRoutesPage extends Component {
         try {
             const lat = obj.lat;
             const long = obj.lng;
-            const conditions = await this.fetchAirQualityData(long, lat);
+            const conditions = await this.fetchAirQualityData(lat, long);
             this.setState({
                 currentPoint: obj,
                 currentCond: conditions.air,
@@ -130,7 +130,6 @@ class UserRoutesPage extends Component {
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions;
         };
-
         return (
             <Container>
                 <Row>

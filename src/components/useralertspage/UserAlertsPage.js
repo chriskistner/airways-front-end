@@ -8,12 +8,15 @@ import {getUserAlerts, createUserAlert} from '../../actions/alerts';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
+import AlertHomeBar from './AlertHomeBar';
 import {sendTestEmail} from '../../actions/alerts';
 
 class UserAlertsPage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            form: false
+        }
     };
 
     componentDidMount() {
@@ -21,6 +24,12 @@ class UserAlertsPage extends Component {
         this.props.getUserRoutes(this.props.match.params.userId);
         this.props.getUserAlerts(this.props.match.params.userId);
         this.props.getUserLocations(this.props.match.params.userId);
+    };
+
+    toggleCreateForm = () => {
+        this.setState({
+            form: !this.state.form
+        })
     };
 
     handleSendEmail = (event) => {
@@ -41,8 +50,9 @@ class UserAlertsPage extends Component {
                         <UserNavBar user={this.props.userName}/>
                     </Col>
                 </Row>
+                <AlertHomeBar toggleForm={this.toggleCreateForm}/>
                 {
-                this.props.routes ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                this.props.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
                 }
                 <Row>
                     <Col xs='6'>

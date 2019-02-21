@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Row, Col, Button, Form, Label, Input, FormGroup, ButtonGroup} from 'reactstrap';
+import { Row, Col, Button, Form, Label, Input} from 'reactstrap';
 import {createUserAlert} from '../../actions/alerts';
 
 class CreateAlert extends Component {
