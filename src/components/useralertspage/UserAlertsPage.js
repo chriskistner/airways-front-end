@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
-import {getUserAlerts, createUserAlert} from '../../actions/alerts';
+import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
@@ -70,7 +70,9 @@ class UserAlertsPage extends Component {
                     alerts.length === 0 ? this.noAlerts() 
                     : 
                     alerts.map(alert => {return <AlertListing key={alert.id} {...alert} 
-                        userId ={this.props.match.params.userId}/>})
+                        userId ={this.props.match.params.userId}
+                        dropAlert={this.props.deleteUserAlert}
+                        />})
                 }
             </Container>
         )
@@ -83,7 +85,8 @@ const mapDispatchToProps = (dispatch) => {
         getUserAlerts,
         getUserLocations,
         getUserRoutes, 
-        createUserAlert, 
+        createUserAlert,
+        deleteUserAlert, 
         sendTestEmail},dispatch)
 };
 
