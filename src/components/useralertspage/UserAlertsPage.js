@@ -4,24 +4,43 @@ import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
-import {getUserAlerts, createUserAlert} from '../../actions/alerts';
+import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
+import AlertHomeBar from './AlertHomeBar';
+import AlertListing from './AlertListing';
 import {sendTestEmail} from '../../actions/alerts';
 
 class UserAlertsPage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            form: false
+        }
     };
 
     componentDidMount() {
+        this.props.getUserRoutes(this.props.match.params.userId);
         this.props.getUser(this.props.match.params.userId);
         this.props.getUserAlerts(this.props.match.params.userId);
         this.props.getUserLocations(this.props.match.params.userId);
-        this.props.getUserRoutes(this.props.match.params.userId);
+    };
 
+    toggleCreateForm = () => {
+        this.setState({
+            form: !this.state.form
+        })
+    };
+
+    noAlerts = () => {
+        return (
+            <Row>
+                <Col>
+                    <h4>You Have No Saved Alerts</h4>
+                </Col>
+            </Row>
+        )
     };
 
     handleSendEmail = (event) => {
@@ -34,7 +53,8 @@ class UserAlertsPage extends Component {
     };
 
     render() {
-
+        const alerts = this.props.alerts
+        console.log(alerts)
         return(
             <Container>
                 <Row>
@@ -42,20 +62,18 @@ class UserAlertsPage extends Component {
                         <UserNavBar user={this.props.userName}/>
                     </Col>
                 </Row>
+                <AlertHomeBar toggleForm={this.toggleCreateForm}/>
                 {
-                this.props.routes ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                this.state.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
                 }
-                <Row>
-                    <Col xs='6'>
-                        <Form onSubmit={this.handleSendEmail}>
-                        <FormGroup>
-                                <Label for="newUserName">Send Test Email</Label>
-                                <Input type="text" name="testMessage" id="testMessage" placeholder="Enter Test Message"></Input>
-                            </FormGroup>
-                            <Button>Send Test Email</Button>
-                        </Form>
-                    </Col>
-                </Row>
+                {
+                    alerts.length === 0 ? this.noAlerts() 
+                    : 
+                    alerts.map(alert => {return <AlertListing key={alert.id} {...alert} 
+                        userId ={this.props.match.params.userId}
+                        dropAlert={this.props.deleteUserAlert}
+                        />})
+                }
             </Container>
         )
     }
@@ -67,7 +85,8 @@ const mapDispatchToProps = (dispatch) => {
         getUserAlerts,
         getUserLocations,
         getUserRoutes, 
-        createUserAlert, 
+        createUserAlert,
+        deleteUserAlert, 
         sendTestEmail},dispatch)
 };
 

@@ -75,3 +75,22 @@ export const sendTestEmail = (userId, name, email, message) => {
     }
 };
 
+export const deleteUserAlert = (userId, alertId) => {
+    return async (dispatch) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios(`${url}/user/${userId}/alerts/${alertId}`, {
+                method: "delete",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch(getUserAlerts(userId))
+        }catch(err) {
+            console.log(err)
+        }
+    }
+};
+
