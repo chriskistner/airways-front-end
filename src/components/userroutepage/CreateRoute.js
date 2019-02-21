@@ -55,7 +55,7 @@ class CreateRoute extends Component {
     };
 
     addLocationToRoute = (event) => {
-        console.log(event)
+        console.log(event.target.value)
     }
 
     handleCreateRoute = () => {
@@ -91,15 +91,8 @@ class CreateRoute extends Component {
     };
 
     generateStoredLocations = (obj) => {
-        const coordinates= [obj.latitude, obj.longitude];
-        const mapPoints = {lat: obj.latitude, lng: obj.longitude}
-        const dataPack = {
-            mapPoints: mapPoints,
-            points: coordinates,
-            pointDetails: obj.name
-        }
         return (
-        <option id={obj.id} value={dataPack}>{obj.name}</option>
+        <option id={obj.id} value={obj.id}>{obj.name}</option>
         )
     };
 
@@ -140,7 +133,7 @@ class CreateRoute extends Component {
                                     <Col>
                                         <FormGroup>
                                             <Label for="exampleSelect">Or Select From Your Saved Locations</Label>
-                                            <Input type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute()}>
+                                            <Input type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute}>
                                             {
                                             this.props.userLocations.map(points => this.generateStoredLocations(points))
                                             }
