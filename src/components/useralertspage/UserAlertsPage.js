@@ -9,6 +9,7 @@ import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reac
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
 import AlertHomeBar from './AlertHomeBar';
+import AlertListing from './AlertListing';
 import {sendTestEmail} from '../../actions/alerts';
 
 class UserAlertsPage extends Component {
@@ -20,8 +21,8 @@ class UserAlertsPage extends Component {
     };
 
     componentDidMount() {
-        this.props.getUser(this.props.match.params.userId);
         this.props.getUserRoutes(this.props.match.params.userId);
+        this.props.getUser(this.props.match.params.userId);
         this.props.getUserAlerts(this.props.match.params.userId);
         this.props.getUserLocations(this.props.match.params.userId);
     };
@@ -30,6 +31,16 @@ class UserAlertsPage extends Component {
         this.setState({
             form: !this.state.form
         })
+    };
+
+    noAlerts = () => {
+        return (
+            <Row>
+                <Col>
+                    <h4>You Have No Saved Alerts</h4>
+                </Col>
+            </Row>
+        )
     };
 
     handleSendEmail = (event) => {
@@ -42,7 +53,8 @@ class UserAlertsPage extends Component {
     };
 
     render() {
-        console.log(this.props.alerts)
+        const alerts = this.props.alerts
+        console.log(alerts)
         return(
             <Container>
                 <Row>
@@ -52,19 +64,14 @@ class UserAlertsPage extends Component {
                 </Row>
                 <AlertHomeBar toggleForm={this.toggleCreateForm}/>
                 {
-                this.props.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                this.state.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
                 }
-                <Row>
-                    <Col xs='6'>
-                        <Form onSubmit={this.handleSendEmail}>
-                        <FormGroup>
-                                <Label for="newUserName">Send Test Email</Label>
-                                <Input type="text" name="testMessage" id="testMessage" placeholder="Enter Test Message"></Input>
-                            </FormGroup>
-                            <Button>Send Test Email</Button>
-                        </Form>
-                    </Col>
-                </Row>
+                {
+                    alerts.length === 0 ? this.noAlerts() 
+                    : 
+                    alerts.map(alert => {return <AlertListing key={alert.id} {...alert} 
+                        userId ={this.props.match.params.userId}/>})
+                }
             </Container>
         )
     }

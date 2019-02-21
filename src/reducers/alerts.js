@@ -4,7 +4,7 @@ const initialState = {
     userId: null,
     pending: true,
     userName: '',
-    alerts: {}
+    alerts: []
 };
 
 export default function alerts (state = initialState, action) {
