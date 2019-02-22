@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import {getGeoCode} from '../../actions/google'
 import { Container, Row, Col } from 'reactstrap';
+import HomePageBar from './HomePageBar';
 import UserNavBar from './UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
@@ -24,24 +25,29 @@ class UserHomePage extends Component {
         let coordinates={lat: this.props.homeLat, lng: this.props.homeLong};
         return (
             <Container>
-                <Row className="noOverlap">
-                    <Col>
-                        <UserNavBar user={this.props.userName}/>
+                <Row>
+                    <Col className='Cell'>
+                        <Row className="noOverlap">
+                            <Col>
+                                <UserNavBar user={this.props.userName}/>
+                            </Col>
+                        </Row>
+                        <HomePageBar/>
+                        <Row className="noMargin bg-light">
+                            <Col xs="5" className="noPadding cellBorder">
+                                <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
+                            </Col>
+                            <Col xs="7" className="noPadding cellBorder" style={{minHeight: 400}}>
+                            {
+                                coordinates.lat ? 
+                                    <GoogleMap currentName={this.state.currentLocName}
+                                    coordinates={coordinates}
+                                    google={this.props.google}/> :
+                                    <p>loading...</p>
+                            }
+                            </Col>  
+                        </Row>
                     </Col>
-                </Row>
-                <Row className="noOverlap">
-                    <Col xs="5" style={{padding: 0}}>
-                        <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
-                    </Col>
-                    <Col xs="7" style={{minHeight: 400, padding: 0}}>
-                    {
-                        coordinates.lat ? 
-                            <GoogleMap currentName={this.state.currentLocName}
-                            coordinates={coordinates}
-                            google={this.props.google}/> :
-                            <p>loading...</p>
-                    }
-                    </Col>  
                 </Row>
             </Container>
         )

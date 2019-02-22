@@ -28,8 +28,8 @@ class CreateLocation extends Component {
 
     render() {
         return (
-            <Row>
-                <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
+            <Row className="noMargin bg-light">
+                <Col className="border createForm">
                     <Form onSubmit={this.handleCreateLocation}>
                         <Row>
                             <Col>

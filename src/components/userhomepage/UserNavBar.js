@@ -59,7 +59,7 @@ class UserNavBar extends Component {
         return (
             <Row>
                 <Col>
-                    <Navbar color="light" light expand="md">
+                    <Navbar className="navBorder" color="light" light expand="md">
                     <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isOpen} navbar>
