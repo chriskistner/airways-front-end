@@ -4,6 +4,8 @@ import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {setAuthentication, toggleError} from '../../actions/authentication';
 import {
+    Row,
+    Col,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -55,34 +57,37 @@ class UserNavBar extends Component {
 
     render() {
         return (
-            <div>
-            <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
-              <NavbarToggler onClick={this.toggleNav} />
-              <Collapse isOpen={this.state.isOpen} navbar>
-                <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink onClick={this.goToHome}>Home</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={this.goToRoutes}>Routes</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={this.goToLocations}>Locations</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={this.goToAlerts}>Alerts</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={this.goToProfile}>Profile</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={this.logOut} href="#">Logout</NavLink>
-                    </NavItem>
-                </Nav>
-              </Collapse>
-            </Navbar>
-          </div>
+            <Row>
+                <Col>
+                    <Navbar color="light" light expand="md">
+                    <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNav} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink onClick={this.goToHome}>Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.goToAlerts}>Alerts</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.goToProfile}>Profile</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.logOut} href="#">Logout</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                    </Navbar>
+                </Col>
+            </Row>
+
         )
     }
 }
