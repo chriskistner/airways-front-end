@@ -23,18 +23,13 @@ export default class AirQualityHomePage extends Component {
     
     render() {
         return (
-                this.props.conditions.indexes && this.props.pollen[0] ?
-                    <Container style={{borderWidth: 2, borderStyle: 'solid', borderColor: 'black'}}>
+            this.props.conditions.indexes && this.props.pollen[0] ?
+                <Container className='subCell'>
                     <Row>
                         <Col>
-                            <h2>Current Air Quality</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Row style={{backgroundColor: "#A9B6BB"}}>
+                            <Row className='airCat'>
                                 <Col>
-                                <h4>Pollen Count</h4>
+                                <b>Pollen Count</b>
                                 </Col>
                             </Row>
                             <Row>
@@ -62,9 +57,9 @@ export default class AirQualityHomePage extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Row style={{backgroundColor: "#A9B6BB"}}>
+                            <Row className='airCat'>
                                 <Col>
-                                <h4>Pollutant Data</h4>
+                                <b>Pollutant Data</b>
                                 </Col>
                             </Row>
                             <Row>

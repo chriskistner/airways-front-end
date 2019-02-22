@@ -24,16 +24,16 @@ class UserHomePage extends Component {
         let coordinates={lat: this.props.homeLat, lng: this.props.homeLong};
         return (
             <Container>
-                <Row>
+                <Row className="noOverlap">
                     <Col>
                         <UserNavBar user={this.props.userName}/>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="noOverlap">
                     <Col xs="5" style={{padding: 0}}>
                         <AirQualityHomePage pollen={this.props.homePollen} conditions={this.props.homeConditions}/>
                     </Col>
-                    <Col xs="7" style={{padding: 0}}>
+                    <Col xs="7" style={{minHeight: 400, padding: 0}}>
                     {
                         coordinates.lat ? 
                             <GoogleMap currentName={this.state.currentLocName}

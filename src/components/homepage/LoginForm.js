@@ -26,7 +26,7 @@ class LoginForm extends Component{
                 <Row id = "loginForm">
                     <Col>
                         <Form onSubmit={this.handleLogin}>
-                            <h1>Login</h1>
+                            <b>USER LOGIN</b>
                             {
                             this.props.errors ? <Alert color="danger">There was a problem logging in, check your user name and password.</Alert> : null
                             }

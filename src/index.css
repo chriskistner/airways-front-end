@@ -8,6 +8,73 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* .HomePage {
+  background-color: #9BC0CD;
+} */
+
+input {
+  margin-bottom: 2px !important;
+}
+
+.noMargin {
+  margin-right: 0px !important;
+  margin-left: 0px !important
+}
+
+.noPadding{
+  padding-left: 0px !important;
+  padding-right: 0px !important
+}
+
+.userListRow {
+  padding: 2px 0px 2px 15px !important;
+
+}
+.userListCol {
+  padding-top: auto;
+  padding-bottom: auto
+}
+
+.userList {
+  background-color: white;
+  border-bottom: 1px solid #59686D;
+}
+
+.Border {
+  border: 1px solid #59686D;
+}
+
+.Cell {
+  background-color: #9BC0CD;
+  border: 2px solid #59686D;
+  border-top-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.subCell {
+  background-color: #f8f9fa;
+}
+
+.homeBar {
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #59686D;
+  background-color: #f8f9fa;
+}
+
+.homeBarText {
+  font-size: 1.2em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+}
+
+.airCat {
+  background-color: #9BC0CD;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
