@@ -23,6 +23,20 @@ class HomePage extends Component{
     };
 
     render() {
+
+        let coordinates = null;
+        
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                coordinates = [position.coords.latitude, position.coords.longitude];
+                console.log(coordinates)
+                console.log("geolocation")
+               });
+          } else {
+            coordinates = [47.606209, -122.332069]
+            console.log('default')
+          };
+
         return (
             <div className="HomePage">
                 <Container>
@@ -32,7 +46,6 @@ class HomePage extends Component{
                                 <CreateUserForm newUser={this.toggleModal} modalStatus={this.state.modal}/>
                             </Col>
                         </Row>
-
                 </Container>
             </div>
         )

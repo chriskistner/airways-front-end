@@ -103,7 +103,7 @@ class UserLocationsPage extends Component {
                         <LocationHomeBar toggleForm={this.toggleCreateForm}/>
                         {this.state.createLoc ? <CreateLocation toggleForm ={this.toggleCreateForm}/> : null}
 
-                    <Row className="noMargin">
+                    <Row className="noMargin bg-light">
                         <Col xs='3' className="noPadding Border" style={{minHeight: 400}}>
                         {
                             locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} userId ={this.props.match.params.userId} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
