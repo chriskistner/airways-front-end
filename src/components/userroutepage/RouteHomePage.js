@@ -37,9 +37,9 @@ class UserRoutesPage extends Component {
 
     noRoutes = () => {
         return (
-            <Row>
-                <Col>
-                    <h4>You Have No Saved Routes</h4>
+            <Row className='noMargin bg-light'>
+                <Col className="noPadding">
+                    <b>YOU HAVE NO ROUTES YET</b>
                 </Col>
             </Row>
         )
@@ -133,36 +133,36 @@ class UserRoutesPage extends Component {
         return (
             <Container>
                 <Row>
-                    <Col>
+                    <Col className='Cell'>
                         <UserNavBar user={this.props.userName} />
-                    </Col>
-                </Row>
-                <RouterHomeBar toggleForm={this.toggleCreateForm}/>
-                {this.state.form ? <CreateRoute userLocations={this.props.locations} toggleForm ={this.toggleCreateForm}/> : null}
-                <Row>
-                    <Col xs='3' style={{minHeight: 400, paddingRight: 0}}>
-                    {
-                        routes.length === 0 ? this.noRoutes() 
-                        : 
-                        routes.map(route => {return <RouteListing key={route.id} {...route} 
-                            userId ={this.props.match.params.userId}
-                            selectRoute={this.handleRouteSelecton}
-                            dropRoute={this.props.deleteUserRoute}/>})
-                    }
-                    </Col>
-                    <Col xs='4'>
-                        {pollenData ? <AirQualityHomePage pollen={pollenData} 
-                                            conditions={airData}/> : <p>loading...</p>}
-                    </Col>
-                    <Col xs='5' style={{paddingRight: 0}}>
-                        {
-                            coordinates !== [] ? 
-                                <GoogleMap currentName={this.state.currentLocName}
-                                coordinates={coordinates}
-                                setCurrentPoint={this.handlePointSelection}
-                                google={this.props.google}/> :
-                                <p>loading...</p>
+                        <RouterHomeBar toggleForm={this.toggleCreateForm}/>
+                        {this.state.form ? <CreateRoute userLocations={this.props.locations} toggleForm ={this.toggleCreateForm}/> : null}
+                        <Row className="noMargin bg-light">
+                            <Col xs='3' className="noPadding cellBorder" style={{minHeight: 400}}>
+                            {
+                                routes.length === 0 ? this.noRoutes() 
+                                : 
+                                routes.map(route => {return <RouteListing key={route.id} {...route} 
+                                    userId ={this.props.match.params.userId}
+                                    selectRoute={this.handleRouteSelecton}
+                                    dropRoute={this.props.deleteUserRoute}/>})
                             }
+                            </Col>
+                            <Col xs='4' className="noPadding cellBorder">
+                                {pollenData ? <AirQualityHomePage pollen={pollenData} 
+                                                    conditions={airData}/> : <p>loading...</p>}
+                            </Col>
+                            <Col xs='5' className="noPadding cellBorder">
+                                {
+                                    coordinates !== [] ? 
+                                        <GoogleMap currentName={this.state.currentLocName}
+                                        coordinates={coordinates}
+                                        setCurrentPoint={this.handlePointSelection}
+                                        google={this.props.google}/> :
+                                        <p>loading...</p>
+                                    }
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>

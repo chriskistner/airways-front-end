@@ -36,9 +36,9 @@ class UserLocationsPage extends Component {
 
     noLocales = () => {
         return (
-            <Row>
-                <Col>
-                    <h4>You Have No Saved Locations</h4>
+            <Row className='noMargin bg-light'>
+                <Col className="noPadding">
+                    <b>YOU HAVE NO LOCATIONS YET</b>
                 </Col>
             </Row>
         )
@@ -102,27 +102,26 @@ class UserLocationsPage extends Component {
                         <UserNavBar user={this.props.userName}/>
                         <LocationHomeBar toggleForm={this.toggleCreateForm}/>
                         {this.state.createLoc ? <CreateLocation toggleForm ={this.toggleCreateForm}/> : null}
-
-                    <Row className="noMargin">
-                        <Col xs='3' className="noPadding Border" style={{minHeight: 400}}>
-                        {
-                            locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} userId ={this.props.match.params.userId} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
-                        }
-                        </Col>
-                        <Col xs='4' className="noPadding Border">
-                            {pollenData ? <AirQualityHomePage pollen={pollenData} 
-                                                conditions={airData}/> : null}
-                        </Col>
-                        <Col xs='5' className="noPadding Border">
+                        <Row className="noMargin bg-light">
+                            <Col xs='3' className="noPadding cellBorder" style={{minHeight: 400}}>
                             {
-                                coordinates.lat ? 
-                                    <GoogleMap currentName={this.state.currentLocName}
-                                    coordinates={coordinates}
-                                    google={this.props.google}/> :
-                                    <p>loading...</p>
-                                }
-                        </Col>
-                    </Row>
+                                locations.length === 0 ? this.noLocales() : locations.map(place => {return <LocationListing key={place.id} {...place} userId ={this.props.match.params.userId} deleteLoc={this.props.deleteUserLocation} setCurrent={this.handleLocationSelecton}/>})
+                            }
+                            </Col>
+                            <Col xs='4' className="noPadding cellBorder">
+                                {pollenData ? <AirQualityHomePage pollen={pollenData} 
+                                                    conditions={airData}/> : null}
+                            </Col>
+                            <Col xs='5' className="noPadding cellBorder">
+                                {
+                                    coordinates.lat ? 
+                                        <GoogleMap currentName={this.state.currentLocName}
+                                        coordinates={coordinates}
+                                        google={this.props.google}/> :
+                                        <p>loading...</p>
+                                    }
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>

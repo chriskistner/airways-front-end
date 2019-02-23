@@ -59,7 +59,7 @@ class UserNavBar extends Component {
         return (
             <Row>
                 <Col>
-                    <Navbar color="light" light expand="md">
+                    <Navbar className="navBorder" color="light" light expand="md">
                     <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -68,10 +68,10 @@ class UserNavBar extends Component {
                                 <NavLink onClick={this.goToHome}>Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
+                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
+                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={this.goToAlerts}>Alerts</NavLink>

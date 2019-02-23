@@ -30,9 +30,9 @@ input {
   padding: 2px 0px 2px 15px !important;
 
 }
-.userListCol {
-  padding-top: auto;
-  padding-bottom: auto
+
+.createRouteInputs {
+  margin: 5px;
 }
 
 .userList {
@@ -40,7 +40,7 @@ input {
   border-bottom: 1px solid #59686D;
 }
 
-.Border {
+.cellBorder {
   border: 1px solid #59686D;
 }
 
@@ -51,6 +51,13 @@ input {
   border-bottom-right-radius: 12px;
   margin: 5px;
   padding: 5px;
+}
+
+.navBorder {
+  background-color: #9BC0CD;
+  border: 2px solid #59686D;
+  border-top-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .subCell {
@@ -73,6 +80,11 @@ input {
 
 .airCat {
   background-color: #9BC0CD;
+}
+
+.createForm {
+  padding-top: 5px;
+  padding-bottom: 5px
 }
 
 code {
