@@ -108,7 +108,6 @@ class CreateRoute extends Component {
             <ul>
                 <span><i>Route Begins At...</i></span>
                 {arr.map(point => <li>{point.address} {point.city}, {point.state}</li>)}
-                {arr.length > 1 ? <span><i>Route Ends At...</i></span> : null}
             </ul>
         )
     };
@@ -129,66 +128,61 @@ class CreateRoute extends Component {
         const points = this.state.pointDetails;
         console.log(this.state.mapPoints)
         return (
-            <Row>
-                <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
+            <Row className="noMargin bg-light">
+                <Col className="noPadding cellBorder">
                     <Form onSubmit={this.addPointToRoute}>
-                        <Row>
-                            <Col>
-                                <Label>Enter A Location</Label>
+                        <Row className="noMargin">
+                            <Col xs="3" className="noPadding">
+                                <Input className="createRouteInputs" type="text" name="newRouteName" id="newRouteName" placeholder="Enter a Name for this Route" onChange={this.handleChange}></Input>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col xs='3'>
-                                <Input type="text" name="newRouteName" id="newRouteName" placeholder="Enter a Name for this Route" onChange={this.handleChange}></Input>
+                        <Row className="noMargin justify-content-start">
+                            <Col xs='5' className="noPadding">
+                                <Input className="createRouteInputs" type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter an Address for the start of your route"></Input>
                             </Col>
-                            <Col xs='4'>
-                                <Input type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter Address"></Input>
+                            <Col xs='3' className="noPadding">
+                                <Input className="createRouteInputs" type="text" name="newPointCity" id="newPointCity" placeholder="Enter City"></Input>
                             </Col>
-                            <Col xs='2'>
-                                <Input type="text" name="newPointCity" id="newPointCity" placeholder="Enter City"></Input>
-                            </Col>
-                            <Col xs='2'>
-                                <Input type="text" name="newPointState" id="newPointState" placeholder="Enter State"></Input>
+                            <Col xs='2' className="noPadding">
+                                <Input className="createRouteInputs" type="text" name="newPointState" id="newPointState" placeholder="Enter State"></Input>
                             </Col>
                         </Row>
-                        {
+                        <Row className="noMargin align-items-center">
+                            {
                             this.props.userLocations.length !== 0 ?                         
-                                <Row>
-                                    <Col>
+                                    <Col xs="5" className="noPadding align-self-center">
                                         <FormGroup>
-                                            <Label for="exampleSelect">Or Select From Your Saved Locations</Label>
-                                            <Input type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute}>
-                                            <option id={0} value={'base'} selected disabled>Your Saved Routes...</option>
+                                            <Input className="createRouteInputs" type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute}>
+                                            <option id={0} value={'base'} selected disabled>Or Select From Your Saved Locations...</option>
                                             {
                                             this.props.userLocations.map(points => this.generateStoredLocations(points))
                                             }
                                             </Input>
                                         </FormGroup>
                                     </Col>
-                                </Row> : null
-                        }
-                        <Row>
-                            <Col>
-                            <Button>{points.length !== 0 ? 'Add To Route' : 'Start New Route'}</Button>
+                                 : null
+                            }
+                            <Col xs="3" className="noPadding">
+                                <Button outline color="primary" style={{marginLeft: 10, marginBottom: 5}}>{points.length !== 0 ? 'Add To Route' : 'Start New Route'}</Button>
                             </Col>
                         </Row>
+
                     </Form>
-                    <Row>
-                        <Col xs="8">
                         {
-                            points.length === 0 ? this.noPoints() : this.generatePointDetails(points)
+                        points.length !== 0 ? 
+                            <Row className="noMargin align-items-center">
+                                <Col xs="8" className="noPadding">
+                                    { this.generatePointDetails(points)}
+                                    <ButtonGroup style={{marginLeft: 5, marginBottom: 5}}>
+                                        <Button outline color="success" onClick={() => this.handleCreateRoute()}>Save Route</Button>
+                                        <Button outline color="danger" onClick={() => this.clearRoutePoints()} >Reset Points</Button>
+                                    </ButtonGroup>
+                                </Col>
+                            </Row> : null
                         }
-                        </Col>
-                        <Col xs='4'>
-                            <ButtonGroup>
-                                <Button outline color="success" size="sm" onClick={() => this.handleCreateRoute()}>Save Route</Button>
-                                <Button outline color="danger" size="sm" onClick={() => this.clearRoutePoints()} >Reset Points</Button>
-                            </ButtonGroup>
-                        </Col>
-                    </Row>
                 </Col>
                 {
-                    this.state.mapPoints.length !==0 ? <Col xs='4' style={{minHeight: 400, paddingRight: 0}}>
+                    this.state.mapPoints.length !==0 ? <Col xs='4' className="noPadding cellBorder" style={{minHeight: 250}}>
                             <GoogleMap coordinates={this.state.mapPoints} google={this.props.google} /> 
                         </Col>: null
                 }

@@ -68,10 +68,10 @@ class UserNavBar extends Component {
                                 <NavLink onClick={this.goToHome}>Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
+                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
+                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={this.goToAlerts}>Alerts</NavLink>
