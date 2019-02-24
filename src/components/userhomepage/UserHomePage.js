@@ -27,7 +27,7 @@ class UserHomePage extends Component {
             <Container>
                 <Row>
                     <Col className='Cell'>
-                        <Row className="noOverlap">
+                        <Row>
                             <Col>
                                 <UserNavBar user={this.props.userName}/>
                             </Col>

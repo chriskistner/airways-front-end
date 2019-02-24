@@ -8,10 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* .HomePage {
-  background-color: #9BC0CD;
-} */
-
 input {
   margin-bottom: 2px !important;
 }
@@ -24,6 +20,10 @@ input {
 .noPadding{
   padding-left: 0px !important;
   padding-right: 0px !important
+}
+.shrinkMargin {
+  margin-right: 10px !important;
+  margin-left: 10px !important
 }
 
 .userListRow {
@@ -49,6 +49,15 @@ input {
   border: 2px solid #59686D;
   border-top-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  box-shadow: 3px 3px 3px 3px #B7DAE6;
+  margin: 10px;
+  padding: 10px;
+}
+
+.footerCell {
+  background-color: #9BC0CD;
+  border: 2px solid #59686D;
+  border-top-right-radius: 12px;
   margin: 10px;
   padding: 10px;
 }

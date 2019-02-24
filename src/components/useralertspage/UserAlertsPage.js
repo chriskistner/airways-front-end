@@ -5,7 +5,7 @@ import {setAuthentication, getUser} from '../../actions/authentication';
 import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
 import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
 import AlertHomeBar from './AlertHomeBar';

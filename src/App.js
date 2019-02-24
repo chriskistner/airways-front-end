@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Container, Row, Col} from 'reactstrap';
 import AuthenticatedRoute from './higherOrderComponents/authenticatedRoute';
 import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {verifyUser} from './actions/authentication';
+import SiteFooter from './components/static/Footer';
 import HomePage from './components/homepage/LoginPage';
 import UserHomePage from './components/userhomepage/UserHomePage';
 import UserLocationsPage from './components/userlocationpage/LocationHomePage';
@@ -20,17 +22,24 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <AuthenticatedRoute path='/user/:userId/profile' component={UserProfilePage} />
-          <AuthenticatedRoute path='/user/:userId/alerts' component={UserAlertsPage} />
-          <AuthenticatedRoute path='/user/:userId/routes' component={UserRoutesPage} />
-          <AuthenticatedRoute path='/user/:userId/locations' component={UserLocationsPage} />
-          <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
-          <Route path='/user' component={UserHomePage}/>
-          <Route path='/' component={HomePage}/>
-        </Switch>
-    </BrowserRouter>
+      <Container>
+        <Row>
+          <Col>
+          <BrowserRouter>
+            <Switch>
+              <AuthenticatedRoute path='/user/:userId/profile' component={UserProfilePage} />
+              <AuthenticatedRoute path='/user/:userId/alerts' component={UserAlertsPage} />
+              <AuthenticatedRoute path='/user/:userId/routes' component={UserRoutesPage} />
+              <AuthenticatedRoute path='/user/:userId/locations' component={UserLocationsPage} />
+              <AuthenticatedRoute path='/user/:userId' component={UserHomePage} />
+              <Route path='/user' component={UserHomePage}/>
+              <Route path='/' component={HomePage}/>
+            </Switch>
+          </BrowserRouter>
+          <SiteFooter />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
