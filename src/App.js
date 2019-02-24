@@ -6,6 +6,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {verifyUser} from './actions/authentication';
+import SiteHeader from './components/static/Header';
 import SiteFooter from './components/static/Footer';
 import HomePage from './components/homepage/LoginPage';
 import UserHomePage from './components/userhomepage/UserHomePage';
@@ -25,6 +26,7 @@ class App extends Component {
       <Container>
         <Row>
           <Col>
+          <SiteHeader />
           <BrowserRouter>
             <Switch>
               <AuthenticatedRoute path='/user/:userId/profile' component={UserProfilePage} />
