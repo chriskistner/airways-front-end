@@ -126,9 +126,8 @@ class CreateRoute extends Component {
 
     render() {
         const points = this.state.pointDetails;
-        console.log(this.state.mapPoints)
         return (
-            <Row className="noMargin bg-light">
+            <Row className="noMargin mb-3 bg-light">
                 <Col className="noPadding cellBorder">
                     <Form onSubmit={this.addPointToRoute}>
                         <Row className="noMargin">
