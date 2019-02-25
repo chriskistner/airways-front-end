@@ -65,7 +65,7 @@ class UserAlertsPage extends Component {
                         </Row>
                         <AlertHomeBar toggleForm={this.toggleCreateForm}/>
                         {
-                        this.state.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                        this.state.form ? <CreateAlert locations={this.props.locations} toggleForm={this.toggleCreateForm} routes={this.props.routes}/> : null
                         }
                         {
                         alerts.length === 0 ? this.noAlerts() 
