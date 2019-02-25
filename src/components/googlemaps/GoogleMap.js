@@ -81,7 +81,7 @@ class GoogleMap extends Component {
                         center={this.props.coordinates}
                     >
                         <Marker
-                            title={'Your Default Zip Code Based on Your Profile'}
+                            title={'Your Selected Location'}
                             name={this.props.currentName || 'Home'}
                             position={this.props.coordinates}/>
                     </Map>
