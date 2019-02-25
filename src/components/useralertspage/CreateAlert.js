@@ -72,6 +72,7 @@ class CreateAlert extends Component {
                 parseFloat(alertValue[0].latitude),
                 parseFloat(alertValue[0].longitude)
                 )
+            this.props.toggleForm()
 
         } else { 
             const alertValue = this.props.routes.filter(point => point.id === parseInt(this.state.alertFor));
@@ -83,6 +84,7 @@ class CreateAlert extends Component {
                 1,
                 1
                 )
+            this.props.toggleForm()
         }
     }
 

@@ -4,42 +4,45 @@ import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import { Container, Row, Col } from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
+import UserProfileHomeBar from './UserProfileHomeBar';
+import UpdateProfileForm from './UpdateProfileForm';
 
 class UserProfilePage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            updateProfile: false
+        }
     };
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.userId);
     };
 
+    toggleCreateForm = () => {
+        this.setState({
+            updateProfile: !this.state.updateProfile
+        })
+    };
+
     render() {
         return(
             <Container>
                 <Row>
-                    <Col>
+                    <Col className="Cell">
                         <UserNavBar user={this.props.userName}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className='Cell'>
-                        <Row className="noOverlap">
-                            <Col xs='6' className="bg-light">
-                                <b>User Name:</b> {this.props.userName}
+                        <Row className="noMargin">
+                            <Col className="noPadding cellBorder" >
+                                <UserProfileHomeBar userName={this.props.userName}
+                                                    address={this.props.userAddress}
+                                                    city={this.props.userCity}
+                                                    state={this.props.userState}
+                                                    email={this.props.userEmail}
+                                                    toggleForm={this.toggleCreateForm}
+                                                    />
                             </Col>
                         </Row>
-                        <Row className="noOverlap ">
-                            <Col xs='6' className="bg-light">
-                                <b>Address:</b> {this.props.userAddress}
-                            </Col>
-                        </Row>
-                        <Row className="noOverlap">
-                            <Col xs='6' className="bg-light">
-                                {this.props.userCity} {this.props.userState}
-                            </Col>
-                        </Row>
+                        {this.state.updateProfile ? <UpdateProfileForm toggleForm ={this.toggleCreateForm}/> : null}
                     </Col>
                 </Row>
             </Container>
@@ -57,10 +60,7 @@ const mapStateToProps = (state) => {
         userAddress: state.auth.address,
         userCity: state.auth.city,
         userState: state.auth.state,
-        homeLat: state.auth.zipLat,
-        homeLong: state.auth.zipLong,
-        homeConditions: state.auth.homeConditions,
-        homePollen: state.auth.homePollen
+        userEmail: state.auth.email
     }
 };
 

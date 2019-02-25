@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserLocations, deleteUserLocation} from '../../actions/locations';
-import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer'
+import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer';
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import LocationListing from './LocationListing';
@@ -103,7 +103,6 @@ class UserLocationsPage extends Component {
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
         };
-        
         return (
             <Container>
                 <Row>
@@ -151,7 +150,7 @@ const mapStateToProps = (state) => {
         homePollen: state.locations.homePollen,
         loadConditions: state.locations.loadConditions,
         loadPollen: state.locations.loadPollen,
-        locations: state.locations.locations
+        locations: state.locations.locations,
     }
 };
 

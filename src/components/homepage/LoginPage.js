@@ -91,7 +91,7 @@ class HomePage extends Component{
                                     </Col>
                                     <Col className="noPadding cellHeight cellBorder" sm='4'>
                                         {pollenData ? <AirQualityHomePage pollen={pollenData} 
-                                                        conditions={airData}/> : null}
+                                                        conditions={airData}/> : <p>Loading...</p>}
                                     </Col>
                                     <Col className="noPadding cellHeight cellBorder bg-light" sm="4">
                                         <LoginForm newUser={this.toggleModal}/>
