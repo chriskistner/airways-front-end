@@ -26,11 +26,10 @@ class LoginForm extends Component{
                 <Row id = "loginForm">
                     <Col className="cellHeight">
                         <Form onSubmit={this.handleLogin}>
-                            <b>USER LOGIN</b>
                             {
                             this.props.errors ? <Alert color="danger">There was a problem logging in, check your user name and password.</Alert> : null
                             }
-                            <FormGroup>
+                            <FormGroup className="mt-1">
                                 <Label for="userEmail">Email</Label>
                                 <Input type="email" name="email" id="userEmail" placeholder="enter account email" />
                                 <FormFeedback>Uh Oh, that username doesn't seem to exist</FormFeedback>
@@ -44,7 +43,7 @@ class LoginForm extends Component{
                         </Form>
                     </Col>
                 </Row>
-                <Row className="mt-2">
+                <Row className="mt-2 mb-3">
                     <Col>
                         <a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a>
                     </Col>

@@ -83,14 +83,14 @@ class HomePage extends Component{
                             <Col className='Cell'>
                                 <LoginPageBar />
                                 <Row className="noMargin bg-light row align-items-start">
-                                    <Col className="noPadding cellBorder bg-light" sm="4">
+                                    <Col className="noPadding cellBorder cellHeight bg-light" sm="4">
                                         <AboutAirways/>
                                     </Col>
-                                    <Col className="noPadding cellBorder" sm='4'>
+                                    <Col className="noPadding cellHeight cellBorder" sm='4'>
                                         {pollenData ? <AirQualityHomePage pollen={pollenData} 
                                                         conditions={airData}/> : null}
                                     </Col>
-                                    <Col className="noPadding cellBorder bg-light" sm="4">
+                                    <Col className="noPadding cellHeight cellBorder bg-light" sm="4">
                                         <LoginForm newUser={this.toggleModal}/>
                                         <CreateUserForm newUser={this.toggleModal} modalStatus={this.state.modal}/>
                                     </Col>

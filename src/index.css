@@ -70,7 +70,11 @@ input {
 }
 
 .cellHeight {
-  height: fit-content(100%)
+  min-height: 414px
+}
+
+.aboutHeight {
+  min-height: 487px
 }
 
 .pollutantsMargin {

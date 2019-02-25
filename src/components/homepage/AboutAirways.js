@@ -5,9 +5,9 @@ import { Row, Col} from 'reactstrap';
 export default function aboutAirways() {
 
     return(
-        <Row className="noMargin homeBar" style={{marginTop: -1}}>
-            <Col xs='12' className="cellHeight">
-                <p className='pl-2 pr-2'>
+        <Row className="noMargin" style={{marginTop: -1}}>
+            <Col xs='12' className="aboutHeight">
+                <p className='pl-2 pr-2 mt-1'>
                     <b>You can start breathing easy.</b> Airways.com allows you to monitor the air quality and
                     Pollen information where you live. 
                     Create a profile, favorite locations, and routes based on your daily 
