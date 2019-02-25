@@ -39,12 +39,14 @@ class HomePage extends Component{
 
     fetchLocation = async () => {
         if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                return [position.coords.latitude, position.coords.longitude, "Your Location"];
-    
-                });
+            return new Promise((resolve, reject)=> {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    resolve([position.coords.latitude, position.coords.longitude, "Where You Are"])
+        
+                    });
+            })
             } else {
-            return [47.606209, -122.332069, "Seattle, WA"]
+            return Promise.resolve([47.606209, -122.332069, "In Seattle"])
         };
     }
 
@@ -59,11 +61,11 @@ class HomePage extends Component{
 
     handleLocationSelecton = async () => {
         try{
-            // const coordinates = await this.fetchLocation()
-            const conditions = await this.setLocalConditions(-122.332069, 47.606209)
-            const pollen = await this.setLocalPollen(-122.332069, 47.606209)
+            const coordinates = await this.fetchLocation()
+            const conditions = await this.setLocalConditions(coordinates[1], coordinates[0])
+            const pollen = await this.setLocalPollen(coordinates[1], coordinates[0])
             this.setState({
-                currentLocName: 'Seattle, WA',
+                currentLocName: coordinates[2],
                 currentCond: conditions.data.data,
                 currentPollen: pollen.data.data
             })
@@ -74,6 +76,7 @@ class HomePage extends Component{
 
 
     render() {
+        console.log(this.state.currentLocName)
         const pollenData = this.state.currentPollen;
         const airData = this.state.currentCond;
         return (
@@ -81,7 +84,7 @@ class HomePage extends Component{
                 <Container>
                         <Row>
                             <Col className='Cell'>
-                                <LoginPageBar />
+                                <LoginPageBar message={this.state.currentLocName}/>
                                 <Row className="noMargin bg-light row align-items-start">
                                     <Col className="noPadding cellBorder cellHeight bg-light" sm="4">
                                         <AboutAirways/>

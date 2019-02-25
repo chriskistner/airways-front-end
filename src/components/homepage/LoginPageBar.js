@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Row, Col, Button} from 'reactstrap';
+import { Row, Col} from 'reactstrap';
 
-export default function locationHomeBar({toggleForm}) {
+export default function locationHomeBar({message}) {
 
     return(
         <Row className="noMargin homeBar">
@@ -10,7 +10,7 @@ export default function locationHomeBar({toggleForm}) {
                 <span className='homeBarText'>About Airways</span>
             </Col>
             <Col xs='4'>
-                <span className='homeBarText'>The Air in Seattle Today is..</span>
+                <span className='homeBarText'>The Air {message} Today is..</span>
             </Col>
             <Col xs='4'>
                 <span className='homeBarText'>Login To Your Profile</span>

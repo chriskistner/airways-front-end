@@ -44,6 +44,11 @@ input {
   border: 1px solid #59686D;
 }
 
+.logoBorder {
+  border: 2px solid #59686D;
+  border-bottom-left-radius: 12px;
+}
+
 .Cell {
   background-color: #9BC0CD;
   border: 2px solid #59686D;
@@ -70,7 +75,7 @@ input {
 }
 
 .cellHeight {
-  min-height: 414px
+  min-height: 486px
 }
 
 .aboutHeight {

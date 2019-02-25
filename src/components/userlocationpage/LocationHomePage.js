@@ -84,7 +84,10 @@ class UserLocationsPage extends Component {
 
         if(this.state.currentLocLat) {
             coordinates = {lat: this.state.currentLocLat, lng: this.state.currentLocLong}
-        } else {
+        } else if (locations.length !== 0) {
+            coordinates = {lat: this.state.currentLocLat, lng: this.state.currentLocLong}
+        }
+        else {
             coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}
         };
 
@@ -95,6 +98,7 @@ class UserLocationsPage extends Component {
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
         };
+        console.log(locations)
         return (
             <Container>
                 <Row>

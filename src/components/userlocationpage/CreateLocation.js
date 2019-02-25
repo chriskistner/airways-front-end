@@ -52,7 +52,7 @@ class CreateLocation extends Component {
                         </Row>
                         <Row>
                             <Col>
-                            <Button>Save Location</Button>
+                            <Button outline color="success">Save Location</Button>
                             </Col>
                         </Row>
                     </Form>

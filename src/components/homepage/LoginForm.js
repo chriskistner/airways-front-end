@@ -41,11 +41,7 @@ class LoginForm extends Component{
                             </FormGroup>
                             <Button>Login</Button>
                         </Form>
-                    </Col>
-                </Row>
-                <Row className="mt-2 mb-3">
-                    <Col>
-                        <a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a>
+                        <p className="mt-3"><a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a> </p>
                     </Col>
                 </Row>
             </Container>
