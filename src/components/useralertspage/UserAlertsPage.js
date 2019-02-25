@@ -5,7 +5,7 @@ import {setAuthentication, getUser} from '../../actions/authentication';
 import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
 import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button,} from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
 import AlertHomeBar from './AlertHomeBar';
@@ -54,26 +54,29 @@ class UserAlertsPage extends Component {
 
     render() {
         const alerts = this.props.alerts
-        console.log(alerts)
         return(
             <Container>
                 <Row>
-                    <Col>
-                        <UserNavBar user={this.props.userName}/>
+                    <Col className='Cell'>
+                        <Row className="noOverlap">
+                            <Col>
+                                <UserNavBar user={this.props.userName}/>
+                            </Col>
+                        </Row>
+                        <AlertHomeBar toggleForm={this.toggleCreateForm}/>
+                        {
+                        this.state.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
+                        }
+                        {
+                        alerts.length === 0 ? this.noAlerts() 
+                        : 
+                        alerts.map(alert => {return <AlertListing key={alert.id} {...alert} 
+                            userId ={this.props.match.params.userId}
+                            dropAlert={this.props.deleteUserAlert}
+                            />})
+                        }
                     </Col>
                 </Row>
-                <AlertHomeBar toggleForm={this.toggleCreateForm}/>
-                {
-                this.state.form ? <CreateAlert locations={this.props.locations} routes={this.props.routes}/> : null
-                }
-                {
-                    alerts.length === 0 ? this.noAlerts() 
-                    : 
-                    alerts.map(alert => {return <AlertListing key={alert.id} {...alert} 
-                        userId ={this.props.match.params.userId}
-                        dropAlert={this.props.deleteUserAlert}
-                        />})
-                }
             </Container>
         )
     }

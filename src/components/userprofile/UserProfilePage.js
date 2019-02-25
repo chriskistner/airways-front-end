@@ -24,18 +24,22 @@ class UserProfilePage extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <b>User Name:</b> {this.props.userName}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <b>Address:</b> {this.props.userAddress}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        {this.props.userCity} {this.props.userState}
+                    <Col className='Cell'>
+                        <Row className="noOverlap">
+                            <Col xs='6' className="bg-light">
+                                <b>User Name:</b> {this.props.userName}
+                            </Col>
+                        </Row>
+                        <Row className="noOverlap ">
+                            <Col xs='6' className="bg-light">
+                                <b>Address:</b> {this.props.userAddress}
+                            </Col>
+                        </Row>
+                        <Row className="noOverlap">
+                            <Col xs='6' className="bg-light">
+                                {this.props.userCity} {this.props.userState}
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>

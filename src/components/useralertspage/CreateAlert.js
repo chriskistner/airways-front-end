@@ -27,7 +27,7 @@ class CreateAlert extends Component {
 
     generateList = (name, arr) => {
         return (
-            <Row>
+            <Row className="noMargin mb-3">
                 <Col xs="6">
                     <Label for="alertFor"> Select a {name}</Label>
                     <Input type="select" name="alertFor" id="alertFor" onChange={this.handleChange}>
@@ -46,7 +46,7 @@ class CreateAlert extends Component {
                     </Input>
                 </Col>
                 <Col xs="3">
-                    <Button>Add Alert</Button>
+                    <Button outline color="success">Add Alert</Button>
                 </Col>
             </Row>
         )
@@ -72,6 +72,7 @@ class CreateAlert extends Component {
                 parseFloat(alertValue[0].latitude),
                 parseFloat(alertValue[0].longitude)
                 )
+
         } else { 
             const alertValue = this.props.routes.filter(point => point.id === parseInt(this.state.alertFor));
             this.props.createUserAlert(this.props.match.params.userId,
@@ -87,12 +88,11 @@ class CreateAlert extends Component {
 
     render() {
         return (
-            <Row>
-                <Col style={{borderWidth: 1, borderStyle: 'solid', borderColor: 'gray'}}>
+            <Row className="noMargin mb-3 bg-light">
+                <Col className="noPadding cellBorder">
                     <Form onSubmit={this.handleCreateAlert}>
-                        <Row>
-                            <Col>
-                                <Label for="alertType">Begin Building Your Route by Selecting a Type</Label>
+                        <Row className="noMargin mt-2 mb-3">
+                            <Col xs='6'>
                                 <Input type="select" name="alertType" id="alertType" onChange={this.handleChange}>
                                     <option value='base' selected disabled>Alert is for a...</option>
                                     <option value='location'>Location</option>

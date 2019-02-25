@@ -60,24 +60,24 @@ class UserNavBar extends Component {
             <Row>
                 <Col>
                     <Navbar className="navBorder" color="light" light expand="md">
-                    <NavbarBrand href="/">Welcome {this.props.user || 'User'}, Go To..</NavbarBrand>
+                    <NavbarBrand href="/">Hello {this.props.user || 'User'}, Go To..</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink onClick={this.goToHome}>Home</NavLink>
+                                <NavLink onClick={this.goToHome} href="#">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToLocations}>Locations</NavLink>
+                                <NavLink onClick={this.goToLocations} href="#">Locations</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToRoutes}>Routes</NavLink>
+                                <NavLink onClick={this.goToRoutes} href="#">Routes</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToAlerts}>Alerts</NavLink>
+                                <NavLink onClick={this.goToAlerts} href="#">Alerts</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.goToProfile}>Profile</NavLink>
+                                <NavLink onClick={this.goToProfile} href="#">Profile</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={this.logOut} href="#">Logout</NavLink>
