@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getCurrentConditions, getPollenCount, getLoadingConditions, getLoadingCount} from './breezeometer'
+import {getCurrentConditions, getPollenCount, getLoadingConditions, getLoadingCount} from './breezeometer';
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_USER_LOCATIONS = "SET_USER_LOCATIONS";
