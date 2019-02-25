@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getCurrentConditions, getPollenCount} from './breezeometer'
+import {getCurrentConditions, getPollenCount, getLoadingConditions, getLoadingCount} from './breezeometer'
 const url = process.env.REACT_APP_API_URL;
 
 export const SET_USER_LOCATIONS = "SET_USER_LOCATIONS";
@@ -22,6 +22,10 @@ export const getUserLocations = (userId) => {
               });
               dispatch(getCurrentConditions(response.data.result[0].home_latitude, response.data.result[0].home_longitude));
               dispatch(getPollenCount(response.data.result[0].home_latitude, response.data.result[0].home_longitude));
+              if(response.data.result[0].locations.length !== 0) {
+                dispatch(getLoadingConditions(response.data.result[0].locations[0].latitude, response.data.result[0].locations[0].longitude))
+                dispatch(getLoadingCount(response.data.result[0].locations[0].latitude, response.data.result[0].locations[0].longitude))
+            }
         }catch(err) {
             console.log(err)
         }

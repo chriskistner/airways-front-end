@@ -119,7 +119,7 @@ class UserRoutesPage extends Component {
         }
         else {coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}};
 
-        if(this.state.currentRoute) {
+        if(this.state.currentCond) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
 
@@ -130,6 +130,7 @@ class UserRoutesPage extends Component {
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions;
         };
+
         return (
             <Container>
                 <Row>
@@ -172,7 +173,7 @@ class UserRoutesPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({getUserRoutes, deleteUserRoute, getUserLocations},dispatch)
-}
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -186,6 +187,6 @@ const mapStateToProps = (state) => {
         loadPollen: state.routes.loadPollen,
         locations: state.locations.locations 
     }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRoutesPage)
+export default connect(mapStateToProps, mapDispatchToProps)(UserRoutesPage);

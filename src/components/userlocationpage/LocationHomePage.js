@@ -62,7 +62,8 @@ class UserLocationsPage extends Component {
                 currentLocLat: lat,
                 currentLocLong: long,
                 currentCond: conditions.data.data,
-                currentPollen: pollen.data.data
+                currentPollen: pollen.data.data,
+                
             })
         }catch(err) {
             console.log(err)
@@ -84,17 +85,25 @@ class UserLocationsPage extends Component {
 
         if(this.state.currentLocLat) {
             coordinates = {lat: this.state.currentLocLat, lng: this.state.currentLocLong}
-        } else {
+        } else if (locations.length !== 0) {
+            coordinates = {lat: locations[0].latitude, lng: locations[0].longitude}
+        }
+        else {
             coordinates = {lat: this.props.homeLat, lng: this.props.homeLong}
         };
 
         if(this.state.currentPollen) {
             pollenData = this.state.currentPollen;
             airData = this.state.currentCond;
-        } else { 
+        } else if (locations.length !== 0) {
+            pollenData = this.props.loadPollen;
+            airData = this.props.loadConditions
+        }
+        else { 
             pollenData = this.props.homePollen;
             airData = this.props.homeConditions
         };
+        
         return (
             <Container>
                 <Row>
@@ -140,6 +149,8 @@ const mapStateToProps = (state) => {
         homeLong: state.locations.zipLong,
         homeConditions: state.locations.homeConditions,
         homePollen: state.locations.homePollen,
+        loadConditions: state.locations.loadConditions,
+        loadPollen: state.locations.loadPollen,
         locations: state.locations.locations
     }
 };

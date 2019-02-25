@@ -44,6 +44,11 @@ input {
   border: 1px solid #59686D;
 }
 
+.logoBorder {
+  border: 2px solid #59686D;
+  border-bottom-left-radius: 12px;
+}
+
 .Cell {
   background-color: #9BC0CD;
   border: 2px solid #59686D;
@@ -69,7 +74,17 @@ input {
   padding: 10px;
 }
 
+.cellHeight {
+  min-height: 486px
+}
 
+.aboutHeight {
+  min-height: 487px
+}
+
+.pollutantsMargin {
+  margin-bottom: -2px;
+}
 .navBorder {
   background-color: #9BC0CD;
   border: 2px solid #59686D;
