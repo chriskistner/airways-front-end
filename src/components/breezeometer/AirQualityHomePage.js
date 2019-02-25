@@ -76,7 +76,7 @@ export default class AirQualityHomePage extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <p><b>All Pollutants Present:</b></p>
+                                    <p className="pollutantsMargin"><b>All Pollutants Present:</b></p>
                                     {this.generatePollutantList(this.props.conditions.pollutants)}
                                 </Col>
                             </Row>

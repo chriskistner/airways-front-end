@@ -24,7 +24,7 @@ class LoginForm extends Component{
         return (
             <Container>
                 <Row id = "loginForm">
-                    <Col>
+                    <Col className="cellHeight">
                         <Form onSubmit={this.handleLogin}>
                             <b>USER LOGIN</b>
                             {
@@ -44,8 +44,10 @@ class LoginForm extends Component{
                         </Form>
                     </Col>
                 </Row>
-                <Row>
-                    <a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a>
+                <Row className="mt-2">
+                    <Col>
+                        <a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a>
+                    </Col>
                 </Row>
             </Container>
         )

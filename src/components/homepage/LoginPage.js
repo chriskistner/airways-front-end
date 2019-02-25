@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
 import { Container, Row, Col} from 'reactstrap';
+import LoginPageBar from './LoginPageBar';
+import AboutAirways from './AboutAirways';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
 import LoginForm from './LoginForm';
 import CreateUserForm from './CreateUserForm';
@@ -79,8 +81,12 @@ class HomePage extends Component{
                 <Container>
                         <Row>
                             <Col className='Cell'>
-                                <Row>
-                                    <Col xs='4' className="noPadding cellBorder">
+                                <LoginPageBar />
+                                <Row className="noMargin bg-light row align-items-start">
+                                    <Col className="noPadding cellBorder bg-light" sm="4">
+                                        <AboutAirways/>
+                                    </Col>
+                                    <Col className="noPadding cellBorder" sm='4'>
                                         {pollenData ? <AirQualityHomePage pollen={pollenData} 
                                                         conditions={airData}/> : null}
                                     </Col>

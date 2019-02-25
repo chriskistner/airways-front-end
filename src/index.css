@@ -69,7 +69,13 @@ input {
   padding: 10px;
 }
 
+.cellHeight {
+  height: fit-content(100%)
+}
 
+.pollutantsMargin {
+  margin-bottom: -2px;
+}
 .navBorder {
   background-color: #9BC0CD;
   border: 2px solid #59686D;
