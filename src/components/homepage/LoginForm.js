@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormFeedback, Alert } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Input, Alert } from 'reactstrap';
 
 class LoginForm extends Component{
     constructor(props) {
@@ -27,7 +27,7 @@ class LoginForm extends Component{
                     <Col>
                         <Form onSubmit={this.handleLogin}>
                             {
-                            this.props.errors ? <Alert color="danger">There was a problem logging in, check your user name and password.</Alert> : null
+                            this.props.errors ? <Alert color="danger">Login in, check your user name and password.</Alert> : null
                             }
                             <Row>
                                 <Col>

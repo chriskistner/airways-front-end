@@ -6,7 +6,8 @@ const url = process.env.REACT_APP_API_URL;
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const SET_USER_DATA = 'SET_USER_DATA';
-export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR"
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
+export const SET_CREATE_USER_ERROR = "SET_CREATE_USER_ERROR";
 
 export const setAuthentication = (claim) => ({
   type: SET_AUTHENTICATION,
@@ -16,7 +17,12 @@ export const setAuthentication = (claim) => ({
 export const toggleError = (claim) => ({
   type: SET_LOGIN_ERROR,
   payload: claim
-})
+});
+
+export const toggleCreateError = (claim) => ({
+  type: SET_CREATE_USER_ERROR,
+  payload: claim
+});
 
 export const verifyUser = (fn) => {
   return async (dispatch) => {
@@ -53,7 +59,8 @@ export const createUser = (userName, email, password, address, city, state, fn) 
       dispatch(login(email, password, fn))
     }catch(err) {
       console.error(err);
-      dispatch(setAuthentication(null))
+      dispatch(setAuthentication(null));
+      dispatch(toggleCreateError(true))
     }
   }
 };
@@ -66,8 +73,8 @@ export const login = (email, password, fn) => {
       dispatch(verifyUser(fn));
     }catch(err) {
       console.error(err)
-      dispatch(setAuthentication(null))
-      dispatch(toggleError(true))
+      dispatch(setAuthentication(null));
+      dispatch(toggleError(true));
     }
   }
 };

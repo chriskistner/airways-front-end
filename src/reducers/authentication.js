@@ -1,4 +1,4 @@
-import {SET_AUTHENTICATION, SET_LOGIN_ERROR, SET_USER_DATA} from '../actions/authentication'
+import {SET_AUTHENTICATION, SET_LOGIN_ERROR, SET_CREATE_USER_ERROR, SET_USER_DATA} from '../actions/authentication'
 import {GET_GEOCODE} from '../actions/google';
 import {GET_CURRENT_CONDITIONS, GET_POLLEN_COUNT} from '../actions/breezeometer'
 
@@ -13,6 +13,7 @@ const initialState = {
     zipLat: null,
     zipLong: null,
     errors: false,
+    createErrors: false,
     homeConditions: {},
     homePollen: {}
 };
@@ -26,6 +27,10 @@ export default function auth (state = initialState, action) {
       case SET_LOGIN_ERROR:
         const errorState = action.payload;
         return {...state, errors: errorState}
+      
+      case SET_CREATE_USER_ERROR:
+        const createError = action.payload;
+        return {...state, createErrors: createError}
         
       case SET_USER_DATA:
         const userName = action.payload.user_name;

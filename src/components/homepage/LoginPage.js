@@ -9,7 +9,6 @@ import SiteHeader from '../static/Header';
 import LoginPageBar from './LoginPageBar';
 import AboutAirways from './AboutAirways';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
-import LoginForm from './LoginForm';
 import CreateUserForm from './CreateUserForm';
 
 const breezeApi = process.env.REACT_APP_BREEZE_O_METER_API_KEY;
@@ -77,7 +76,6 @@ class HomePage extends Component{
 
 
     render() {
-        console.log(this.state.currentLocName)
         const pollenData = this.state.currentPollen;
         const airData = this.state.currentCond;
         return (
