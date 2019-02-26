@@ -36,9 +36,9 @@ class UserAlertsPage extends Component {
 
     noAlerts = () => {
         return (
-            <Row>
-                <Col>
-                    <h4>You Have No Saved Alerts</h4>
+            <Row className="noMargin bg-light">
+                <Col className="cellBorder">
+                    <b>You Have No Saved Alerts...</b>
                 </Col>
             </Row>
         )

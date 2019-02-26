@@ -57,17 +57,17 @@ export default class AirQualityHomePage extends Component {
                         <Col>
                             <Row className='airCat'>
                                 <Col>
-                                <b>Pollutant Data</b>
+                                <b>Local Air Quality</b>
                                 </Col>
                             </Row>
-                            <Row className="mt-1">
+                            <Row style={{backgroundColor: this.props.conditions.indexes.usa_epa.color}}>
                                 <Col>
-                                    <p style={{color: this.props.conditions.indexes.usa_epa.color}}>
-                                        <b>{this.props.conditions.indexes.usa_epa.category} right now.</b>
+                                    <p className="mt-1 mb-1">
+                                        <i>{this.props.conditions.indexes.usa_epa.category} right now.</i>
                                     </p>
                                 </Col>
                             </Row>
-                            <Row>
+                            <Row className="mt-2">
                                 <Col>
                                     <p className="pollutantsMargin"><b>Air Quality Index:</b> {this.props.conditions.indexes.usa_epa.aqi_display}</p>
                                     <p><b>Dominant Pollutant:</b> {this.props.conditions.indexes.usa_epa.dominant_pollutant}</p>

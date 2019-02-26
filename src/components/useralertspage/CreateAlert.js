@@ -27,7 +27,7 @@ class CreateAlert extends Component {
 
     generateList = (name, arr) => {
         return (
-            <Row className="noMargin mb-3">
+            <Row className="noMargin align-items-end mb-3">
                 <Col xs="6">
                     <Label for="alertFor"> Select a {name}</Label>
                     <Input type="select" name="alertFor" id="alertFor" onChange={this.handleChange}>
