@@ -26,7 +26,6 @@ class App extends Component {
       <Container>
         <Row>
           <Col>
-          <SiteHeader />
           <BrowserRouter>
             <Switch>
               <AuthenticatedRoute path='/user/:userId/profile' component={UserProfilePage} />

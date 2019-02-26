@@ -70,16 +70,16 @@ input {
   background-color: #9BC0CD;
   border: 2px solid #59686D;
   border-bottom-left-radius: 12px;
-  margin: 10px;
+  margin: 10px 0px 10px 0px !important;
   padding: 10px;
 }
 
 .cellHeight {
-  min-height: 486px
+  min-height: 451px
 }
 
 .aboutHeight {
-  min-height: 487px
+  min-height: 450px
 }
 
 .pollutantsMargin {

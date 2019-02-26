@@ -6,6 +6,7 @@ import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
 import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
 import { Container, Row, Col} from 'reactstrap';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
 import AlertHomeBar from './AlertHomeBar';
@@ -56,6 +57,7 @@ class UserAlertsPage extends Component {
         const alerts = this.props.alerts
         return(
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <Row className="noOverlap">

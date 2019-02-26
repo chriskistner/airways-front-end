@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import { Container, Row, Col } from 'reactstrap';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import UserProfileHomeBar from './UserProfileHomeBar';
 import UpdateProfileForm from './UpdateProfileForm';
@@ -28,6 +29,7 @@ class UserProfilePage extends Component {
     render() {
         return(
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className="Cell">
                         <UserNavBar user={this.props.userName}/>

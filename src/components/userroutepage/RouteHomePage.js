@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
 import {getUserLocations} from '../../actions/locations';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import RouteListing from './RouteListing';
@@ -133,6 +134,7 @@ class UserRoutesPage extends Component {
 
         return (
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <UserNavBar user={this.props.userName} />

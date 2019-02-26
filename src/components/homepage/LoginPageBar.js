@@ -6,14 +6,11 @@ export default function locationHomeBar({message}) {
 
     return(
         <Row className="noMargin homeBar">
-            <Col xs='4'>
+            <Col xs='6'>
                 <span className='homeBarText'>About Airways</span>
             </Col>
-            <Col xs='4'>
+            <Col xs='6'>
                 <span className='homeBarText'>The Air {message} Today is..</span>
-            </Col>
-            <Col xs='4'>
-                <span className='homeBarText'>Login To Your Profile</span>
             </Col>
         </Row>
     )
