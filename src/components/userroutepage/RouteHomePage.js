@@ -39,8 +39,8 @@ class UserRoutesPage extends Component {
     noRoutes = () => {
         return (
             <Row className='noMargin bg-light'>
-                <Col className="noPadding">
-                    <b>YOU HAVE NO ROUTES YET</b>
+                <Col>
+                    <b>You Have No Saved Routes...</b>
                 </Col>
             </Row>
         )

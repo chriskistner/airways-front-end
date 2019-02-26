@@ -149,7 +149,7 @@ class CreateRoute extends Component {
                         </Row>
                         <Row className="noMargin justify-content-start">
                             <Col xs='5' className="noPadding">
-                                <Input className="createRouteInputs" type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter an Address for the start of your route"></Input>
+                                <Input className="createRouteInputs" type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter an Address for a point on your Route"></Input>
                             </Col>
                             <Col xs='3' className="noPadding">
                                 <Input className="createRouteInputs" type="text" name="newPointCity" id="newPointCity" placeholder="Enter City"></Input>

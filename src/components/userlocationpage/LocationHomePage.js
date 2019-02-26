@@ -38,8 +38,8 @@ class UserLocationsPage extends Component {
     noLocales = () => {
         return (
             <Row className='noMargin bg-light'>
-                <Col className="noPadding">
-                    <b>YOU HAVE NO LOCATIONS YET</b>
+                <Col>
+                    <b>You Have No Saved Locations...</b>
                 </Col>
             </Row>
         )

@@ -29,7 +29,7 @@ class CreateUserForm extends Component{
         return (
                 <Modal isOpen={this.props.modalStatus} toggle={this.props.newUser}>
                     <ModalHeader>
-                        <b>CREATE AN ACCOUNT</b>
+                        <b>CREATE A NEW USER ACCOUNT</b>
                     </ModalHeader>
                         <ModalBody>
                             <Form onSubmit={this.handleCreateUser}>
@@ -47,7 +47,7 @@ class CreateUserForm extends Component{
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserEmail">User Email</Label>
+                                            <Label for="newUserEmail">Email</Label>
                                             <Input type="text" name="newUserEmail" id="newUserEmail" placeholder="enter a valid email account"></Input>
                                             <FormFeedback>Sorry, that email is already being used</FormFeedback>
                                         </FormGroup>
@@ -56,15 +56,15 @@ class CreateUserForm extends Component{
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserPassword">User Password</Label>
-                                            <Input type="password" name="newUserPassword" id="newUserPassword" placeholder="enter password"></Input>
+                                            <Label for="newUserPassword">Password</Label>
+                                            <Input type="password" name="newUserPassword" id="newUserPassword" minLength="8" placeholder="enter password, must be 8 character or more"></Input>
                                         </FormGroup>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserEmail">User Home Address</Label>
+                                            <Label for="newUserEmail">Home Address</Label>
                                             <Input type="text" name="newUserAddress" id="newUserAddress" placeholder="Street Address"></Input>
                                             
                                         </FormGroup>
