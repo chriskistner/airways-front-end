@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {createUser} from '../../actions/authentication';
-import { Row, Col, Button, Form, FormGroup, Label, Input, FormFeedback, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Row, Col, Button, Form, FormGroup, Label, Input, Alert, FormFeedback, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class CreateUserForm extends Component{
     constructor(props) {
@@ -11,7 +11,7 @@ class CreateUserForm extends Component{
         this.state = {
 
         }
-    }
+    };
 
     handleCreateUser = (event) => {
         event.preventDefault();
@@ -23,17 +23,19 @@ class CreateUserForm extends Component{
             event.target.newUserState.value,
             () => this.props.history.push(`/user/${this.props.userId}/`)
             );
-    }
-
+    };
 
     render() {
         return (
                 <Modal isOpen={this.props.modalStatus} toggle={this.props.newUser}>
                     <ModalHeader>
-                        <b>CREATE AN ACCOUNT</b>
+                        <b>CREATE A NEW USER ACCOUNT</b>
                     </ModalHeader>
                         <ModalBody>
                             <Form onSubmit={this.handleCreateUser}>
+                                {
+                                this.props.createErrors ? <Alert color="danger">Oops something went wrong, make sure all fields are filled in. You may also need to use a different username.</Alert> : null
+                                }
                                 <Row>
                                     <Col>
                                         <FormGroup>
@@ -45,7 +47,7 @@ class CreateUserForm extends Component{
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserEmail">User Email</Label>
+                                            <Label for="newUserEmail">Email</Label>
                                             <Input type="text" name="newUserEmail" id="newUserEmail" placeholder="enter a valid email account"></Input>
                                             <FormFeedback>Sorry, that email is already being used</FormFeedback>
                                         </FormGroup>
@@ -54,15 +56,15 @@ class CreateUserForm extends Component{
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserPassword">User Password</Label>
-                                            <Input type="password" name="newUserPassword" id="newUserPassword" placeholder="enter password"></Input>
+                                            <Label for="newUserPassword">Password</Label>
+                                            <Input type="password" name="newUserPassword" id="newUserPassword" minLength="8" placeholder="enter password, must be 8 character or more"></Input>
                                         </FormGroup>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="newUserEmail">User Home Address</Label>
+                                            <Label for="newUserEmail">Home Address</Label>
                                             <Input type="text" name="newUserAddress" id="newUserAddress" placeholder="Street Address"></Input>
                                             
                                         </FormGroup>
@@ -86,7 +88,7 @@ class CreateUserForm extends Component{
 
 const mapStateToProps = state => ({
     userId: state.auth.userId,
-    errors: state.auth.errors
+    createErrors: state.auth.createErrors
   })
 
   const mapDispatchToProps = dispatch =>

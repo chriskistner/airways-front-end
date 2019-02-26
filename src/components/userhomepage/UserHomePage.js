@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {setAuthentication, getUser} from '../../actions/authentication';
 import {getGeoCode} from '../../actions/google'
 import { Container, Row, Col } from 'reactstrap';
+import SiteHeader from '../static/Header';
 import HomePageBar from './HomePageBar';
 import UserNavBar from './UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
@@ -25,6 +26,7 @@ class UserHomePage extends Component {
         let coordinates={lat: this.props.homeLat, lng: this.props.homeLong};
         return (
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <Row>

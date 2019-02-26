@@ -60,7 +60,7 @@ class UserNavBar extends Component {
             <Row>
                 <Col>
                     <Navbar className="navBorder" color="light" light expand="md">
-                    <NavbarBrand href="/">Hello {this.props.user || 'User'}, Go To..</NavbarBrand>
+                    <NavbarBrand href="/">Go To Your..</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>

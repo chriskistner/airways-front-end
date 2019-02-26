@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormFeedback, Alert } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Input, Alert } from 'reactstrap';
 
 class LoginForm extends Component{
     constructor(props) {
@@ -24,24 +24,30 @@ class LoginForm extends Component{
         return (
             <Container>
                 <Row id = "loginForm">
-                    <Col className="cellHeight">
+                    <Col>
                         <Form onSubmit={this.handleLogin}>
                             {
-                            this.props.errors ? <Alert color="danger">There was a problem logging in, check your user name and password.</Alert> : null
+                            this.props.errors ? <Alert color="danger">Login in, check your user name and password.</Alert> : null
                             }
-                            <FormGroup className="mt-1">
-                                <Label for="userEmail">Email</Label>
-                                <Input type="email" name="email" id="userEmail" placeholder="enter account email" />
-                                <FormFeedback>Uh Oh, that username doesn't seem to exist</FormFeedback>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="userPassword">Password</Label>
-                                <Input type="password" name="password" id="userPassword" placeholder="enter account password" />
-                                <FormFeedback>Password does not match email account</FormFeedback>
-                            </FormGroup>
-                            <Button>Login</Button>
+                            <Row>
+                                <Col>
+                                    <FormGroup className="mt-1">
+                                        <Input type="email" name="email" id="userEmail" placeholder="user email" />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row style={{marginTop: -10}}>
+                                <Col xs='8'>
+                                    <FormGroup>
+                                        <Input type="password" name="password" id="userPassword" placeholder="user password" />
+                                    </FormGroup>
+                                </Col>
+                                <Col xs='4'>
+                                <Button>Login</Button>
+                                </Col>
+                            </Row>
                         </Form>
-                        <p className="mt-3"><a href="#" onClick={this.props.newUser}>New to AirWays? Click Here to Create an Account...</a> </p>
+                        <p><a href="#" onClick={this.props.newUser}>New to AirWays? Click to Join...</a> </p>
                     </Col>
                 </Row>
             </Container>

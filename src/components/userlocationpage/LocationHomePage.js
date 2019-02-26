@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserLocations, deleteUserLocation} from '../../actions/locations';
 import {getCurrentConditions, getPollenCount} from '../../actions/breezeometer';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import LocationListing from './LocationListing';
@@ -37,8 +38,8 @@ class UserLocationsPage extends Component {
     noLocales = () => {
         return (
             <Row className='noMargin bg-light'>
-                <Col className="noPadding">
-                    <b>YOU HAVE NO LOCATIONS YET</b>
+                <Col>
+                    <b>You Have No Saved Locations...</b>
                 </Col>
             </Row>
         )
@@ -105,6 +106,7 @@ class UserLocationsPage extends Component {
         };
         return (
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <UserNavBar user={this.props.userName}/>

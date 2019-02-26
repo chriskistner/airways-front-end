@@ -6,6 +6,7 @@ import {getUserLocations} from '../../actions/locations';
 import {getUserRoutes} from '../../actions/routes';
 import {getUserAlerts, createUserAlert, deleteUserAlert} from '../../actions/alerts';
 import { Container, Row, Col} from 'reactstrap';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import CreateAlert from './CreateAlert';
 import AlertHomeBar from './AlertHomeBar';
@@ -35,9 +36,9 @@ class UserAlertsPage extends Component {
 
     noAlerts = () => {
         return (
-            <Row>
-                <Col>
-                    <h4>You Have No Saved Alerts</h4>
+            <Row className="noMargin bg-light">
+                <Col className="cellBorder">
+                    <b>You Have No Saved Alerts...</b>
                 </Col>
             </Row>
         )
@@ -56,6 +57,7 @@ class UserAlertsPage extends Component {
         const alerts = this.props.alerts
         return(
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <Row className="noOverlap">
@@ -65,7 +67,10 @@ class UserAlertsPage extends Component {
                         </Row>
                         <AlertHomeBar toggleForm={this.toggleCreateForm}/>
                         {
-                        this.state.form ? <CreateAlert locations={this.props.locations} toggleForm={this.toggleCreateForm} routes={this.props.routes}/> : null
+                        this.state.form ? <CreateAlert locations={this.props.locations} 
+                                                        toggleForm={this.toggleCreateForm} 
+                                                        routes={this.props.routes}
+                                                        userHome={[this.props.homeLat, this.props.homeLong]}/> : null
                         }
                         {
                         alerts.length === 0 ? this.noAlerts() 

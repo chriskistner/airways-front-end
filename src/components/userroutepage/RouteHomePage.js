@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import {getUserRoutes, deleteUserRoute} from '../../actions/routes';
 import {getUserLocations} from '../../actions/locations';
+import SiteHeader from '../static/Header';
 import UserNavBar from '../userhomepage/UserNavBar';
 import GoogleMap from '../googlemaps/GoogleMap';
 import RouteListing from './RouteListing';
@@ -38,8 +39,8 @@ class UserRoutesPage extends Component {
     noRoutes = () => {
         return (
             <Row className='noMargin bg-light'>
-                <Col className="noPadding">
-                    <b>YOU HAVE NO ROUTES YET</b>
+                <Col>
+                    <b>You Have No Saved Routes...</b>
                 </Col>
             </Row>
         )
@@ -133,11 +134,14 @@ class UserRoutesPage extends Component {
 
         return (
             <Container>
+                <SiteHeader userName={this.props.userName} newUser={this.toggleModal} />
                 <Row>
                     <Col className='Cell'>
                         <UserNavBar user={this.props.userName} />
                         <RouterHomeBar toggleForm={this.toggleCreateForm}/>
-                        {this.state.form ? <CreateRoute userLocations={this.props.locations} toggleForm ={this.toggleCreateForm}/> : null}
+                        {this.state.form ? <CreateRoute userLocations={this.props.locations}
+                                                        userHome={[this.props.homeLat, this.props.homeLong,]} 
+                                                        toggleForm ={this.toggleCreateForm}/> : null}
                         <Row className="noMargin bg-light">
                             <Col xs='3' className="noPadding cellBorder" style={{minHeight: 400}}>
                             {

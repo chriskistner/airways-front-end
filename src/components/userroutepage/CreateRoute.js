@@ -60,25 +60,37 @@ class CreateRoute extends Component {
     };
 
     addLocationToRoute = (event) => {
-        const location = this.props.userLocations.filter(point => parseInt(event.target.value) === point.id);
-        const pointName = location[0].name;
-        console.log(location[0])
-        const latitude = parseFloat(location[0].latitude);
-        const longitude = parseFloat(location[0].longitude);
-        console.log(latitude);
-        const pointCoords = [latitude, longitude];
+        if (event.target.value === 'home') {
+            const latitude = parseFloat(this.props.userHome[0]);
+            const longitude = parseFloat(this.props.userHome[1]);
+            const homeCoords = {lat: latitude, lng: longitude};
 
-        const mapCoords = {lat: latitude, lng: longitude};
+            this.setState({
+                points: [...this.state.points, [latitude, longitude]],
+                mapPoints: [...this.state.mapPoints, homeCoords],
+                pointDetails: [...this.state.pointDetails, {address: 'Home Address', city: '', state: ''}]
+            })
+        } else {
+            const location = this.props.userLocations.filter(point => parseInt(event.target.value) === point.id);
+            const pointName = location[0].name;
+            const latitude = parseFloat(location[0].latitude);
+            const longitude = parseFloat(location[0].longitude);
+            const pointCoords = [latitude, longitude];
+            const mapCoords = {lat: latitude, lng: longitude};
+    
+    
+            const pointInfo = {
+                address: pointName, 
+                city: '', 
+                state: ''
+            }
 
-        const pointInfo = {address: pointName, 
-            city: '', 
-            state: ''
-        };
-        this.setState({
-            points: [...this.state.points, pointCoords],
-            mapPoints: [...this.state.mapPoints, mapCoords],
-            pointDetails: [...this.state.pointDetails, pointInfo]
-        })
+            this.setState({
+                points: [...this.state.points, pointCoords],
+                mapPoints: [...this.state.mapPoints, mapCoords],
+                pointDetails: [...this.state.pointDetails, pointInfo]
+            })
+        }
     };
 
     handleCreateRoute = () => {
@@ -137,7 +149,7 @@ class CreateRoute extends Component {
                         </Row>
                         <Row className="noMargin justify-content-start">
                             <Col xs='5' className="noPadding">
-                                <Input className="createRouteInputs" type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter an Address for the start of your route"></Input>
+                                <Input className="createRouteInputs" type="text" name="newPointAddress" id="newPointAddress" placeholder="Enter an Address for a point on your Route"></Input>
                             </Col>
                             <Col xs='3' className="noPadding">
                                 <Input className="createRouteInputs" type="text" name="newPointCity" id="newPointCity" placeholder="Enter City"></Input>
@@ -152,7 +164,8 @@ class CreateRoute extends Component {
                                     <Col xs="5" className="noPadding align-self-center">
                                         <FormGroup>
                                             <Input className="createRouteInputs" type="select" name="selectLocation" id="selectLocation" onChange={this.addLocationToRoute}>
-                                            <option id={0} value={'base'} selected disabled>Or Select From Your Saved Locations...</option>
+                                            <option id='fake' value='base' selected disabled>Or Select From Your Saved Locations...</option>
+                                            <option id='home' value='home'>Home Address</option>
                                             {
                                             this.props.userLocations.map(points => this.generateStoredLocations(points))
                                             }

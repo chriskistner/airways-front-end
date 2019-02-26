@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAuthentication, login, createUser } from '../../actions/authentication';
 import { Container, Row, Col} from 'reactstrap';
+import SiteHeader from '../static/Header';
 import LoginPageBar from './LoginPageBar';
 import AboutAirways from './AboutAirways';
 import AirQualityHomePage from '../breezeometer/AirQualityHomePage';
-import LoginForm from './LoginForm';
 import CreateUserForm from './CreateUserForm';
 
 const breezeApi = process.env.REACT_APP_BREEZE_O_METER_API_KEY;
@@ -76,26 +76,23 @@ class HomePage extends Component{
 
 
     render() {
-        console.log(this.state.currentLocName)
         const pollenData = this.state.currentPollen;
         const airData = this.state.currentCond;
         return (
                 <div className="HomePage">
                 <Container>
+                        <SiteHeader newUser={this.toggleModal} />
                         <Row>
                             <Col className='Cell'>
                                 <LoginPageBar message={this.state.currentLocName}/>
                                 <Row className="noMargin bg-light row align-items-start">
-                                    <Col className="noPadding cellBorder cellHeight bg-light" sm="4">
-                                        <AboutAirways/>
+                                    <Col className="noPadding cellBorder cellHeight bg-light" sm="6">
+                                        <AboutAirways />
+                                        <CreateUserForm newUser={this.toggleModal} modalStatus={this.state.modal}/>
                                     </Col>
-                                    <Col className="noPadding cellHeight cellBorder" sm='4'>
+                                    <Col className="noPadding cellHeight cellBorder" sm='6'>
                                         {pollenData ? <AirQualityHomePage pollen={pollenData} 
                                                         conditions={airData}/> : <p>Loading...</p>}
-                                    </Col>
-                                    <Col className="noPadding cellHeight cellBorder bg-light" sm="4">
-                                        <LoginForm newUser={this.toggleModal}/>
-                                        <CreateUserForm newUser={this.toggleModal} modalStatus={this.state.modal}/>
                                     </Col>
                                 </Row>
                             </Col>
