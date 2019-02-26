@@ -139,7 +139,9 @@ class UserRoutesPage extends Component {
                     <Col className='Cell'>
                         <UserNavBar user={this.props.userName} />
                         <RouterHomeBar toggleForm={this.toggleCreateForm}/>
-                        {this.state.form ? <CreateRoute userLocations={this.props.locations} toggleForm ={this.toggleCreateForm}/> : null}
+                        {this.state.form ? <CreateRoute userLocations={this.props.locations}
+                                                        userHome={[this.props.homeLat, this.props.homeLong,]} 
+                                                        toggleForm ={this.toggleCreateForm}/> : null}
                         <Row className="noMargin bg-light">
                             <Col xs='3' className="noPadding cellBorder" style={{minHeight: 400}}>
                             {
