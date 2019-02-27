@@ -3,9 +3,10 @@
 }
 
 body {
-  background: url(https://bloximages.chicago2.vip.townnews.com/missoulian.com/content/tncms/assets/v3/editorial/5/aa/5aa9642f-e19b-5cb8-91b8-e07165f99a3b/59a05d725869b.image.jpg?resize=750%2C500) center center no-repeat;
+  background: url(https://bloximages.chicago2.vip.townnews.com/missoulian.com/content/tncms/assets/v3/editorial/5/aa/5aa9642f-e19b-5cb8-91b8-e07165f99a3b/59a05d725869b.image.jpg?resize=750%2C500) center center no-repeat fixed;
   background-size: cover;
   height:100%;
+  min-height: 100vh
 }
 
 .App-logo {
