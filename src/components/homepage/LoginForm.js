@@ -47,7 +47,7 @@ class LoginForm extends Component{
                                 </Col>
                             </Row>
                         </Form>
-                        <p><a href="#" onClick={this.props.newUser}>New to AirWays? Click to Join...</a> </p>
+                        <p style={{marginBottom: 5}}><a href="#" onClick={this.props.newUser}>New to AirWays? Click to Join...</a> </p>
                     </Col>
                 </Row>
             </Container>
