@@ -29,7 +29,7 @@ class GoogleMap extends Component {
         return (
             <Marker
             onClick={() => this.props.setCurrentPoint(obj)}
-            title={`Location #${name+1}, click to access Air Qaulity`}
+            title={`Location #${name+1}, click to access Air Quality`}
             name={name}
             position={obj}/>
         )
