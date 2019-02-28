@@ -19,7 +19,7 @@ export default function aboutAirways() {
                     <li>Create alerts to get conditions for impoartant routes or locations send to your inbox</li>
                 </ul>
                 <p className='pl-2 pr-2'>
-                    Airways was created by Christopher Kistner, a Galvanize Web Development student. Being a life-long asthmatic who was also prone 
+                    Airways was created by Christopher Kistner, a Galvanize Web Development graduate. A life-long asthmatic who was also prone 
                     to allergies every Spring, Chris saw a need for a better way to convey local air conditions to other asthmatics. Particularly those who enjoy an active lifestyle and like 
                     biking or walking to work. 
                 </p>
